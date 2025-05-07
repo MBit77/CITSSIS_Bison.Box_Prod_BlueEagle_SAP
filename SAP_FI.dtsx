@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
   DTS:CreationDate="10/23/2019 11:41:14 AM"
@@ -12,8 +12,9 @@
   DTS:LocaleID="1031"
   DTS:ObjectName="SAP_FI"
   DTS:PackageType="5"
-  DTS:VersionBuild="404"
-  DTS:VersionGUID="{BCDB611A-37E6-4CED-AC0A-3610F5D6CCD5}">
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="405"
+  DTS:VersionGUID="{9789C00D-71F6-45B2-84DC-E7AF7FB65DE2}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -902,7 +903,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="BISDB bereinigen, wenn Objekt nicht mehr vorhanden"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -919,7 +920,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Calculate balance carryforward"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:PropertyExpression
         DTS:Name="SqlStatementSource">" IF '" + @[User::cfgCalcSV] + "' = '1'
@@ -1019,7 +1020,7 @@ END
               DTS:LocaleID="-1"
               DTS:ObjectName="BIS_IFFILLFAKT"
               DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-              DTS:ThreadHint="1">
+              DTS:ThreadHint="0">
               <DTS:Variables />
               <DTS:LoggingOptions
                 DTS:FilterKind="0" />
@@ -1849,7 +1850,7 @@ and xPrefix is not null</property>
               DTS:LocaleID="-1"
               DTS:ObjectName="Init"
               DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-              DTS:ThreadHint="1">
+              DTS:ThreadHint="0">
               <DTS:Variables />
               <DTS:LoggingOptions
                 DTS:FilterKind="0" />
@@ -1869,7 +1870,7 @@ and xPrefix is not null</property>
               DTS:LocaleID="-1"
               DTS:ObjectName="Init target"
               DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-              DTS:ThreadHint="1">
+              DTS:ThreadHint="0">
               <DTS:Variables />
               <DTS:LoggingOptions
                 DTS:FilterKind="0" />
@@ -1895,7 +1896,7 @@ and xPrefix is not null</property>
               DTS:ExecutableType="Microsoft.ExecuteSQLTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="Update BSEG_ALL (xImport)"
-              DTS:ThreadHint="1">
+              DTS:ThreadHint="0">
               <DTS:Variables />
               <DTS:ObjectData>
                 <SQLTask:SqlTaskData
@@ -1913,7 +1914,7 @@ and xPrefix is not null</property>
               DTS:LocaleID="-1"
               DTS:ObjectName="Update FDIM01 Bilanzstruktur Konten"
               DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-              DTS:ThreadHint="1">
+              DTS:ThreadHint="0">
               <DTS:Variables />
               <DTS:LoggingOptions
                 DTS:FilterKind="0" />
@@ -1989,7 +1990,7 @@ and xPrefix is not null</property>
               DTS:LocaleID="-1"
               DTS:ObjectName="BIS_IFFILLID"
               DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-              DTS:ThreadHint="1">
+              DTS:ThreadHint="0">
               <DTS:Variables />
               <DTS:LoggingOptions
                 DTS:FilterKind="0" />
@@ -6150,7 +6151,7 @@ where
               DTS:LocaleID="-1"
               DTS:ObjectName="Init"
               DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-              DTS:ThreadHint="1">
+              DTS:ThreadHint="0">
               <DTS:Variables />
               <DTS:LoggingOptions
                 DTS:FilterKind="0" />
@@ -6512,7 +6513,7 @@ left join " +@[User::cfgIDB]+ ".dbo.xgesellschaft ge on obj.xobjgesellsch = ge.x
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="delete facts 4 non-existing"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -6536,7 +6537,7 @@ left join " +@[User::cfgIDB]+ ".dbo.xgesellschaft ge on obj.xobjgesellsch = ge.x
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="Insert missing assets"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -6560,7 +6561,7 @@ left join " +@[User::cfgIDB]+ ".dbo.xgesellschaft ge on obj.xobjgesellsch = ge.x
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="Insert missing assets?"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -6654,7 +6655,7 @@ left join " +@[User::cfgIDB]+ ".dbo.xgesellschaft ge on obj.xobjgesellsch = ge.x
       <GraphLayout
         Capacity="64" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="219,42"
+          Size="218.666666666667,42"
           Id="Package\BISDB bereinigen, wenn Objekt nicht mehr vorhanden"
           TopLeft="1511,209" />
         <NodeLayout
@@ -6682,7 +6683,7 @@ left join " +@[User::cfgIDB]+ ".dbo.xgesellschaft ge on obj.xobjgesellsch = ge.x
           Id="Package\Data flows\Import balances\Init target"
           TopLeft="31.3460597918424,304.495426490352" />
         <NodeLayout
-          Size="171,42"
+          Size="170.666666666667,42"
           Id="Package\Data flows\Import balances\Update BSEG_ALL (xImport)"
           TopLeft="30,93" />
         <NodeLayout
@@ -6803,7 +6804,7 @@ left join " +@[User::cfgIDB]+ ".dbo.xgesellschaft ge on obj.xobjgesellsch = ge.x
           HeaderHeight="43"
           IsExpanded="True"
           PanelSize="230,586"
-          Size="230,629"
+          Size="230,629.333333333334"
           Id="Package\Data flows\Import balances"
           TopLeft="479.685719620939,17.7058884831868" />
         <NodeLayout
@@ -6811,11 +6812,11 @@ left join " +@[User::cfgIDB]+ ".dbo.xgesellschaft ge on obj.xobjgesellsch = ge.x
           Id="Package\Data flows\Import master data\BIS_IFFILLID"
           TopLeft="118.285713847803,220.376469987651" />
         <NodeLayout
-          Size="169,42"
+          Size="169.333333333334,42"
           Id="Package\Data flows\Import master data\DF_Accounts"
           TopLeft="20.5714281043228,112.611764131038" />
         <NodeLayout
-          Size="169,42"
+          Size="169.333333333334,42"
           Id="Package\Data flows\Import master data\DF_Accounts_alloc"
           TopLeft="210.571428104323,112.211764131038" />
         <NodeLayout
@@ -6961,7 +6962,7 @@ left join " +@[User::cfgIDB]+ ".dbo.xgesellschaft ge on obj.xobjgesellsch = ge.x
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="396,291"
+          PanelSize="396,290.666666666667"
           Size="396,334"
           Id="Package\Data flows\Import master data"
           TopLeft="21.9142979879774,17.3647111803604" />
@@ -7003,7 +7004,7 @@ left join " +@[User::cfgIDB]+ ".dbo.xgesellschaft ge on obj.xobjgesellsch = ge.x
           HeaderHeight="43"
           IsExpanded="True"
           PanelSize="758,702"
-          Size="758,745"
+          Size="758,745.333333333334"
           Id="Package\Data flows"
           TopLeft="700.678580632015,114.716332888208" />
         <NodeLayout
@@ -7019,7 +7020,7 @@ left join " +@[User::cfgIDB]+ ".dbo.xgesellschaft ge on obj.xobjgesellsch = ge.x
           Id="Package\Mappings and PRE - executions\BSEG --&gt; BSEG_ALL"
           TopLeft="33.149220966807,339.809138502921" />
         <NodeLayout
-          Size="167,42"
+          Size="166.666666666667,42"
           Id="Package\Mappings and PRE - executions\Buchungsdatum aus BuKopf holen"
           TopLeft="35,258" />
         <NodeLayout
@@ -7174,19 +7175,19 @@ left join " +@[User::cfgIDB]+ ".dbo.xgesellschaft ge on obj.xobjgesellsch = ge.x
           HeaderHeight="43"
           IsExpanded="True"
           PanelSize="296,594"
-          Size="296,637"
+          Size="296,637.333333333334"
           Id="Package\Mappings and PRE - executions"
           TopLeft="353.250017660005,114.82353347643" />
         <NodeLayout
-          Size="203,42"
+          Size="202.666666666667,42"
           Id="Package\Sequenzcontainer\delete facts 4 non-existing"
           TopLeft="16,162" />
         <NodeLayout
-          Size="203,42"
+          Size="202.666666666667,42"
           Id="Package\Sequenzcontainer\Insert missing assets"
           TopLeft="20,92" />
         <NodeLayout
-          Size="203,42"
+          Size="202.666666666667,42"
           Id="Package\Sequenzcontainer\Insert missing assets?"
           TopLeft="22,7" />
         <EdgeLayout
@@ -7238,7 +7239,7 @@ left join " +@[User::cfgIDB]+ ".dbo.xgesellschaft ge on obj.xobjgesellsch = ge.x
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="230,291"
+          PanelSize="230,290.666666666667"
           Size="230,334"
           Id="Package\Sequenzcontainer"
           TopLeft="382,790" />

@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
   DTS:CreationDate="9/24/2020 9:56:56 AM"
@@ -12,8 +12,9 @@
   DTS:LocaleID="1031"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="32"
-  DTS:VersionGUID="{ACBF85E1-AF9F-4899-9F73-9163C18FBC0B}">
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="33"
+  DTS:VersionGUID="{B0C31F25-2731-48BB-AC2D-4BDA5D6C592B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -197,7 +198,7 @@
           Id="Package\Clear BISimportDB"
           TopLeft="318,60" />
         <NodeLayout
-          Size="211,42"
+          Size="210.666666666667,42"
           Id="Package\Clear SSIS log"
           TopLeft="60,60" />
         <NodeLayout
