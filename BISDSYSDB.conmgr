@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:DelayValidation="True"
+  DTS:ObjectName="BISDSYSDB"
+  DTS:DTSID="{F7560E27-2584-440B-B85C-EEEFC99D892B}"
+  DTS:CreationName="OLEDB">
+  <DTS:PropertyExpression
+    DTS:Name="ServerName">@[$Project::parServerName_SDB]</DTS:PropertyExpression>
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=DBP332004,54364;Initial Catalog=BISDSYSDB;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Package-{F7560E27-2584-440B-B85C-EEEFC99D892B}DBP332001.BISDSYSDB;Auto Translate=False;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>
