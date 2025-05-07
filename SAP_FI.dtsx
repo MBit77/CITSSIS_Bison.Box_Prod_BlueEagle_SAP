@@ -12,9 +12,9 @@
   DTS:LocaleID="1031"
   DTS:ObjectName="SAP_FI"
   DTS:PackageType="5"
-  DTS:ProtectionLevel="0"
-  DTS:VersionBuild="405"
-  DTS:VersionGUID="{9789C00D-71F6-45B2-84DC-E7AF7FB65DE2}">
+  DTS:ProtectionLevel="2"
+  DTS:VersionBuild="406"
+  DTS:VersionGUID="{6073D7F5-E1E3-4BC6-B0A1-81924184FBC3}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -6803,7 +6803,7 @@ left join " +@[User::cfgIDB]+ ".dbo.xgesellschaft ge on obj.xobjgesellsch = ge.x
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="230,586"
+          PanelSize="230,586.666666666667"
           Size="230,629.333333333334"
           Id="Package\Data flows\Import balances"
           TopLeft="479.685719620939,17.7058884831868" />
@@ -7003,7 +7003,7 @@ left join " +@[User::cfgIDB]+ ".dbo.xgesellschaft ge on obj.xobjgesellsch = ge.x
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="758,702"
+          PanelSize="758,702.666666666667"
           Size="758,745.333333333334"
           Id="Package\Data flows"
           TopLeft="700.678580632015,114.716332888208" />
@@ -7174,7 +7174,7 @@ left join " +@[User::cfgIDB]+ ".dbo.xgesellschaft ge on obj.xobjgesellsch = ge.x
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="296,594"
+          PanelSize="296,594.666666666667"
           Size="296,637.333333333334"
           Id="Package\Mappings and PRE - executions"
           TopLeft="353.250017660005,114.82353347643" />
