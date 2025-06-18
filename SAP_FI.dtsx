@@ -8,13 +8,12 @@
   DTS:DTSID="{2D3E980A-3F0C-4440-9FF4-3D958B697836}"
   DTS:EnableConfig="True"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="15.0.2000.93"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
   DTS:LocaleID="1031"
   DTS:ObjectName="SAP_FI"
   DTS:PackageType="5"
-  DTS:ProtectionLevel="2"
-  DTS:VersionBuild="406"
-  DTS:VersionGUID="{6073D7F5-E1E3-4BC6-B0A1-81924184FBC3}">
+  DTS:VersionBuild="408"
+  DTS:VersionGUID="{9FC23BAE-9E67-4AC1-B856-96DBCAD5E061}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -1111,7 +1110,7 @@ group by xPrefix, hkont, xobjnr, xGesellschaftsCode, left(replace(budat, '-', ''
                           dataType="System.String"
                           description="The SQL command to be executed."
                           name="SqlCommand"
-                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                         <property
                           dataType="System.Int32"
                           description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -1420,7 +1419,7 @@ group by xPrefix, hkont, xobjnr, xGesellschaftsCode, left(replace(budat, '-', ''
                           dataType="System.String"
                           description="The SQL command to be executed."
                           name="SqlCommand"
-                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select 
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select 
   fdim01	= cast(xPrefix + '_' + hkont as varchar(50))
 , fdim02	= cast(xobjnr as varchar(50))
 , fdim03	= cast(bukrs as varchar(50))
@@ -2042,7 +2041,7 @@ and xPrefix is not null</property>
                           dataType="System.String"
                           description="The SQL command to be executed."
                           name="SqlCommand"
-                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                         <property
                           dataType="System.Int32"
                           description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -5429,7 +5428,7 @@ and xPrefix is not null</property>
                           dataType="System.String"
                           description="The SQL command to be executed."
                           name="SqlCommand"
-                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">declare @cfgGrp01Initial int = ?
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">declare @cfgGrp01Initial int = ?
 
 select * from 
 	(
@@ -5741,7 +5740,7 @@ where
                           dataType="System.String"
                           description="The SQL command to be executed."
                           name="SqlCommand"
-                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
                         <property
                           dataType="System.Int32"
                           description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -5912,7 +5911,7 @@ where
                           dataType="System.String"
                           description="The SQL command to be executed."
                           name="SqlCommand"
-                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">declare @cfgAlloc01Initial int = ?
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">declare @cfgAlloc01Initial int = ?
 select * from 
 (
 	select
@@ -6643,19 +6642,19 @@ left join " +@[User::cfgIDB]+ ".dbo.xgesellschaft ge on obj.xobjgesellsch = ge.x
       DTS:To="Package\Mappings and PRE - executions" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
-<!--Dieser CDATA-Abschnitt enthält die Layoutinformationen des Pakets, z.B. Informationen wie X-/Y-Koordinaten, Breite und Höhe.-->
-<!--Wenn Sie diesen Abschnitt manuell ändern und Ihnen ein Fehler unterläuft, können Sie ihn löschen. -->
-<!--Das Paket kann zwar weiterhin normal geladen werden, aber frühere Layoutinformationen gehen verloren, und die Elemente auf der Entwurfsoberfläche werden vom Designer automatisch neu angeordnet.-->
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
 <Objects
   Version="8">
-  <!--Jeder darunter liegende Knoten enthält Eigenschaften, die sich nicht auf das Laufzeitverhalten auswirken.-->
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
   <Package
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
         Capacity="64" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="218.666666666667,42"
+          Size="219,42"
           Id="Package\BISDB bereinigen, wenn Objekt nicht mehr vorhanden"
           TopLeft="1511,209" />
         <NodeLayout
@@ -6683,7 +6682,7 @@ left join " +@[User::cfgIDB]+ ".dbo.xgesellschaft ge on obj.xobjgesellsch = ge.x
           Id="Package\Data flows\Import balances\Init target"
           TopLeft="31.3460597918424,304.495426490352" />
         <NodeLayout
-          Size="170.666666666667,42"
+          Size="171,42"
           Id="Package\Data flows\Import balances\Update BSEG_ALL (xImport)"
           TopLeft="30,93" />
         <NodeLayout
@@ -6803,8 +6802,8 @@ left join " +@[User::cfgIDB]+ ".dbo.xgesellschaft ge on obj.xobjgesellsch = ge.x
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="230,586.666666666667"
-          Size="230,629.333333333334"
+          PanelSize="230,587"
+          Size="230,629"
           Id="Package\Data flows\Import balances"
           TopLeft="479.685719620939,17.7058884831868" />
         <NodeLayout
@@ -6812,11 +6811,11 @@ left join " +@[User::cfgIDB]+ ".dbo.xgesellschaft ge on obj.xobjgesellsch = ge.x
           Id="Package\Data flows\Import master data\BIS_IFFILLID"
           TopLeft="118.285713847803,220.376469987651" />
         <NodeLayout
-          Size="169.333333333334,42"
+          Size="169,42"
           Id="Package\Data flows\Import master data\DF_Accounts"
           TopLeft="20.5714281043228,112.611764131038" />
         <NodeLayout
-          Size="169.333333333334,42"
+          Size="169,42"
           Id="Package\Data flows\Import master data\DF_Accounts_alloc"
           TopLeft="210.571428104323,112.211764131038" />
         <NodeLayout
@@ -6962,7 +6961,7 @@ left join " +@[User::cfgIDB]+ ".dbo.xgesellschaft ge on obj.xobjgesellsch = ge.x
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="396,290.666666666667"
+          PanelSize="396,291"
           Size="396,334"
           Id="Package\Data flows\Import master data"
           TopLeft="21.9142979879774,17.3647111803604" />
@@ -7003,8 +7002,8 @@ left join " +@[User::cfgIDB]+ ".dbo.xgesellschaft ge on obj.xobjgesellsch = ge.x
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="758,702.666666666667"
-          Size="758,745.333333333334"
+          PanelSize="758,703"
+          Size="758,745"
           Id="Package\Data flows"
           TopLeft="700.678580632015,114.716332888208" />
         <NodeLayout
@@ -7020,7 +7019,7 @@ left join " +@[User::cfgIDB]+ ".dbo.xgesellschaft ge on obj.xobjgesellsch = ge.x
           Id="Package\Mappings and PRE - executions\BSEG --&gt; BSEG_ALL"
           TopLeft="33.149220966807,339.809138502921" />
         <NodeLayout
-          Size="166.666666666667,42"
+          Size="167,42"
           Id="Package\Mappings and PRE - executions\Buchungsdatum aus BuKopf holen"
           TopLeft="35,258" />
         <NodeLayout
@@ -7174,20 +7173,20 @@ left join " +@[User::cfgIDB]+ ".dbo.xgesellschaft ge on obj.xobjgesellsch = ge.x
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="296,594.666666666667"
-          Size="296,637.333333333334"
+          PanelSize="296,595"
+          Size="296,637"
           Id="Package\Mappings and PRE - executions"
           TopLeft="353.250017660005,114.82353347643" />
         <NodeLayout
-          Size="202.666666666667,42"
+          Size="203,42"
           Id="Package\Sequenzcontainer\delete facts 4 non-existing"
           TopLeft="16,162" />
         <NodeLayout
-          Size="202.666666666667,42"
+          Size="203,42"
           Id="Package\Sequenzcontainer\Insert missing assets"
           TopLeft="20,92" />
         <NodeLayout
-          Size="202.666666666667,42"
+          Size="203,42"
           Id="Package\Sequenzcontainer\Insert missing assets?"
           TopLeft="22,7" />
         <EdgeLayout
@@ -7239,7 +7238,7 @@ left join " +@[User::cfgIDB]+ ".dbo.xgesellschaft ge on obj.xobjgesellsch = ge.x
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="230,290.666666666667"
+          PanelSize="230,291"
           Size="230,334"
           Id="Package\Sequenzcontainer"
           TopLeft="382,790" />
