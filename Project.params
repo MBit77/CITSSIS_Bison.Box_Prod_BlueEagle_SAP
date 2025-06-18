@@ -21,4 +21,25 @@
         SSIS:Name="DataType">18</SSIS:Property>
     </SSIS:Properties>
   </SSIS:Parameter>
+  <SSIS:Parameter
+    SSIS:Name="ImmoControlling_RDB_Import_HR3">
+    <SSIS:Properties>
+      <SSIS:Property
+        SSIS:Name="ID">{f0d991f6-497a-41e1-abcd-ae8758e9edc0}</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="CreationName"></SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Description">Connectionstring  for ImportDB</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Required">0</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Sensitive">0</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Value">Data Source=DBP332003;Initial Catalog=ImmoControlling_RDB_Import_HR3;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-CITSSIS_Bison-{B0C3630F-6C3A-4EF5-B65F-E55891C1073B}DBP332003.ImmoControlling_RDB_Import_HR3;Auto Translate=False;</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="DataType">18</SSIS:Property>
+    </SSIS:Properties>
+  </SSIS:Parameter>
 </SSIS:Parameters>

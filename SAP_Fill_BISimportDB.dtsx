@@ -12,8 +12,8 @@
   DTS:LocaleID="1031"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="35"
-  DTS:VersionGUID="{D6EE2367-10C1-43EC-856F-0C14C036AE36}">
+  DTS:VersionBuild="37"
+  DTS:VersionGUID="{ED34B74A-29D6-423A-A54A-AE1DAD7DDE4D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -28,7 +28,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=DBP332004;Initial Catalog=ImmoControlling_Bison.Box_Import;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=DBP332004;Initial Catalog=ImmoControlling_RDB_Import_HR3;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-Package-{EAC566E0-C88C-436F-8C81-62678CF1210F}ImmoControlling_Bison.Box_Import;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -111,7 +111,7 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{EAC566E0-C88C-436F-8C81-62678CF1210F}"
+          SQLTask:Connection="{B0C3630F-6C3A-4EF5-B65F-E55891C1073B}"
           SQLTask:SqlStatementSource="declare @sql varchar(max) = ''&#xA;&#xA;select @sql  = @sql + 'truncate table BISimportDB.dbo.' + inp.name +';'&#xA;from sys.objects o&#xA;join BISimportDB.sys.objects inp on o.name = inp.name&#xA;where o.name like 'SAP%'&#xA;&#xA;--print @sql&#xA;exec (@sql)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -159,7 +159,7 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{EAC566E0-C88C-436F-8C81-62678CF1210F}"
+          SQLTask:Connection="{B0C3630F-6C3A-4EF5-B65F-E55891C1073B}"
           SQLTask:SqlStatementSource="declare @sql varchar(max) = '', @tableList varchar(8000) = '', @table varchar(50), @i int&#xA;&#xA;select @tableList = @tableList + expTab.name +';'&#xA;-- select *&#xA;from sys.objects expTab&#xA;join BISimportDB.sys.objects impTab on expTab.name = impTab.name&#xA;join sys.schemas expSchema on expTab.schema_id = expSchema.schema_id&#xA;where expTab.name like 'SAP%'&#xA;and expTab.type_desc = 'USER_TABLE'&#xA;and expSchema.name = 'box'&#xA;&#xA;while @tableList &lt;&gt; ''&#xA;begin&#xA;&#x9;set @i = CHARINDEX(';', @tableList)&#xA;&#x9;set @table = left(@tableList, @i - 1)&#xA;&#xA;&#x9;print @table&#xA;&#x9;set @sql = ''&#xA;&#xA;&#x9;select @sql = @sql + 'insert into BISimportDB.dbo.' +@table+ '(' + x.cols + 'xHubID, xPrefix, xTypeOfDataDelivery) select ' +x.cols+ ' ''HansaInvest-RealAssets'',''HIRAsap'', ''SAP'' from box.' + @table + '; '&#xA;&#x9;from &#xA;&#x9;(&#xA;&#x9;&#x9;select distinct expTabs.name, x.cols&#xA;&#x9;&#x9;from sys.objects expTabs&#xA;&#x9;&#x9;join BISimportDB.sys.objects impTabs on expTabs.name = impTabs.name&#xA;&#x9;&#x9;join sys.schemas expSchema on expTabs.schema_id = expSchema.schema_id&#xA;&#x9;&#x9;join sys.columns expCols on expTabs.object_id = expCols.object_id&#xA;&#x9;&#x9;-- Alle Spalten als String verketten&#xA;&#x9;&#x9;cross apply&#xA;&#x9;&#x9;(&#xA;&#x9;&#x9;&#x9;select '[' +expCols.name+ '],' &#xA;&#x9;&#x9;&#x9;from sys.columns expCols &#xA;&#x9;&#x9;&#x9;where expTabs.object_id = expCols.object_id&#xA;&#x9;&#x9;&#x9;-- Spalten müssen in Quelle und Ziel vorhanden sein&#xA;&#x9;&#x9;&#x9;and expCols.name in (select name from BISimportDB.sys.columns impCols where impTabs.object_id = impCols.object_id)&#xA;&#x9;&#x9;&#x9;order by expCols.column_id&#xA;&#x9;&#x9;&#x9;for xml path ('')&#xA;&#x9;&#x9;) x (cols)&#xA;&#x9;&#x9;where expTabs.name like 'SAP%'&#xA;&#x9;&#x9;and impTabs.type = 'U' -- user table&#xA;&#x9;&#x9;and expSchema.name = 'box'&#xA;&#x9;&#x9;and impTabs.name = @table&#xA;&#x9;) x&#xA;&#xA;&#x9;print @sql&#xA;&#x9;exec (@sql)&#xA;&#x9;set @tableList = substring(@tableList, @i + 1, 8000)&#xA;end&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>

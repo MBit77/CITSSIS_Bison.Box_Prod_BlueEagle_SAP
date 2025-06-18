@@ -1,0 +1,14 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="DBP332003.ImmoControlling_RDB_Import_HR3"
+  DTS:DTSID="{B0C3630F-6C3A-4EF5-B65F-E55891C1073B}"
+  DTS:CreationName="OLEDB">
+  <DTS:PropertyExpression
+    DTS:Name="ConnectionString">@[$Project::ImmoControlling_RDB_Import_HR3]</DTS:PropertyExpression>
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=DBP332003;Initial Catalog=ImmoControlling_RDB_Import_HR3;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-CITSSIS_Bison-{B0C3630F-6C3A-4EF5-B65F-E55891C1073B}DBP332003.ImmoControlling_RDB_Import_HR3;Auto Translate=False;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>
