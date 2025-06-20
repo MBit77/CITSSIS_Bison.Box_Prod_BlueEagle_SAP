@@ -12,8 +12,8 @@
   DTS:LocaleID="1031"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="39"
-  DTS:VersionGUID="{FC20859C-C59F-4D43-BF87-0E47D001AA14}">
+  DTS:VersionBuild="40"
+  DTS:VersionGUID="{3F23F60B-C1F4-496A-9DE4-31C34E1BA7D1}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -28,7 +28,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=DBP332004;Initial Catalog=ImmoControlling_RDB_Import_HR3;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-Package-{EAC566E0-C88C-436F-8C81-62678CF1210F}ImmoControlling_Bison.Box_Import;" />
+          DTS:ConnectionString="Data Source=DBP332003;Initial Catalog=ImmoControlling_RDB_Import_HR3;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-Package-{EAC566E0-C88C-436F-8C81-62678CF1210F}ImmoControlling_Bison.Box_Import;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -205,7 +205,7 @@
         <NodeLayout
           Size="216,42"
           Id="Package\Transfer data (from views) to BISimportDB"
-          TopLeft="582,60" />
+          TopLeft="582,62" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Einschränkung]"
           TopLeft="271,81">
@@ -230,7 +230,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Einschränkung 1]"
-          TopLeft="534,81">
+          TopLeft="534,82">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"

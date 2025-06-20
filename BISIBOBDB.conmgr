@@ -10,6 +10,6 @@
     <DTS:ConnectionManager
       DTS:ConnectRetryCount="1"
       DTS:ConnectRetryInterval="5"
-      DTS:ConnectionString="Data Source=DBP332004;Initial Catalog=BISIBOBDB;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-{85fd5fce-e1d8-4d51-99b6-67ae18f92939}BISIBOBDB;" />
+      DTS:ConnectionString="Data Source=DBP332003;Initial Catalog=BISIBOBDB;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-{85fd5fce-e1d8-4d51-99b6-67ae18f92939}BISIBOBDB;" />
   </DTS:ObjectData>
 </DTS:ConnectionManager>
