@@ -13,8 +13,8 @@
   DTS:LocaleID="1031"
   DTS:ObjectName="SAP_RE"
   DTS:PackageType="5"
-  DTS:VersionBuild="592"
-  DTS:VersionGUID="{C7D8E44E-E0F3-4EF8-BCDF-7BBE8D189892}">
+  DTS:VersionBuild="615"
+  DTS:VersionGUID="{33CA40E7-6651-477A-8F94-69DEC4229D7B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Configurations>
@@ -384,7 +384,6 @@
       DTS:refId="Package\clear last debit for each unit if value is 0"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:Disabled="True"
       DTS:DTSID="{B0A6D524-FF88-4523-B529-A258E8A281FD}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
@@ -442,7 +441,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{85fd5fce-e1d8-4d51-99b6-67ae18f92939}"
-          SQLTask:SqlStatementSource="if object_id ('BISimportDB.dbo.temp_SAP_mapping_BP') is not null drop table BISimportDB.dbo.temp_SAP_mapping_BP&#xA;select mapFrom=xkeyalphanr, mapTo=dbo.BISGET_Keyval_Alpha(xkeyHier01) &#xA;into BISimportDB.dbo.temp_SAP_mapping_BP&#xA;from dbo.fn_keyval('ExtPersonenarten') &#xA;where nullif(xkeyHier01, 0) is not null and ldelete = 0&#xA;&#xA;if object_id ('BISimportDB.dbo.temp_SAP_ObjTeam') is not null drop table BISimportDB.dbo.temp_SAP_ObjTeam&#xA;&#xA;select xobjnr&#xA;-- Objektteam&#xA;, xobjamcompany&#x9;&#x9;&#x9;&#x9;&#x9;= max(CASE WHEN mapTo = 'AM'  then PARTNER END)&#xA;, xobjbetreuerek&#x9;&#x9;&#x9;&#x9;= max(CASE WHEN mapTo = 'AMP'  then PARTNER END)&#xA;, xobjaccoutant&#x9;&#x9;&#x9;&#x9;&#x9;= max(CASE WHEN mapTo = 'BKP' then PARTNER END)&#xA;, xobjcaretaker&#x9;&#x9;&#x9;&#x9;&#x9;= max(CASE WHEN mapTo = 'HM'  then PARTNER END)&#xA;, xobjcommercialpm&#x9;&#x9;&#x9;&#x9;= max(CASE WHEN mapTo = 'KPM' then PARTNER END)&#xA;, xobjtechnicalpm&#x9;&#x9;&#x9;&#x9;= max(CASE WHEN mapTo = 'TPM' then PARTNER END)&#xA;, xobjlettingmanager&#x9;&#x9;&#x9;= max(CASE WHEN mapTo = 'VRM' then PARTNER END)&#xA;into BISimportDB.dbo.temp_SAP_ObjTeam&#xA;from &#xA;(&#xA;select xobjnr, bp.*, R=ROW_NUMBER() over (partition by bp.mandt, bp.intreno, role order by bp.validfrom desc), mapTo&#xA;from BISimportDB.dbo.SAP_vibpobjrel bp&#xA;join BISimportDB.dbo.temp_SAP_mapping_BP map on xPrefix +'_'+ ROLE = map.mapFrom&#xA;join BISimportDB.dbo.SAP_VIBDBE on SAP_VIBDBE.xHubid = bp.xHubid and SAP_VIBDBE.MANDT = bp.MANDT and SAP_VIBDBE.Intreno = bp.INTRENO&#xA;where mapTo &lt;&gt; 'P03'&#xA;and xobjnr is not null&#xA;) x&#xA;where r=1&#xA;group by xobjnr " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="  if object_id ('BISimportDB.dbo.temp_SAP_mapping_BP') is not null drop table BISimportDB.dbo.temp_SAP_mapping_BP&#xA;select mapFrom=xkeyalphanr, mapTo=dbo.BISGET_Keyval_Alpha(xkeyHier01) &#xA;into BISimportDB.dbo.temp_SAP_mapping_BP&#xA;from dbo.fn_keyval('ExtPersonenarten') &#xA;where nullif(xkeyHier01, 0) is not null and ldelete = 0&#xA;&#xA;if object_id ('BISimportDB.dbo.temp_SAP_ObjTeam') is not null drop table BISimportDB.dbo.temp_SAP_ObjTeam&#xA;&#xA;select xobjnr&#xA;-- Objektteam&#xA;, xobjamcompany&#x9;&#x9;&#x9;&#x9;&#x9;= max(CASE WHEN mapTo = 'AM'  then PARTNER END)&#xA;, xobjbetreuerek&#x9;&#x9;&#x9;&#x9;= max(CASE WHEN mapTo = 'AMP'  then PARTNER END)&#xA;, xobjaccoutant&#x9;&#x9;&#x9;&#x9;&#x9;= max(CASE WHEN mapTo = 'BKP' then PARTNER END)&#xA;, xobjcaretaker&#x9;&#x9;&#x9;&#x9;&#x9;= max(CASE WHEN mapTo = 'HM'  then PARTNER END)&#xA;, xobjcommercialpm&#x9;&#x9;&#x9;&#x9;= max(CASE WHEN mapTo = 'KPM' then PARTNER END)&#xA;, xobjtechnicalpm&#x9;&#x9;&#x9;&#x9;= max(CASE WHEN mapTo = 'TPM' then PARTNER END)&#xA;, xobjlettingmanager&#x9;&#x9;&#x9;= max(CASE WHEN mapTo = 'VRM' then PARTNER END)&#xA;into BISimportDB.dbo.temp_SAP_ObjTeam&#xA;from &#xA;(&#xA;select &#xA;xobjnr, bp.*, R=ROW_NUMBER() over (partition by bp.mandt, bp.intreno, role order by bp.validfrom desc), mapTo&#xA;from BISimportDB.dbo.SAP_vibpobjrel bp&#xA;join BISimportDB.dbo.temp_SAP_mapping_BP map on xPrefix +'_'+ ROLE = map.mapFrom&#xA;join BISimportDB.dbo.SAP_VIBDBE on SAP_VIBDBE.xHubid = bp.xHubid and SAP_VIBDBE.MANDT = bp.MANDT and SAP_VIBDBE.Intreno = bp.INTRENO&#xA;where mapTo &lt;&gt; 'P03'&#xA;and xobjnr is not null&#xA;) x&#xA;where r=1&#xA;and xPrefix = 'SICOREsap'&#xA;group by xobjnr " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -458,7 +457,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{2105E5C9-C9EB-4DDA-8714-2A9812EBB32F}"
-          SQLTask:SqlStatementSource="-- 1. Verträge bestimmen &#xA;If OBJECT_ID('dbo.cit_SAPVertrag') is not null drop table dbo.cit_SAPVertrag &#xA;go &#xA;select distinct &#xA;  vt.MANDT, vt.INTRENO as INTRENOVT, RECNNR, vt.OBJNR as vtOBJNR, vt.IMKEY as vtIMKEY &#xA;, me.OBJNR as meOBJNR &#xA;, me.BUKRS, me.SWENR, me.SMENR, me.IMKEY as meIMKEY, me.SGENR, me.SGRNR &#xA;, NbrVt &#xA;, vt.RECNENDABS&#xA;, case when ass.VALIDFROM is not NULL and ass.VALIDFROM &gt; isnull(recnbeg,'19000101') then CONVERT(datetime,ass.VALIDFROM,120)&#xA;          else  convert(datetime,isnull(recnbeg,'19000101'),120) end as xvtBeginn&#xA;, case when convert(datetime,ass.VALIDTO,120) &lt; convert(datetime,recnendabs,120)&#xA;             then nullif(convert(datetime,ass.VALIDTO,120),'99991231') else nullif(convert(datetime,recnendabs,120),'99991231') end as xvtEnde&#xA;, isnull(VALIDFROMX,'17530101')  as OBJVALIDFROMX , VALIDTOX as OBJVALIDTOX  &#xA;--, xvertrag = me.BUKRS + ' ' + right('000000' + me.SWENR,6) + ' ' + me.smenr + ' ' + vt.RECNNR + case when NbrVt &gt;1 then ' ' + right(100+NbrVt,2) else '' end &#xA;--, xFlaeche = me.BUKRS + ' ' + right('000000' + me.SWENR,6) + ' ' + me.smenr &#xA;, xvertrag&#x9;= cast(obj.xobjnr +'_'+ case when me.SGENR is null then 'G' else '' end + right(isnull(me.SGENR, me.SGRNR), 3) +'_'+ right(me.SMENR,5) +'_'+ vt.RECNNR as varchar(50))&#xA;, xFlaeche&#x9;= cast(obj.xobjnr +'_'+ case when me.SGENR is null then 'G' else '' end + right(isnull(me.SGENR, me.SGRNR), 3) +'_'+ right(me.SMENR,5) as varchar(50))&#xA;, me.xPrefix&#xA;into dbo.cit_SAPVertrag  &#xA;-- select *&#xA;from&#x9;&#x9;dbo.SAP_VICNCN vt with(nolock)&#xA;inner join&#x9;(&#xA;&#x9;&#x9;&#x9;select *&#xA;&#x9;&#x9;&#x9;&#x9;, VALIDFROMX = BISDSYSDB.dbo.BIS_Convert_DATE(nullif(VALIDFROM,''), null) &#xA;&#x9;&#x9;&#x9;&#x9;, VALIDTOX = BISDSYSDB.dbo.BIS_Convert_DATE(nullif(VALIDTO,''), null)&#xA;&#x9;&#x9;&#x9;&#x9;, NbrVt = ROW_NUMBER() over(partition by OBJNRSRC, OBJNRTRG order by validTo)    &#xA;&#x9;&#x9;&#x9;from dbo.SAP_VIBDOBJASS &#xA;&#x9;&#x9;&#x9;where '10' = OBJASSTYPE&#xA;&#x9;&#x9;&#x9;)  ass on  vt.OBJNR = ass.OBJNRSRC &#xA;join &#x9;&#x9;dbo.SAP_TIV26 t26 on vt.RECNTYPE = SMVART &#xA;join &#x9;&#x9;dbo.SAP_VIBDRO me on ass.OBJNRTRG = me.OBJNR&#xA;join&#x9;&#x9;dbo.SAP_VIBDBE obj on me.xHubid = obj.xHubid and me.BUKRs = obj.BUKRS and me.SWENR = obj.SWENR &#xA;where recnsrelob  = '02' &#xA;and (ass.ASSIGNONLYINFO is null or ass.ASSIGNONLYINFO != 'X')&#xA;--and SMENR like '%80001'&#xA;--and vt.RECNNR like '2191810001001'&#xA;&#xA;go &#xA;&#xA;if object_id('dbo.cit_SollmieteVertrag') is not null drop table dbo.cit_SollmieteVertrag&#xA;go &#xA;select &#xA; vt.BUKRS, vt.SWENR, vt.SMENR, vt.meOBJNR, vt.meIMKEY, vt.SGENR, vt.SGRNR&#xA;, vt.xflaeche &#xA;, vt.xVertrag &#xA;,INTRENOVT, RECNNR, vtOBJNR, vtIMKEY, xvtBeginn, xvtEnde &#xA;,sol.CONDTYPE&#xA;, isnull(&#xA;&#x9;&#x9;BISDSYSDB.dbo.BIS_Convert_DATE(nullif(sold.VALUEVALIDFROM,''), null),&#xA;&#x9;&#x9;BISDSYSDB.dbo.BIS_Convert_DATE(nullif(sol.CONDVALIDFROM,''), null)&#xA;&#x9;&#x9;)  as xBeginn&#xA;, case&#xA;  --  when BISDSYSDB.dbo.BIS_Convert_DATE(nullif(sold.VALUEVALIDTO,''), null) &lt; case when vt.xvtEnde &lt;= getdate() and vt.xvtEnde &lt; BISDSYSDB.dbo.BIS_Convert_DATE(nullif(CONDVALIDTO,''), null) &#xA;&#x9;&#x9;--&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;   then vt.xvtEnde else sol.CONDVALIDTO end&#xA;&#x9;&#x9;--then sold.VALUEVALIDTO&#xA;&#x9;when vt.xvtEnde &lt;= getdate() and vt.xvtEnde &lt; BISDSYSDB.dbo.BIS_Convert_DATE(nullif(CONDVALIDTO,''), null) &#xA;&#x9;&#x9;then vt.xvtEnde &#xA;&#x9;else BISDSYSDB.dbo.BIS_Convert_DATE&#xA;&#x9;(&#xA;&#x9;&#x9;isnull(&#xA;&#x9;&#x9;&#x9;&#x9;nullif(sold.VALUEVALIDTO,'')&#xA;&#x9;&#x9;&#x9;&#x9;, &#xA;&#x9;&#x9;&#x9;&#x9;nullif(sol.CONDVALIDTO,''))&#xA;&#x9;, null)&#xA;  end as xEnde  &#xA;, sol.UNITPRICE, sold.CONDVALUE, sold.TAXVALUE, isnull(sold.CONDCURR,sol.CONDCURR)  as CONDCURR, XCONDTYPEL, sol.CHGREASON, /*XCHGREASON, */ sol.CONDPURPOSEEXT&#xA;, cast(sol.CONDTYPE as varchar (10)) as xSollstellungsart &#xA;--&#x9;L = Lease &#xA;, TERMNOAJ = convert(varchar(10),ISNULL(sol.TERMNOAJ,'')) &#xA;, TERMNORH = convert(varchar(10),isnull(sol.TERMNORH,''))  &#xA;, ISNULL(flty.ssolhab,'S') as SSOLHAB&#xA;, CONDVALUEX = bisdsysdb.dbo.BIS_Convert_FLOAT(sold.CONDVALUE) &#xA;, UNITPRICEX = bisdsysdb.dbo.BIS_Convert_FLOAT(sol.UNITPRICE)  &#xA;, CONDVALIDTOX = BISDSYSDB.dbo.BIS_Convert_DATE(nullif(CONDVALIDTO,''), null) &#xA;, VALUEVALIDTOX = BISDSYSDB.dbo.BIS_Convert_DATE(nullif(sold.VALUEVALIDTO,''), null)&#xA;, CONDGUID = convert(varchar,sol.CONDGUID,2)&#xA;, OBJNRX = sol.OBJNR&#xA;, vt.OBJVALIDFROMX, vt.OBJVALIDTOX &#xA;, vt.xPrefix&#xA;into dbo.cit_SollmieteVertrag&#xA;from&#x9;&#x9;dbo.cit_SAPVertrag vt with(nolock)&#xA;join&#x9;&#x9;dbo.SAP_VICDCOND sol on vt.INTRENOVT = sol.intreno and vt.MANDT = sol.MANDT&#xA;join&#x9;&#x9;dbo.SAP_VICDCONDDIST sold on sol.CONDGUID = sold.CONDGUID and sold.DISTOBJNR = vt.meOBJNR and sold.MANDT = vt.MANDT and sold.INTRENO = vt.INTRENOVT&#xA;join&#x9;&#x9;dbo.SAP_VIBDRO me on sold.DISTOBJNR = me.OBJNR and sold.MANDT = me.MANDT&#xA;left join &#x9;dbo.SAP_TIVCDCONDTYPE cond on sol.CONDTYPE = cond.CONDTYPE and sol.MANDT = cond.MANDT&#xA;left join &#x9;dbo.SAP_TIVCDFLOWTYPE flty on cond.FLOWTYPE = flty.FLOWTYPE and cond.MANDT = flty.MANDT&#xA;left join &#x9;dbo.SAP_TIVCDCONDTYPET solt on 'D' = solt.SPRAS and sol.CONDTYPE = solt.CONDTYPE and solt.MANDT = sol.MANDT&#xA;--left join &#x9;dbo.SAP_TIVCDCHGREAST  crt on sol.CONDTYPE = crt.CONDTYPE and  isnull(sol.CHGREASON,'') = crt.CHGREASON and 'D' = crt.SPRAS &#xA;where (sol.CONDDELETE is null or sol.CONDDELETE &lt;&gt; 'X')&#xA;--and xFlaeche = '2300_02075_001_20007'&#xA;--and sol.CONDTYPE = '100A'&#xA;order by xvertrag&#xA;--and (sol.CONDPURPOSEEXT is null or sol.CONDPURPOSEEXT &lt;&gt; 'I') &#xA;&#xA;&#xA;&#xA;go &#xA;delete t1 &#xA;  from dbo.cit_SollmieteVertrag t1&#xA;where xBeginn not between OBJVALIDFROMX and OBJVALIDTOX &#xA;go&#xA;if object_id('dbo.cit_SollmieteVertragADD') is not null drop table dbo.cit_SollmieteVertragADD&#xA;go &#xA;-- 2. Konditionen nicht in VICDCONDDIST nur aus CONDCALC &#xA;select &#xA; vt.BUKRS, vt.SWENR, vt.SMENR, vt.meOBJNR, vt.meIMKEY, vt.SGENR,vt.SGRNR &#xA;, vt.xflaeche &#xA;, vt.xVertrag &#xA;,INTRENOVT, RECNNR, vtOBJNR, vtIMKEY, xvtBeginn, xvtEnde &#xA;,sol.CONDTYPE&#xA;, isnull(BISDSYSDB.dbo.BIS_Convert_DATE(nullif(solc.VALUEVALIDFROM,''), null), BISDSYSDB.dbo.BIS_Convert_DATE(nullif(sol.CONDVALIDFROM,''), null)) as xBeginn&#xA;, case when vt.xvtEnde &lt;= getdate() &#xA;&#x9;and vt.xvtEnde &lt; BISDSYSDB.dbo.BIS_Convert_DATE(nullif(sol.CONDVALIDTO,''), null) &#xA;&#x9;then vt.xvtEnde else  isnull(BISDSYSDB.dbo.BIS_Convert_DATE(nullif(solc.VALUEVALIDTO,''), null) , BISDSYSDB.dbo.BIS_Convert_DATE(nullif(sol.CONDVALIDTO,''), null)) end as xEnde  &#xA;, sol.UNITPRICE, solc.CONDVALUE, solc.TAXVALUE, CONDCURR = isnull(solc.CONDCURR,sol.CONDCURR) , XCONDTYPEL, sol.CHGREASON, /*XCHGREASON, */ sol.CONDPURPOSEEXT&#xA;, cast(sol.CONDTYPE     &#x9;&#x9;as varchar (10))as xSollstellungsart&#xA;, sol.TERMNOAJ, sol.TERMNORH &#xA;, ISNULL(flty.ssolhab,'S') as SSOLHAB&#xA;, CONDVALUEX = bisdsysdb.dbo.BIS_Convert_FLOAT(solc.CONDVALUE) &#xA;, UNITPRICEX = bisdsysdb.dbo.BIS_Convert_FLOAT(sol.UNITPRICE)  &#xA;, CONDVALIDTOX = BISDSYSDB.dbo.BIS_Convert_DATE(nullif(CONDVALIDTO,''), null) &#xA;, VALUEVALIDTOX = BISDSYSDB.dbo.BIS_Convert_DATE(nullif(solc.VALUEVALIDTO,''), null)&#xA;, OBJNRX = sol.OBJNR&#xA;, CONDGUID = convert(varchar,sol.CONDGUID ,2)&#xA;, vt.OBJVALIDFROMX, vt.OBJVALIDTOX &#xA;, vt.xPrefix&#xA;into &#x9;&#x9;dbo.CIT_SollmieteVertragAdd  &#xA;-- select top 100 vt.*&#xA;from&#x9;&#x9;dbo.cit_SAPVertrag vt with(nolock)&#xA;join&#x9;&#x9;dbo.SAP_VICDCOND sol on vt.INTRENOVT = sol.intreno&#xA;join&#x9;&#x9;dbo.SAP_VICDCONDCALC solc on sol.CONDGUID = solc.CONDGUID and vt.meOBJNR = sol.OBJNRDIST  &#xA;left join &#x9;dbo.SAP_TIVCDCONDTYPE cond on sol.CONDTYPE = cond.CONDTYPE&#xA;left join &#x9;dbo.SAP_TIVCDFLOWTYPE flty on cond.FLOWTYPE = flty.FLOWTYPE&#xA;left join &#x9;dbo.SAP_TIVCDCONDTYPET solt on 'D' = solt.SPRAS and sol.CONDTYPE = solt.CONDTYPE&#xA;--left join &#x9;dbo.SAP_TIVCDCHGREAST  crt on sol.CONDTYPE = crt.CONDTYPE and isnull(sol.CHGREASON,'') = crt.CHGREASON and 'D' = crt.SPRAS &#xA;where (sol.CONDDELETE is null or sol.CONDDELETE &lt;&gt; 'X')  &#xA;--and (sol.CONDPURPOSEEXT is null or sol.CONDPURPOSEEXT &lt;&gt; 'I')  &#xA;and not exists(select CONDGUID from&#x9;dbo.SAP_VICDCONDDIST dist where solc.CONDGUID = dist.CONDGUID)  &#xA;go &#xA;&#xA;delete t1 &#xA;  from dbo.CIT_SollmieteVertragAdd t1 &#xA;where xBeginn not between OBJVALIDFROMX and OBJVALIDTOX &#xA;go &#xA;insert into dbo.CIT_SollmieteVertrag &#xA;select * from dbo.CIT_SollmieteVertragAdd &#xA;go &#xA;if object_id('dbo.cit_SollmieteVertragADD') is not null drop table dbo.cit_SollmieteVertragADD&#xA;go &#xA;select &#xA; vt.BUKRS, vt.SWENR, vt.SMENR, vt.meOBJNR, vt.meIMKEY, vt.SGENR,vt.SGRNR &#xA;, vt.xflaeche &#xA;, vt.xVertrag &#xA;,INTRENOVT, RECNNR, vtOBJNR, vtIMKEY, xvtBeginn, xvtEnde &#xA;,sol.CONDTYPE&#xA;, BISDSYSDB.dbo.BIS_Convert_DATE(nullif(sol.CONDVALIDFROM,''), null)  as xBeginn&#xA;, case when vt.xvtEnde &lt;= getdate() &#xA;&#x9;and vt.xvtEnde &lt; BISDSYSDB.dbo.BIS_Convert_DATE(nullif(CONDVALIDTO,''), null)  &#xA;&#x9;then vt.xvtEnde else BISDSYSDB.dbo.BIS_Convert_DATE(nullif(sol.CONDVALIDTO,''), null)  end as xEnde  &#xA;, sol.UNITPRICE, convert(varchar(512),null) as CONDVALUE, convert(varchar(512),null) as TAXVALUE, sol.CONDCURR, XCONDTYPEL, sol.CHGREASON, sol.CONDPURPOSEEXT&#xA;, cast(sol.CONDTYPE     &#x9;&#x9;as varchar (10))as xSollstellungsart &#xA;--&#x9;L = Lease &#xA;, TERMNOAJ = convert(varchar(10),ISNULL(sol.TERMNOAJ,'')) &#xA;, TERMNORH = convert(varchar(10),isnull(sol.TERMNORH,''))  &#xA;, ISNULL(flty.ssolhab,'S') as SSOLHAB&#xA;, CONDVALUEX = bisdsysdb.dbo.BIS_Convert_FLOAT(sol.UNITPRICE) &#xA;, UNITPRICEX = bisdsysdb.dbo.BIS_Convert_FLOAT(sol.UNITPRICE)  &#xA;, CONDVALIDTOX = BISDSYSDB.dbo.BIS_Convert_DATE(nullif(CONDVALIDTO,''), null) &#xA;, VALUEVALIDTOX = BISDSYSDB.dbo.BIS_Convert_DATE(NULL, null)&#xA;, CONDGUID = convert(varchar,sol.CONDGUID ,2)&#xA;, OBJNRX = sol.OBJNR&#xA;, vt.OBJVALIDFROMX, vt.OBJVALIDTOX &#xA;, vt.xPrefix&#xA;into dbo.cit_SollmieteVertragADD &#xA;-- select top 100 vt.*&#xA;from&#x9;&#x9;dbo.cit_SAPVertrag vt with(nolock)&#xA;join&#x9;&#x9;dbo.SAP_VICDCOND sol on vt.INTRENOVT = sol.intreno and vt.meOBJNR = sol.OBJNRDIST &#xA;join&#x9;&#x9;dbo.SAP_VIBDRO me on sol.OBJNRDIST = me.OBJNR  &#xA;left join &#x9;dbo.SAP_TIVCDCONDTYPE cond on sol.CONDTYPE = cond.CONDTYPE&#xA;left join &#x9;dbo.SAP_TIVCDFLOWTYPE flty on cond.FLOWTYPE = flty.FLOWTYPE&#xA;left join &#x9;dbo.SAP_TIVCDCONDTYPET solt on 'D' = solt.SPRAS and sol.CONDTYPE = solt.CONDTYPE&#xA;--left join &#x9;dbo.SAP_TIVCDCHGREAST  crt on sol.CONDTYPE = crt.CONDTYPE and  isnull(sol.CHGREASON,'') = crt.CHGREASON and 'D' = crt.SPRAS &#xA;where (sol.CONDDELETE is null or sol.CONDDELETE &lt;&gt; 'X')  &#xA;--and (sol.CONDPURPOSEEXT is null or sol.CONDPURPOSEEXT &lt;&gt; 'I')  &#xA;--and sol.CHGREASON in('STAFFEL', 'INDEX')  &#xA;and not exists(select CONDGUID from dbo.SAP_VICDCONDDIST sold where sol.CONDGUID = sold.CONDGUID ) &#xA;and not exists(select CONDGUID from dbo.SAP_VICDCONDCALC calc where sol.CONDGUID = calc.CONDGUID )   &#xA;&#xA;go &#xA;-- Künftige Datensätze mit CHGREASON = FREIE oder NULL. Keine UNITPRICE = 0 mit abweichender Berechnungsvorschrift &#xA;insert into dbo.CIT_SollmieteVertragAdd  &#xA;select &#xA; vt.BUKRS, vt.SWENR, vt.SMENR, vt.meOBJNR, vt.meIMKEY, vt.SGENR,vt.SGRNR &#xA;, vt.xflaeche &#xA;, vt.xVertrag &#xA;,INTRENOVT, RECNNR, vtOBJNR, vtIMKEY, xvtBeginn, xvtEnde &#xA;,sol.CONDTYPE&#xA;, BISDSYSDB.dbo.BIS_Convert_DATE(nullif(sol.CONDVALIDFROM, ''), null)  as xBeginn&#xA;, case when vt.xvtEnde &lt;= getdate() &#xA;&#x9;and vt.xvtEnde &lt; BISDSYSDB.dbo.BIS_Convert_DATE(nullif(CONDVALIDTO, ''), null)  &#xA;&#x9;then vt.xvtEnde else BISDSYSDB.dbo.BIS_Convert_DATE(nullif(sol.CONDVALIDTO, ''), null)  end as xEnde  &#xA;, sol.UNITPRICE, convert(varchar(512),null) as CONDVALUE, convert(varchar(512),null) as TAXVALUE, sol.CONDCURR, XCONDTYPEL, sol.CHGREASON, sol.CONDPURPOSEEXT&#xA;, cast(sol.CONDTYPE     &#x9;&#x9;as varchar (10))as xSollstellungsart &#xA;--&#x9;L = Lease &#xA;, TERMNOAJ = convert(varchar(10),ISNULL(sol.TERMNOAJ,'')) &#xA;, TERMNORH = convert(varchar(10),isnull(sol.TERMNORH,''))  &#xA;, ISNULL(flty.ssolhab,'S') as SSOLHAB&#xA;, CONDVALUEX = bisdsysdb.dbo.BIS_Convert_FLOAT(sol.UNITPRICE) &#xA;, UNITPRICEX = bisdsysdb.dbo.BIS_Convert_FLOAT(sol.UNITPRICE)  &#xA;, CONDVALIDTOX = BISDSYSDB.dbo.BIS_Convert_DATE(nullif(CONDVALIDTO, ''), null) &#xA;, VALUEVALIDTOX = BISDSYSDB.dbo.BIS_Convert_DATE(NULL, null) &#xA;, CONDGUID = convert(varchar,sol.CONDGUID ,2)&#xA;, OBJNRX = sol.OBJNR&#xA;, vt.OBJVALIDFROMX, vt.OBJVALIDTOX &#xA;, vt.xPrefix&#xA;--into dbo.cit_SollmieteVertragADD &#xA;-- select top 100 vt.*&#xA;from&#x9;&#x9;dbo.cit_SAPVertrag vt with(nolock)&#xA;join&#x9;&#x9;dbo.SAP_VICDCOND sol on vt.INTRENOVT = sol.intreno and vt.meOBJNR = sol.OBJNRDIST &#xA;join&#x9;&#x9;dbo.SAP_VIBDRO me on sol.OBJNRDIST = me.OBJNR  &#xA;left join &#x9;dbo.SAP_TIVCDCONDTYPE cond on sol.CONDTYPE = cond.CONDTYPE&#xA;left join &#x9;dbo.SAP_TIVCDFLOWTYPE flty on cond.FLOWTYPE = flty.FLOWTYPE&#xA;left join &#x9;dbo.SAP_TIVCDCONDTYPET solt on 'D' = solt.SPRAS and sol.CONDTYPE = solt.CONDTYPE&#xA;--left join &#x9;dbo.SAP_TIVCDCHGREAST  crt on sol.CONDTYPE = crt.CONDTYPE and  isnull(sol.CHGREASON,'') = crt.CHGREASON and 'D' = crt.SPRAS &#xA;where (sol.CONDDELETE is null or sol.CONDDELETE &lt;&gt; 'X')  &#xA;--and (sol.CONDPURPOSEEXT is null or sol.CONDPURPOSEEXT &lt;&gt; 'I')  &#xA;and (sol.CHGREASON = 'FREIE'  or sol.CHGREASON is NULL) &#xA;and sol.CALCRULE &lt;&gt; 'E1' &#xA;and BISDSYSDB.dbo.BIS_Convert_DATE(nullif(sol.CONDVALIDFROM, ''), null) &gt;= getdate() &#xA;and not exists(select CONDGUID from dbo.SAP_VICDCONDDIST sold where sol.CONDGUID = sold.CONDGUID ) &#xA;and not exists(select CONDGUID from dbo.SAP_VICDCONDCALC calc where sol.CONDGUID = calc.CONDGUID )   &#xA;&#xA;go  &#xA;delete t1 &#xA;  from dbo.CIT_SollmieteVertragAdd t1 &#xA;where xBeginn not between OBJVALIDFROMX and OBJVALIDTOX &#xA;go &#xA;delete &#xA;from dbo.cit_SollmieteVertragADD  &#xA;where xende &lt; xbeginn &#xA;go &#xA;delete t1 &#xA;from  dbo.cit_SollmieteVertragADD  t1 &#xA;join (select *, VALIDFROMX = BISDSYSDB.dbo.BIS_Convert_DATE(nullif(VALIDFROM,''), null) , VALIDTOX = BISDSYSDB.dbo.BIS_Convert_DATE(nullif(VALIDTO,''), null) from SAP_VIBDRO) fl on fl.OBJNR = t1.meOBJNR &#xA;where (CHGREASON in('INDEX', 'FREIE') OR CHGREASON is null) and (t1.xbeginn &gt; fl.VALIDTOX or t1.xbeginn &lt;  VALIDFROMX) &#xA;go &#xA;delete mv &#xA;from dbo.cit_SollmieteVertragADD  mv &#xA;left join&#x9;(select vi.INTRENO, vi.NTREASON, NTRECEIPT = BISDSYSDB.dbo.BIS_Convert_DATE(nullif(NTRECEIPT,''), null) &#xA;&#x9;&#x9;&#x9;&#x9; , vi.NTPARTY, NTACTIVATEDON ,  NTPER=BISDSYSDB.dbo.BIS_Convert_DATE(nullif(NTPER,''), null)&#xA;&#x9;&#x9;&#x9;&#x9; , NTAPPROVEDON = BISDSYSDB.dbo.BIS_Convert_DATE(nullif(NTAPPROVEDON,''), null)&#xA;&#x9;&#x9;&#x9;&#x9; , NTREQUESTON  = BISDSYSDB.dbo.BIS_Convert_DATE(nullif(NTREQUESTON,''), null)&#xA;&#x9;&#x9;&#x9;&#x9;from dbo.SAP_VICNNT vi &#xA;&#x9;&#x9;&#x9;&#x9;where NTCATE = 'C' and NTACTIVE = 'X' and (NTREVERSEDON is null or NTREVERSEDON  = '')) kuend on mv.INTRENOVT = kuend.INTRENO &#xA;left join   (select vi.INTRENO, OBJNR = ob.OBJNR , vi.NTREASON, NTRECEIPT = BISDSYSDB.dbo.BIS_Convert_DATE(nullif(NTRECEIPT,''), null)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;, vi.NTPARTY, NTACTIVATEDON, NTPER=BISDSYSDB.dbo.BIS_Convert_DATE(nullif(NTPER,''), null)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;from&#x9;&#x9;&#x9;dbo.SAP_VICNNT vi  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;join&#x9;&#x9;&#x9;dbo.SAP_VICNNTOBJREL ob on vi.INTRENO = ob.INTRENO and vi.NTNO = ob.NTNO  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;where vi.NTCATE = 'O' and NTACTIVE = 'X' and (NTREVERSEDON is null or NTREVERSEDON = '00.00.0000')) kuendobj on mv.INTRENOVT = kuendobj.INTRENO and mv.meOBJNR = kuendobj.OBJNR &#xA;&#xA;where (CHGREASON in('INDEX', 'FREIE') OR CHGREASON is null)&#xA;and  (kuend.ntper &gt; xvtende or kuendobj.ntper &lt; xvtende ) &#xA;go &#xA;insert into dbo.cit_SollmieteVertrag (&#xA; BUKRS, SWENR, SMENR, meOBJNR, meIMKEY, SGENR, SGRNR , xFlaeche&#xA;, xVertrag,INTRENOVT, RECNNR, vtOBJNR, vtIMKEY, xvtBeginn, xvtEnde &#xA;,CONDTYPE, xBeginn, xEnde  &#xA;, UNITPRICE, CONDVALUE, TAXVALUE, CONDCURR, XCONDTYPEL, CHGREASON, CONDPURPOSEEXT&#xA;,xSollstellungsart , TERMNOAJ, TERMNORH, SSOLHAB, CONDVALUEX, UNITPRICEX, CONDVALIDTOX, VALUEVALIDTOX&#xA;,OBJVALIDFROMX, OBJVALIDTOX, xPrefix&#xA;) &#xA;select &#xA; BUKRS, SWENR, SMENR, meOBJNR, meIMKEY, SGENR, SGRNR , xFlaeche&#xA;, xVertrag,INTRENOVT, RECNNR, vtOBJNR, vtIMKEY, xvtBeginn, xvtEnde &#xA;,CONDTYPE, xBeginn, xEnde  &#xA;, UNITPRICE, CONDVALUE, TAXVALUE, CONDCURR, XCONDTYPEL, CHGREASON, CONDPURPOSEEXT&#xA;,xSollstellungsart , TERMNOAJ, TERMNORH, SSOLHAB, CONDVALUEX, UNITPRICEX, CONDVALIDTOX, VALUEVALIDTOX&#xA;,OBJVALIDFROMX, OBJVALIDTOX &#xA;, xPrefix&#xA;from&#x9;dbo.cit_SollmieteVertragADD &#xA;go &#xA;-- Konditionsende für künftige Verträge, falls Folgevertrag vorhanden &#xA;update a set xende = a.xvtende &#xA;from cit_sollmieteVertrag a with(nolock) &#xA;join cit_sollmieteVertrag b on a.meObjnr = b.meObjnr and a.xvtende &lt; b.xvtbeginn &#xA;where a.xvtende &gt; getdate() and a.xende &gt; a.xvtende &#xA;go &#xA;alter Table cit_sollmieteVertrag add &#xA;ciMonth varchar(12) null, CONDVALUEREFER varchar(10) null, FREQUENCYUNIT varchar(10) null, FREQUENCY varchar(10) null&#xA; &#xA;GO &#xA;update a set ciMonth = isnull(crh.ciMonth,'XXXXXXXXXXXX')&#xA;,  CONDVALUEREFER = rh.CONDVALUEREFER&#xA;,  FREQUENCYUNIT = rh.FREQUENCYUNIT &#xA;,  FREQUENCY = rh.FREQUENCY  &#xA;-- select *&#xA;from dbo.cit_SollmieteVertrag a &#xA;left join   dbo.SAP_VITMRH rh on INTRENOVT = rh.INTRENO and rh.termtype = '1110' and a.termnorh = isnull(rh.termno,'')  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;and xBeginn between BISDSYSDB.dbo.BIS_Convert_DATE(isnull(nullif(rh.validfrom,''),'1900-01-01'), null)  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and BISDSYSDB.dbo.BIS_Convert_DATE(isnull(nullif(rh.validto,''),'9999-12-31'), null)  &#xA;left join &#x9;dbo.cit_rymMonth crh on rh.frequencyunit = crh.frequencyunit and rh.frequency = crh.frequency  &#xA;and case when rh.Monthfrom = '13' then right(100+month(xbeginn),2) &#xA;&#x9; when rh.MonthFrom = '40' then &#xA;&#x9;&#x9;&#x9;&#x9;case when Rhythmbegin is not null then right(100+month(BISDSYSDB.dbo.BIS_Convert_DATE(nullif(Rhythmbegin,''), null)),2) &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;else rh.Monthfrom end &#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;else rh.Monthfrom end = crh.Monthfrom &#xA;go &#xA;-- Umrechnen Betragsbasis Monatsbetrag und Rhythmus &lt;&gt; Monate &#xA;update a set CONDVALUEX = CONDVALUEX * 12.00 / convert(decimal(18,2),LEN(replace(cimonth,' ', '')))   &#xA;from dbo.cit_SollmieteVertrag a &#xA;where &#x9;CONDVALUEREFER = '0' &#xA;and not (FREQUENCYUNIT = '0' and FREQUENCY = '001') &#xA;and  LEN(replace(cimonth,' ', '')) &gt; 0 &#xA;and CONDVALUEX is not null &#xA;go  &#xA;-- Umrechnung Betragsbasis Jahresbetrag und Rhythmus &lt;&gt; Jahresrhythmus  &#xA;update a set CONDVALUEX = CONDVALUEX / convert(decimal(18,2),LEN(replace(cimonth,' ', '')))   &#xA;from dbo.cit_SollmieteVertrag a &#xA;where &#x9;CONDVALUEREFER = '1' &#xA;and FREQUENCYUNIT = '0' and FREQUENCY &lt;&gt; '012' &#xA;and  LEN(replace(cimonth,' ', '')) &gt; 0 &#xA;and CONDVALUEX is not null &#xA;go &#xA;-- Umrechnung Betragsbasis = Tagesbetrag &#xA;update a set CONDVALUEX = 30.00 * CONDVALUEX *12.00 /  convert(decimal(18,2),LEN(replace(cimonth,' ', '')))   &#xA;from dbo.cit_SollmieteVertrag a &#xA;where &#x9;CONDVALUEREFER = '2' &#xA;and  LEN(replace(cimonth,' ', '')) &gt; 0 &#xA;and CONDVALUEX is not null &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;GO &#xA;-- Ende für Einmalsollstellung eintragen sofern nicht vorhanden oder zu spät &#xA;if COL_LENGTH('dbo.cit_SollmieteVertrag', 'zzEnde') is null alter table cit_SollmieteVertrag add zzEnde datetime null &#xA;go &#xA;update a set zzEnde = dateadd(day,-1,dateadd(month,1,Dateadd(day,-day(xbeginn)+1,xbeginn)))  &#xA; from&#x9;cit_SollmieteVertrag a &#xA;where&#x9;CONDPURPOSEEXT = 'B' &#xA;and xEnde &gt; dateadd(day,-1,dateadd(month,1,Dateadd(day,-day(xbeginn)+1,xbeginn))) &#xA;go &#xA;update t1 set xende = t1.zzende &#xA;from&#x9;&#x9;dbo.cit_SollmieteVertrag t1 &#xA;left join&#x9;dbo.cit_SollmieteVertrag t2 on t1.xFlaeche = t2.xFlaeche and t1.xSollstellungsart = t2.xSollstellungsart and t2.xBeginn &gt; t1.xBeginn  &#xA;&#x9;and t2.xBeginn &lt;= t1.zzEnde  &#xA;where t1.zzende is not null &#xA;and t2.xBeginn is null &#xA;GO &#xA;-- Tagessollstlelung auf Monatsende verlängern sofern eintägig damit aktiviert &#xA;update t1 set xende = EOMONTH(xende)&#xA;from dbo.cit_SollmieteVertrag t1 &#xA;where CONDPURPOSEEXT = 'B' &#xA;and xbeginn = xende &#xA;&#x9;&#xA;-------------------------------------------------------------------------------------------------------------------------------------------------------------&#xA;-- TEXT Konditionen: Aufbereitung Leerstandsmiete Flächen &#xA;-------------------------------------------------------------------------------------------------------------------------------------------------------------&#xA;if OBJECT_ID('dbo.cit_SollmieteFlaeche') is not null drop table dbo.cit_SollmieteFlaeche &#xA;go  &#xA;Select  &#xA; me.BUKRS, me.SWENR, me.SMENR, me.OBJNR as meOBJNR, me.IMKEY as meIMKEY, me.SGENR, me.SGRNR, sol.INTRENO&#xA;--, cast(me.BUKRS + ' ' + right('000000' + me.SWENR,6) + ' ' + me.smenr as varchar (45))as xFlaeche&#xA;--, xvertrag&#x9;= cast(obj.xobjnr +'_'+ case when me.SGENR is null then 'G' else '' end + right(isnull(me.SGENR, me.SGRNR), 3) +'_'+ right(me.SMENR,5) +'_'+ vt.RECNNR as varchar(50))&#xA;, xFlaeche&#x9;= cast(obj.xobjnr +'_'+ case when me.SGENR is null then 'G' else '' end + right(isnull(me.SGENR, me.SGRNR), 3) +'_'+ right(me.SMENR,5) as varchar(50))&#xA;&#xA;,sol.CONDTYPE&#xA;, BISDSYSDB.dbo.BIS_Convert_DATE(isnull(nullif(solc.VALUEVALIDFROM,''), nullif(sol.CONDVALIDFROM,'')), null) as xBeginn&#xA;, BISDSYSDB.dbo.BIS_Convert_DATE(nullif(sol.CONDVALIDTO,''), null)  as xEnde  &#xA;, sol.UNITPRICE, solc.CONDVALUE, solc.TAXVALUE, solc.CONDCURR, XCONDTYPEL, sol.CHGREASON, sol.CONDPURPOSEEXT&#xA;, cast(sol.CONDTYPE     &#x9;&#x9;as varchar (10))as xSollstellungsart&#xA;, sol.TERMNOAJ, sol.TERMNORH &#xA;, ISNULL(flty.ssolhab,'S') as SSOLHAB&#xA;, CONDVALUEX = bisdsysdb.dbo.BIS_Convert_FLOAT(solc.CONDVALUE) &#xA;, UNITPRICEX = bisdsysdb.dbo.BIS_Convert_FLOAT(sol.UNITPRICE)  &#xA;, me.xPrefix&#xA;into dbo.cit_SollmieteFlaeche&#xA;from        dbo.SAP_VIBDRO me with(nolock)&#xA;join&#x9;&#x9;dbo.SAP_VIBDBE obj on me.xHubid = obj.xHubid and me.BUKRs = obj.BUKRS and me.SWENR = obj.SWENR &#xA;join&#x9;&#x9;dbo.SAP_VICDCOND     sol on me.INTRENO = sol.INTRENO&#xA;join&#x9;&#x9;dbo.SAP_VICDCONDCALC solc on sol.CONDGUID = solc.CONDGUID&#xA;left join&#x9;dbo.SAP_TIVCDCONDTYPE cond on sol.CONDTYPE = cond.CONDTYPE&#xA;left join  dbo.SAP_TIVCDFLOWTYPE flty on cond.FLOWTYPE = flty.FLOWTYPE&#xA;left join  dbo.SAP_TIVCDCONDTYPET solt on 'D' = solt.SPRAS and sol.CONDTYPE = solt.CONDTYPE&#xA;--left join  dbo.SAP_TIVCDCHGREAST  crt on sol.CONDTYPE = crt.CONDTYPE and sol.CHGREASON = crt.CHGREASON AND crt.SPRAS = 'D' &#xA;where (sol.CONDDELETE is null or sol.CONDDELETE &lt;&gt; 'X')   &#xA;and CONDPURPOSEEXT IN ('I', 'G') -- G=Leerstandsbuchung, I=Statistische Kondition&#xA;and obj.xobjnr is not null&#xA;&#xA;&#xA;go &#xA;alter Table cit_SollmieteFlaeche add ciMonth varchar(12) null &#xA;GO &#xA;update a set ciMonth = isnull(crh.ciMonth,'XXXXXXXXXXXX') &#xA;from cit_SollmieteFlaeche a &#xA;left join   dbo.SAP_VITMRH rh on a.INTRENO = rh.INTRENO and rh.termtype = '1110' and a.termnorh = isnull(rh.termno,'')  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;and xBeginn between BISDSYSDB.dbo.BIS_Convert_DATE(isnull(nullif(rh.validfrom,''),'1900-01-01'), null)  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and BISDSYSDB.dbo.BIS_Convert_DATE(isnull(nullif(rh.validto,''),'9999-12-31'), null) &#xA;left join &#x9;dbo.cit_rymMonth crh on rh.frequencyunit = crh.frequencyunit and rh.frequency = crh.frequency  &#xA;and case when rh.Monthfrom = '13' then right(100+month(xbeginn),2) &#xA;&#x9; when rh.MonthFrom = '40' then &#xA;&#x9;&#x9;&#x9;&#x9;case when Rhythmbegin is not null then right(100+month(BISDSYSDB.dbo.BIS_Convert_DATE(nullif(Rhythmbegin,''), null)),2) &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;else rh.Monthfrom end &#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;else rh.Monthfrom end = crh.Monthfrom &#x9;&#x9;&#xA;go &#xA;&#xA;&#xA;-- ungültige Mietkonditionen entfernen&#xA;delete&#xA;-- select *&#xA;from cit_SollmieteFlaeche &#xA;where xBeginn &gt; xEnde&#xA;and xEnde is not null&#xA;&#xA;delete &#xA;-- select * &#xA;from cit_SollmieteVertrag&#xA;where xBeginn &gt; xEnde&#xA;and xEnde is not null" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="-- 1. Verträge bestimmen &#xA;--MBIT 15072025 Debugging mit SICORE prefix&#xA;If OBJECT_ID('dbo.cit_SAPVertrag') is not null drop table dbo.cit_SAPVertrag &#xA;go &#xA;select distinct &#xA;  vt.MANDT, vt.INTRENO as INTRENOVT, RECNNR, vt.OBJNR as vtOBJNR, vt.IMKEY as vtIMKEY &#xA;, me.OBJNR as meOBJNR &#xA;, me.BUKRS, me.SWENR, me.SMENR, me.IMKEY as meIMKEY, me.SGENR, me.SGRNR &#xA;, NbrVt &#xA;, vt.RECNENDABS&#xA;, case when ass.VALIDFROM is not NULL and ass.VALIDFROM &gt; isnull(recnbeg,'19000101') then CONVERT(datetime,ass.VALIDFROM,120)&#xA;          else  convert(datetime,isnull(recnbeg,'19000101'),120) end as xvtBeginn&#xA;, case when convert(datetime,ass.VALIDTO,120) &lt; convert(datetime,recnendabs,120)&#xA;             then nullif(convert(datetime,ass.VALIDTO,120),'99991231') else nullif(convert(datetime,recnendabs,120),'99991231') end as xvtEnde&#xA;, isnull(VALIDFROMX,'17530101')  as OBJVALIDFROMX , VALIDTOX as OBJVALIDTOX  &#xA;--, xvertrag = me.BUKRS + ' ' + right('000000' + me.SWENR,6) + ' ' + me.smenr + ' ' + vt.RECNNR + case when NbrVt &gt;1 then ' ' + right(100+NbrVt,2) else '' end &#xA;--, xFlaeche = me.BUKRS + ' ' + right('000000' + me.SWENR,6) + ' ' + me.smenr &#xA;, xvertrag&#x9;= cast(obj.xobjnr +'_'+ case when me.SGENR is null then 'G' else '' end + right(isnull(me.SGENR, me.SGRNR), 3) +'_'+ right(me.SMENR,5) +'_'+ vt.RECNNR as varchar(50))&#xA;, xFlaeche&#x9;= cast(obj.xobjnr +'_'+ case when me.SGENR is null then 'G' else '' end + right(isnull(me.SGENR, me.SGRNR), 3) +'_'+ right(me.SMENR,5) as varchar(50))&#xA;, me.xPrefix&#xA;into dbo.cit_SAPVertrag  &#xA;--select *&#xA;from&#x9;&#x9;dbo.SAP_VICNCN vt with(nolock)&#xA;inner join&#x9;(&#xA;&#x9;&#x9;&#x9;select *&#xA;&#x9;&#x9;&#x9;&#x9;, VALIDFROMX = BISDSYSDB.dbo.BIS_Convert_DATE( CASE &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;WHEN VALIDFROM = '00000000' THEN '17530101' &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;ELSE NULLIF(VALIDFROM, '') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;END, &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9; NULL) &#xA;&#x9;&#x9;&#x9;&#x9;, VALIDTOX = BISDSYSDB.dbo.BIS_Convert_DATE(nullif(VALIDTO,''), null)&#xA;&#x9;&#x9;&#x9;&#x9;, NbrVt = ROW_NUMBER() over(partition by OBJNRSRC, OBJNRTRG order by validTo)    &#xA;&#x9;&#x9;&#x9;from dbo.SAP_VIBDOBJASS &#xA;&#x9;&#x9;&#x9;where '10' = OBJASSTYPE&#xA;&#x9;&#x9;&#x9;and &#xA;&#x9;&#x9;&#x9;xPrefix  ='SICOREsap'&#xA;&#x9;&#x9;&#x9;)  ass on  vt.OBJNR = ass.OBJNRSRC &#xA;join &#x9;&#x9;dbo.SAP_TIV26 t26 on vt.RECNTYPE = SMVART and t26.xPrefix  ='SICOREsap'&#xA;join &#x9;&#x9;dbo.SAP_VIBDRO me on ass.OBJNRTRG = me.OBJNR and me.xPrefix  ='SICORE'&#xA;join&#x9;&#x9;dbo.SAP_VIBDBE obj on me.xHubid = obj.xHubid and me.BUKRs = obj.BUKRS and me.SWENR = obj.SWENR  and obj.xPrefix  ='SICORE'&#xA;where recnsrelob  = '02' &#xA;and (ass.ASSIGNONLYINFO is null or ass.ASSIGNONLYINFO != 'X')&#xA;and &#xA;vt.xPrefix ='SICOREsap'&#xA;and&#xA;me.SWENR='00000025'&#xA; &#xA;&#xA;&#xA;&#xA; &#xA;-- select * from&#xA;--dbo.cit_SAPVertrag  &#xA;-- select *&#xA;&#xA;--and SMENR like '%80001'&#xA;--and vt.RECNNR like '2191810001001'&#xA;&#xA;--select *&#xA;--from&#xA;--dbo.cit_SAPVertrag&#xA;&#xA;&#xA;go &#xA;&#xA;if object_id('dbo.cit_SollmieteVertrag') is not null drop table dbo.cit_SollmieteVertrag&#xA;go &#xA;select &#xA; vt.BUKRS, vt.SWENR, vt.SMENR, vt.meOBJNR, vt.meIMKEY, vt.SGENR, vt.SGRNR&#xA;, vt.xflaeche &#xA;, vt.xVertrag &#xA;,INTRENOVT, RECNNR, vtOBJNR, vtIMKEY, xvtBeginn, xvtEnde &#xA;,sol.CONDTYPE&#xA;, isnull(&#xA;&#x9;&#x9;BISDSYSDB.dbo.BIS_Convert_DATE(nullif(sold.VALUEVALIDFROM,''), null),&#xA;&#x9;&#x9;BISDSYSDB.dbo.BIS_Convert_DATE(nullif(sol.CONDVALIDFROM,''), null)&#xA;&#x9;&#x9;)  as xBeginn&#xA;, case&#xA;  --  when BISDSYSDB.dbo.BIS_Convert_DATE(nullif(sold.VALUEVALIDTO,''), null) &lt; case when vt.xvtEnde &lt;= getdate() and vt.xvtEnde &lt; BISDSYSDB.dbo.BIS_Convert_DATE(nullif(CONDVALIDTO,''), null) &#xA;&#x9;&#x9;--&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;   then vt.xvtEnde else sol.CONDVALIDTO end&#xA;&#x9;&#x9;--then sold.VALUEVALIDTO&#xA;&#x9;when vt.xvtEnde &lt;= getdate() and vt.xvtEnde &lt; BISDSYSDB.dbo.BIS_Convert_DATE(nullif(CONDVALIDTO,''), null) &#xA;&#x9;&#x9;then vt.xvtEnde &#xA;&#x9;else BISDSYSDB.dbo.BIS_Convert_DATE&#xA;&#x9;(&#xA;&#x9;&#x9;isnull(&#xA;&#x9;&#x9;&#x9;&#x9;nullif(sold.VALUEVALIDTO,'')&#xA;&#x9;&#x9;&#x9;&#x9;, &#xA;&#x9;&#x9;&#x9;&#x9;nullif(sol.CONDVALIDTO,''))&#xA;&#x9;, null)&#xA;  end as xEnde  &#xA;, sol.UNITPRICE&#xA;, sold.CONDVALUE&#xA;, sold.TAXVALUE&#xA;, isnull(sold.CONDCURR,sol.CONDCURR)  as CONDCURR&#xA;, solt.XCONDTYPEL&#xA;, sol.CHGREASON&#xA;, /*XCHGREASON, */ sol.CONDPURPOSEEXT&#xA;, cast(sol.CONDTYPE as varchar (10)) as xSollstellungsart &#xA;----&#x9;L = Lease &#xA;, TERMNOAJ = convert(varchar(10),ISNULL(sol.TERMNOAJ,'')) &#xA;, TERMNORH = convert(varchar(10),isnull(sol.TERMNORH,''))  &#xA;, ISNULL(flty.ssolhab,'S') as SSOLHAB&#xA;, CONDVALUEX = bisdsysdb.dbo.BIS_Convert_FLOAT(sold.CONDVALUE) &#xA;, UNITPRICEX = bisdsysdb.dbo.BIS_Convert_FLOAT(sol.UNITPRICE)  &#xA;, CONDVALIDTOX = BISDSYSDB.dbo.BIS_Convert_DATE(nullif(CONDVALIDTO,''), null) &#xA;, VALUEVALIDTOX = BISDSYSDB.dbo.BIS_Convert_DATE(nullif(sold.VALUEVALIDTO,''), null)&#xA;, CONDGUID = convert(varchar,sol.CONDGUID,2)&#xA;, OBJNRX = sol.OBJNR&#xA;, vt.OBJVALIDFROMX, vt.OBJVALIDTOX &#xA;, vt.xPrefix&#xA;into dbo.cit_SollmieteVertrag&#xA;from&#x9;&#x9;dbo.cit_SAPVertrag vt with(nolock)&#xA;join&#x9;&#x9;dbo.SAP_VICDCOND sol on vt.INTRENOVT = sol.intreno and vt.MANDT = sol.MANDT and sol.xPrefix ='SICORE'&#xA;join&#x9;&#x9;dbo.SAP_VICDCONDDIST sold on sold.INTRENO = sol.INTRENO and sol.CONDTYPE = sold.CONDTYPE and sol.OBJNRDIST = sold.DISTOBJNR and sol.CONDVALIDTO = sold.VALUEVALIDTO and sold.DISTOBJNR = vt.meOBJNR  and sold.xPrefix ='SICOREsap'&#xA;join&#x9;&#x9;dbo.SAP_VIBDRO me on sold.DISTOBJNR = me.OBJNR  and me.xPrefix  ='SICORE'&#xA;left join &#x9;dbo.SAP_TIVCDCONDTYPE cond on sol.CONDTYPE = cond.CONDTYPE and sol.MANDT = cond.MANDT and cond.xPrefix ='SICOREsap'&#xA;left join &#x9;dbo.SAP_TIVCDFLOWTYPE flty on cond.FLOWTYPE = flty.FLOWTYPE and cond.MANDT = flty.MANDT  and flty.xPrefix ='SICOREsap'&#xA;left join &#x9;dbo.SAP_TIVCDCONDTYPET solt on 'D' = solt.SPRAS and sol.CONDTYPE = solt.CONDTYPE and solt.MANDT = sol.MANDT and solt.xPrefix ='SICOREsap'&#xA;left join &#x9;dbo.SAP_TIVCDCHGREAST  crt on sol.CONDTYPE = crt.CONDTYPE and  isnull(sol.CHGREASON,'') = crt.CHGREASON and 'D' = crt.SPRAS and crt.xPrefix ='SICOREsap'&#xA;where (sol.CONDDELETE is null or sol.CONDDELETE &lt;&gt; 'X')&#xA;--and xFlaeche = '2300_02075_001_20007'&#xA;--and sol.CONDTYPE = '100A'&#xA;--order by xvertrag&#xA;and (sol.CONDPURPOSEEXT is null or sol.CONDPURPOSEEXT &lt;&gt; 'I') &#xA;&#xA;--SELECT *&#xA;--FROM&#xA;--dbo.cit_SollmieteVertrag&#xA;--order by meOBJNR&#xA;&#xA;go &#xA;delete t1 &#xA;  from dbo.cit_SollmieteVertrag t1&#xA;where xBeginn not between OBJVALIDFROMX and OBJVALIDTOX &#xA;go&#xA;if object_id('dbo.cit_SollmieteVertragADD') is not null drop table dbo.cit_SollmieteVertragADD&#xA;go &#xA;-- 2. Konditionen nicht in VICDCONDDIST nur aus CONDCALC &#xA;select &#xA; vt.BUKRS, vt.SWENR, vt.SMENR, vt.meOBJNR, vt.meIMKEY, vt.SGENR,vt.SGRNR &#xA;, vt.xflaeche &#xA;, vt.xVertrag &#xA;,INTRENOVT, RECNNR, vtOBJNR, vtIMKEY, xvtBeginn, xvtEnde &#xA;,sol.CONDTYPE&#xA;, isnull(BISDSYSDB.dbo.BIS_Convert_DATE(nullif(solc.VALUEVALIDFROM,''), null), BISDSYSDB.dbo.BIS_Convert_DATE(nullif(sol.CONDVALIDFROM,''), null)) as xBeginn&#xA;, case when vt.xvtEnde &lt;= getdate() &#xA;&#x9;and vt.xvtEnde &lt; BISDSYSDB.dbo.BIS_Convert_DATE(nullif(sol.CONDVALIDTO,''), null) &#xA;&#x9;then vt.xvtEnde else  isnull(BISDSYSDB.dbo.BIS_Convert_DATE(nullif(solc.VALUEVALIDTO,''), null) , BISDSYSDB.dbo.BIS_Convert_DATE(nullif(sol.CONDVALIDTO,''), null)) end as xEnde  &#xA;, sol.UNITPRICE, solc.CONDVALUE, solc.TAXVALUE, CONDCURR = isnull(solc.CONDCURR,sol.CONDCURR) , XCONDTYPEL, sol.CHGREASON, /*XCHGREASON, */ sol.CONDPURPOSEEXT&#xA;, cast(sol.CONDTYPE     &#x9;&#x9;as varchar (10))as xSollstellungsart&#xA;, sol.TERMNOAJ, sol.TERMNORH &#xA;, ISNULL(flty.ssolhab,'S') as SSOLHAB&#xA;, CONDVALUEX = bisdsysdb.dbo.BIS_Convert_FLOAT(solc.CONDVALUE) &#xA;, UNITPRICEX = bisdsysdb.dbo.BIS_Convert_FLOAT(sol.UNITPRICE)  &#xA;, CONDVALIDTOX = BISDSYSDB.dbo.BIS_Convert_DATE(nullif(CONDVALIDTO,''), null) &#xA;, VALUEVALIDTOX = BISDSYSDB.dbo.BIS_Convert_DATE(nullif(solc.VALUEVALIDTO,''), null)&#xA;, OBJNRX = sol.OBJNR&#xA;, CONDGUID = convert(varchar,sol.CONDGUID ,2)&#xA;, vt.OBJVALIDFROMX, vt.OBJVALIDTOX &#xA;, vt.xPrefix&#xA;into &#x9;&#x9;dbo.CIT_SollmieteVertragAdd  &#xA;-- select top 100 vt.*&#xA;from&#x9;&#x9;dbo.cit_SAPVertrag vt with(nolock)&#xA;join&#x9;&#x9;dbo.SAP_VICDCOND sol on vt.INTRENOVT = sol.intreno and sol.xPrefix ='SICORE'&#xA;join&#x9;&#x9;dbo.SAP_VICDCONDCALC solc on sol.CONDGUID = solc.CONDGUID and vt.meOBJNR = sol.OBJNRDIST  and solc.xPrefix='SICOREsap'&#xA;left join &#x9;dbo.SAP_TIVCDCONDTYPE cond on sol.CONDTYPE = cond.CONDTYPE and cond.xPrefix='SICOREsap'&#xA;left join &#x9;dbo.SAP_TIVCDFLOWTYPE flty on cond.FLOWTYPE = flty.FLOWTYPE and flty.xPrefix='SICOREsap'&#xA;left join &#x9;dbo.SAP_TIVCDCONDTYPET solt on 'D' = solt.SPRAS and sol.CONDTYPE = solt.CONDTYPE and solt.xPrefix='SICOREsap'&#xA;--left join &#x9;dbo.SAP_TIVCDCHGREAST  crt on sol.CONDTYPE = crt.CONDTYPE and isnull(sol.CHGREASON,'') = crt.CHGREASON and 'D' = crt.SPRAS &#xA;where (sol.CONDDELETE is null or sol.CONDDELETE &lt;&gt; 'X')  &#xA;--and (sol.CONDPURPOSEEXT is null or sol.CONDPURPOSEEXT &lt;&gt; 'I')  &#xA;and not exists(select CONDGUID from&#x9;dbo.SAP_VICDCONDDIST dist where solc.CONDGUID = dist.CONDGUID)  &#xA;go &#xA;&#xA;&#xA;&#xA;&#xA;delete t1 &#xA;  from dbo.CIT_SollmieteVertragAdd t1 &#xA;where xBeginn not between OBJVALIDFROMX and OBJVALIDTOX &#xA;go &#xA;&#xA; &#xA;insert into dbo.CIT_SollmieteVertrag &#xA;select * from dbo.CIT_SollmieteVertragAdd &#xA;go &#xA;if object_id('dbo.cit_SollmieteVertragADD') is not null drop table dbo.cit_SollmieteVertragADD&#xA;go &#xA;select &#xA; vt.BUKRS, vt.SWENR, vt.SMENR, vt.meOBJNR, vt.meIMKEY, vt.SGENR,vt.SGRNR &#xA;, vt.xflaeche &#xA;, vt.xVertrag &#xA;,INTRENOVT, RECNNR, vtOBJNR, vtIMKEY, xvtBeginn, xvtEnde &#xA;,sol.CONDTYPE&#xA;, BISDSYSDB.dbo.BIS_Convert_DATE(nullif(sol.CONDVALIDFROM,''), null)  as xBeginn&#xA;, case when vt.xvtEnde &lt;= getdate() &#xA;&#x9;and vt.xvtEnde &lt; BISDSYSDB.dbo.BIS_Convert_DATE(nullif(CONDVALIDTO,''), null)  &#xA;&#x9;then vt.xvtEnde else BISDSYSDB.dbo.BIS_Convert_DATE(nullif(sol.CONDVALIDTO,''), null)  end as xEnde  &#xA;, sol.UNITPRICE, convert(varchar(512),null) as CONDVALUE, convert(varchar(512),null) as TAXVALUE, sol.CONDCURR, XCONDTYPEL, sol.CHGREASON, sol.CONDPURPOSEEXT&#xA;, cast(sol.CONDTYPE     &#x9;&#x9;as varchar (10))as xSollstellungsart &#xA;--&#x9;L = Lease &#xA;, TERMNOAJ = convert(varchar(10),ISNULL(sol.TERMNOAJ,'')) &#xA;, TERMNORH = convert(varchar(10),isnull(sol.TERMNORH,''))  &#xA;, ISNULL(flty.ssolhab,'S') as SSOLHAB&#xA;, CONDVALUEX = bisdsysdb.dbo.BIS_Convert_FLOAT(sol.UNITPRICE) &#xA;, UNITPRICEX = bisdsysdb.dbo.BIS_Convert_FLOAT(sol.UNITPRICE)  &#xA;, CONDVALIDTOX = BISDSYSDB.dbo.BIS_Convert_DATE(nullif(CONDVALIDTO,''), null) &#xA;, VALUEVALIDTOX = BISDSYSDB.dbo.BIS_Convert_DATE(NULL, null)&#xA;, CONDGUID = convert(varchar,sol.CONDGUID ,2)&#xA;, OBJNRX = sol.OBJNR&#xA;, vt.OBJVALIDFROMX, vt.OBJVALIDTOX &#xA;, vt.xPrefix&#xA;into dbo.cit_SollmieteVertragADD &#xA;-- select top 100 vt.*&#xA;from&#x9;&#x9;dbo.cit_SAPVertrag vt with(nolock)&#xA;join&#x9;&#x9;dbo.SAP_VICDCOND sol on vt.INTRENOVT = sol.intreno and vt.meOBJNR = sol.OBJNRDIST and sol.xPrefix ='SICORE'&#xA;join&#x9;&#x9;dbo.SAP_VIBDRO me on sol.OBJNRDIST = me.OBJNR  and me.xPrefix ='SICORE'&#xA;left join &#x9;dbo.SAP_TIVCDCONDTYPE cond on sol.CONDTYPE = cond.CONDTYPE and cond.xPrefix='SICOREsap'&#xA;left join &#x9;dbo.SAP_TIVCDFLOWTYPE flty on cond.FLOWTYPE = flty.FLOWTYPE and flty.xPrefix='SICOREsap'&#xA;left join &#x9;dbo.SAP_TIVCDCONDTYPET solt on 'D' = solt.SPRAS and sol.CONDTYPE = solt.CONDTYPE and solt.xPrefix='SICOREsap'&#xA;--left join &#x9;dbo.SAP_TIVCDCHGREAST  crt on sol.CONDTYPE = crt.CONDTYPE and  isnull(sol.CHGREASON,'') = crt.CHGREASON and 'D' = crt.SPRAS &#xA;where (sol.CONDDELETE is null or sol.CONDDELETE &lt;&gt; 'X')  &#xA;--and (sol.CONDPURPOSEEXT is null or sol.CONDPURPOSEEXT &lt;&gt; 'I')  &#xA;--and sol.CHGREASON in('STAFFEL', 'INDEX')  &#xA;and not exists(select CONDGUID from dbo.SAP_VICDCONDDIST sold where sol.CONDGUID = sold.CONDGUID ) &#xA;and not exists(select CONDGUID from dbo.SAP_VICDCONDCALC calc where sol.CONDGUID = calc.CONDGUID )   &#xA;&#xA;-- SELECT *&#xA;--from&#xA;--dbo.CIT_SollmieteVertragAdd &#xA;&#xA;&#xA;&#xA;go &#xA;-- Künftige Datensätze mit CHGREASON = FREIE oder NULL. Keine UNITPRICE = 0 mit abweichender Berechnungsvorschrift &#xA;insert into dbo.CIT_SollmieteVertragAdd  &#xA;select &#xA; vt.BUKRS, vt.SWENR, vt.SMENR, vt.meOBJNR, vt.meIMKEY, vt.SGENR,vt.SGRNR &#xA;, vt.xflaeche &#xA;, vt.xVertrag &#xA;,INTRENOVT, RECNNR, vtOBJNR, vtIMKEY, xvtBeginn, xvtEnde &#xA;,sol.CONDTYPE&#xA;, BISDSYSDB.dbo.BIS_Convert_DATE(nullif(sol.CONDVALIDFROM, ''), null)  as xBeginn&#xA;, case when vt.xvtEnde &lt;= getdate() &#xA;&#x9;and vt.xvtEnde &lt; BISDSYSDB.dbo.BIS_Convert_DATE(nullif(CONDVALIDTO, ''), null)  &#xA;&#x9;then vt.xvtEnde else BISDSYSDB.dbo.BIS_Convert_DATE(nullif(sol.CONDVALIDTO, ''), null)  end as xEnde  &#xA;, sol.UNITPRICE, convert(varchar(512),null) as CONDVALUE, convert(varchar(512),null) as TAXVALUE, sol.CONDCURR, XCONDTYPEL, sol.CHGREASON, sol.CONDPURPOSEEXT&#xA;, cast(sol.CONDTYPE     &#x9;&#x9;as varchar (10))as xSollstellungsart &#xA;--&#x9;L = Lease &#xA;, TERMNOAJ = convert(varchar(10),ISNULL(sol.TERMNOAJ,'')) &#xA;, TERMNORH = convert(varchar(10),isnull(sol.TERMNORH,''))  &#xA;, ISNULL(flty.ssolhab,'S') as SSOLHAB&#xA;, CONDVALUEX = bisdsysdb.dbo.BIS_Convert_FLOAT(sol.UNITPRICE) &#xA;, UNITPRICEX = bisdsysdb.dbo.BIS_Convert_FLOAT(sol.UNITPRICE)  &#xA;, CONDVALIDTOX = BISDSYSDB.dbo.BIS_Convert_DATE(nullif(CONDVALIDTO, ''), null) &#xA;, VALUEVALIDTOX = BISDSYSDB.dbo.BIS_Convert_DATE(NULL, null) &#xA;, CONDGUID = convert(varchar,sol.CONDGUID ,2)&#xA;, OBJNRX = sol.OBJNR&#xA;, vt.OBJVALIDFROMX, vt.OBJVALIDTOX &#xA;, vt.xPrefix&#xA;--into dbo.cit_SollmieteVertragADD &#xA;-- select top 100 vt.*&#xA;from&#x9;&#x9;dbo.cit_SAPVertrag vt with(nolock)&#xA;join&#x9;&#x9;dbo.SAP_VICDCOND sol on vt.INTRENOVT = sol.intreno and vt.meOBJNR = sol.OBJNRDIST and sol.xPrefix ='SICORE'&#xA;join&#x9;&#x9;dbo.SAP_VIBDRO me on sol.OBJNRDIST = me.OBJNR  and me.xPrefix ='SICORE'&#xA;left join &#x9;dbo.SAP_TIVCDCONDTYPE cond on sol.CONDTYPE = cond.CONDTYPE and cond.xPrefix='SICOREsap'&#xA;left join &#x9;dbo.SAP_TIVCDFLOWTYPE flty on cond.FLOWTYPE = flty.FLOWTYPE and flty.xPrefix='SICOREsap'&#xA;left join &#x9;dbo.SAP_TIVCDCONDTYPET solt on 'D' = solt.SPRAS and sol.CONDTYPE = solt.CONDTYPE and solt.xPrefix='SICOREsap'&#xA;--left join &#x9;dbo.SAP_TIVCDCHGREAST  crt on sol.CONDTYPE = crt.CONDTYPE and  isnull(sol.CHGREASON,'') = crt.CHGREASON and 'D' = crt.SPRAS &#xA;where (sol.CONDDELETE is null or sol.CONDDELETE &lt;&gt; 'X')  &#xA;--and (sol.CONDPURPOSEEXT is null or sol.CONDPURPOSEEXT &lt;&gt; 'I')  &#xA;and (sol.CHGREASON = 'FREIE'  or sol.CHGREASON is NULL) &#xA;and sol.CALCRULE &lt;&gt; 'E1' &#xA;and BISDSYSDB.dbo.BIS_Convert_DATE(nullif(sol.CONDVALIDFROM, ''), null) &gt;= getdate() &#xA;and not exists(select CONDGUID from dbo.SAP_VICDCONDDIST sold where sol.CONDGUID = sold.CONDGUID ) &#xA;and not exists(select CONDGUID from dbo.SAP_VICDCONDCALC calc where sol.CONDGUID = calc.CONDGUID )   &#xA;&#xA;--SELECT *&#xA;--from&#xA;--dbo.cit_SollmieteVertragADD&#xA;&#xA;&#xA;&#xA;go  &#xA;delete t1 &#xA;  from dbo.CIT_SollmieteVertragAdd t1 &#xA;where xBeginn not between OBJVALIDFROMX and OBJVALIDTOX &#xA;go &#xA;delete &#xA;from dbo.cit_SollmieteVertragADD  &#xA;where xende &lt; xbeginn &#xA;go &#xA;delete t1 &#xA;from  dbo.cit_SollmieteVertragADD  t1 &#xA;join (select *, VALIDFROMX = BISDSYSDB.dbo.BIS_Convert_DATE(nullif(VALIDFROM,''), null) , VALIDTOX = BISDSYSDB.dbo.BIS_Convert_DATE(nullif(VALIDTO,''), null) from SAP_VIBDRO where xPrefix ='SICORE' ) fl on fl.OBJNR = t1.meOBJNR &#xA;where (CHGREASON in('INDEX', 'FREIE') OR CHGREASON is null) and (t1.xbeginn &gt; fl.VALIDTOX or t1.xbeginn &lt;  VALIDFROMX) &#xA;go &#xA;delete mv &#xA;from dbo.cit_SollmieteVertragADD  mv &#xA;left join&#x9;(select vi.INTRENO, vi.NTREASON, NTRECEIPT = BISDSYSDB.dbo.BIS_Convert_DATE(nullif(NTRECEIPT,''), null) &#xA;&#x9;&#x9;&#x9;&#x9; , vi.NTPARTY, NTACTIVATEDON ,  NTPER=BISDSYSDB.dbo.BIS_Convert_DATE(nullif(NTPER,''), null)&#xA;&#x9;&#x9;&#x9;&#x9; , NTAPPROVEDON = BISDSYSDB.dbo.BIS_Convert_DATE(nullif(NTAPPROVEDON,''), null)&#xA;&#x9;&#x9;&#x9;&#x9; , NTREQUESTON  = BISDSYSDB.dbo.BIS_Convert_DATE(nullif(NTREQUESTON,''), null)&#xA;&#x9;&#x9;&#x9;&#x9;from dbo.SAP_VICNNT vi &#xA;&#x9;&#x9;&#x9;&#x9;where NTCATE = 'C' and NTACTIVE = 'X' and (NTREVERSEDON is null or NTREVERSEDON  = '')and xPrefix ='SICOREsap') kuend on mv.INTRENOVT = kuend.INTRENO &#xA;left join   (select vi.INTRENO, OBJNR = ob.OBJNR , vi.NTREASON, NTRECEIPT = BISDSYSDB.dbo.BIS_Convert_DATE(nullif(NTRECEIPT,''), null)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;, vi.NTPARTY, NTACTIVATEDON, NTPER=BISDSYSDB.dbo.BIS_Convert_DATE(nullif(NTPER,''), null)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;from&#x9;&#x9;&#x9;dbo.SAP_VICNNT vi  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;join&#x9;&#x9;&#x9;dbo.SAP_VICNNTOBJREL ob on vi.INTRENO = ob.INTRENO and vi.NTNO = ob.NTNO  and ob.xPrefix ='SICOREsap' &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;where vi.NTCATE = 'O' and NTACTIVE = 'X' and (NTREVERSEDON is null or NTREVERSEDON = '00.00.0000')and vi.xPrefix ='SICOREsap') kuendobj on mv.INTRENOVT = kuendobj.INTRENO and mv.meOBJNR = kuendobj.OBJNR &#xA;&#xA;where (CHGREASON in('INDEX', 'FREIE') OR CHGREASON is null)&#xA;and  (kuend.ntper &gt; xvtende or kuendobj.ntper &lt; xvtende ) &#xA;go &#xA;insert into dbo.cit_SollmieteVertrag (&#xA; BUKRS, SWENR, SMENR, meOBJNR, meIMKEY, SGENR, SGRNR , xFlaeche&#xA;, xVertrag,INTRENOVT, RECNNR, vtOBJNR, vtIMKEY, xvtBeginn, xvtEnde &#xA;,CONDTYPE, xBeginn, xEnde  &#xA;, UNITPRICE, CONDVALUE, TAXVALUE, CONDCURR, XCONDTYPEL, CHGREASON, CONDPURPOSEEXT&#xA;,xSollstellungsart , TERMNOAJ, TERMNORH, SSOLHAB, CONDVALUEX, UNITPRICEX, CONDVALIDTOX, VALUEVALIDTOX&#xA;,OBJVALIDFROMX, OBJVALIDTOX, xPrefix&#xA;) &#xA;select &#xA; BUKRS, SWENR, SMENR, meOBJNR, meIMKEY, SGENR, SGRNR , xFlaeche&#xA;, xVertrag,INTRENOVT, RECNNR, vtOBJNR, vtIMKEY, xvtBeginn, xvtEnde &#xA;,CONDTYPE, xBeginn, xEnde  &#xA;, UNITPRICE, CONDVALUE, TAXVALUE, CONDCURR, XCONDTYPEL, CHGREASON, CONDPURPOSEEXT&#xA;,xSollstellungsart , TERMNOAJ, TERMNORH, SSOLHAB, CONDVALUEX, UNITPRICEX, CONDVALIDTOX, VALUEVALIDTOX&#xA;,OBJVALIDFROMX, OBJVALIDTOX &#xA;, xPrefix&#xA;from&#x9;dbo.cit_SollmieteVertragADD &#xA;go &#xA;-- Konditionsende für künftige Verträge, falls Folgevertrag vorhanden &#xA;update a set xende = a.xvtende &#xA;from cit_sollmieteVertrag a with(nolock) &#xA;join cit_sollmieteVertrag b on a.meObjnr = b.meObjnr and a.xvtende &lt; b.xvtbeginn &#xA;where a.xvtende &gt; getdate() and a.xende &gt; a.xvtende &#xA;go &#xA;alter Table cit_sollmieteVertrag add &#xA;ciMonth varchar(12) null, CONDVALUEREFER varchar(10) null, FREQUENCYUNIT varchar(10) null, FREQUENCY varchar(10) null&#xA; &#xA;GO &#xA;update a set ciMonth = isnull(crh.ciMonth,'XXXXXXXXXXXX')&#xA;,  CONDVALUEREFER = rh.CONDVALUEREFER&#xA;,  FREQUENCYUNIT = rh.FREQUENCYUNIT &#xA;,  FREQUENCY = rh.FREQUENCY  &#xA;-- select *&#xA;from dbo.cit_SollmieteVertrag a &#xA;left join   dbo.SAP_VITMRH rh on INTRENOVT = rh.INTRENO and rh.termtype = '1110' and a.termnorh = isnull(rh.termno,'')  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;and xBeginn between BISDSYSDB.dbo.BIS_Convert_DATE(&#xA;    CASE &#xA;        WHEN rh.validfrom IS NULL OR rh.validfrom = '' OR rh.validfrom = '00000000' THEN '1900-01-01'&#xA;        ELSE rh.validfrom&#xA;    END,&#xA;    NULL&#xA;)   &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and BISDSYSDB.dbo.BIS_Convert_DATE(isnull(nullif(rh.validto,''),'9999-12-31'), null)  &#xA;left join &#x9;dbo.cit_rymMonth crh on rh.frequencyunit = crh.frequencyunit and rh.frequency = crh.frequency  &#xA;and case when rh.Monthfrom = '13' then right(100+month(xbeginn),2) &#xA;&#x9; when rh.MonthFrom = '40' then &#xA;&#x9;&#x9;&#x9;&#x9;case when Rhythmbegin is not null then right(100+month(BISDSYSDB.dbo.BIS_Convert_DATE(nullif(Rhythmbegin,''), null)),2) &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;else rh.Monthfrom end &#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;else rh.Monthfrom end = crh.Monthfrom &#xA;go &#xA;--SELECT *&#xA;--FROm &#xA;--dbo.cit_SollmieteVertrag&#xA;-- Umrechnen Betragsbasis Monatsbetrag und Rhythmus &lt;&gt; Monate &#xA;update a set CONDVALUEX = CONDVALUEX * 12.00 / convert(decimal(18,2),LEN(replace(cimonth,' ', '')))   &#xA;from dbo.cit_SollmieteVertrag a &#xA;where &#x9;CONDVALUEREFER = '0' &#xA;and not (FREQUENCYUNIT = '0' and FREQUENCY = '001') &#xA;and  LEN(replace(cimonth,' ', '')) &gt; 0 &#xA;and CONDVALUEX is not null &#xA;go  &#xA;-- Umrechnung Betragsbasis Jahresbetrag und Rhythmus &lt;&gt; Jahresrhythmus  &#xA;update a set CONDVALUEX = CONDVALUEX / convert(decimal(18,2),LEN(replace(cimonth,' ', '')))   &#xA;from dbo.cit_SollmieteVertrag a &#xA;where &#x9;CONDVALUEREFER = '1' &#xA;and FREQUENCYUNIT = '0' and FREQUENCY &lt;&gt; '012' &#xA;and  LEN(replace(cimonth,' ', '')) &gt; 0 &#xA;and CONDVALUEX is not null &#xA;go &#xA;-- Umrechnung Betragsbasis = Tagesbetrag &#xA;update a set CONDVALUEX = 30.00 * CONDVALUEX *12.00 /  convert(decimal(18,2),LEN(replace(cimonth,' ', '')))   &#xA;from dbo.cit_SollmieteVertrag a &#xA;where &#x9;CONDVALUEREFER = '2' &#xA;and  LEN(replace(cimonth,' ', '')) &gt; 0 &#xA;and CONDVALUEX is not null &#xA;&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;GO &#xA;-- Ende für Einmalsollstellung eintragen sofern nicht vorhanden oder zu spät &#xA;if COL_LENGTH('dbo.cit_SollmieteVertrag', 'zzEnde') is null alter table cit_SollmieteVertrag add zzEnde datetime null &#xA;go &#xA;update a set zzEnde = dateadd(day,-1,dateadd(month,1,Dateadd(day,-day(xbeginn)+1,xbeginn)))  &#xA; from&#x9;cit_SollmieteVertrag a &#xA;where&#x9;CONDPURPOSEEXT = 'B' &#xA;and xEnde &gt; dateadd(day,-1,dateadd(month,1,Dateadd(day,-day(xbeginn)+1,xbeginn))) &#xA;go &#xA;update t1 set xende = t1.zzende &#xA;from&#x9;&#x9;dbo.cit_SollmieteVertrag t1 &#xA;left join&#x9;dbo.cit_SollmieteVertrag t2 on t1.xFlaeche = t2.xFlaeche and t1.xSollstellungsart = t2.xSollstellungsart and t2.xBeginn &gt; t1.xBeginn  &#xA;&#x9;and t2.xBeginn &lt;= t1.zzEnde  &#xA;where t1.zzende is not null &#xA;and t2.xBeginn is null &#xA;GO &#xA;-- Tagessollstlelung auf Monatsende verlängern sofern eintägig damit aktiviert &#xA;update t1 set xende = EOMONTH(xende)&#xA;from dbo.cit_SollmieteVertrag t1 &#xA;where CONDPURPOSEEXT = 'B' &#xA;and xbeginn = xende &#xA;&#xA;&#x9;&#xA;-------------------------------------------------------------------------------------------------------------------------------------------------------------&#xA;-- TEXT Konditionen: Aufbereitung Leerstandsmiete Flächen &#xA;-------------------------------------------------------------------------------------------------------------------------------------------------------------&#xA;if OBJECT_ID('dbo.cit_SollmieteFlaeche') is not null drop table dbo.cit_SollmieteFlaeche &#xA;go  &#xA;Select  &#xA; me.BUKRS, me.SWENR, me.SMENR, me.OBJNR as meOBJNR, me.IMKEY as meIMKEY, me.SGENR, me.SGRNR, sol.INTRENO&#xA;--, cast(me.BUKRS + ' ' + right('000000' + me.SWENR,6) + ' ' + me.smenr as varchar (45))as xFlaeche&#xA;--, xvertrag&#x9;= cast(obj.xobjnr +'_'+ case when me.SGENR is null then 'G' else '' end + right(isnull(me.SGENR, me.SGRNR), 3) +'_'+ right(me.SMENR,5) +'_'+ vt.RECNNR as varchar(50))&#xA;, xFlaeche&#x9;= cast(obj.xobjnr +'_'+ case when me.SGENR is null then 'G' else '' end + right(isnull(me.SGENR, me.SGRNR), 3) +'_'+ right(me.SMENR,5) as varchar(50))&#xA;&#xA;,sol.CONDTYPE&#xA;, BISDSYSDB.dbo.BIS_Convert_DATE(isnull(nullif(solc.VALUEVALIDFROM,''), nullif(sol.CONDVALIDFROM,'')), null) as xBeginn&#xA;, BISDSYSDB.dbo.BIS_Convert_DATE(nullif(sol.CONDVALIDTO,''), null)  as xEnde  &#xA;, sol.UNITPRICE, solc.CONDVALUE, solc.TAXVALUE, solc.CONDCURR, XCONDTYPEL, sol.CHGREASON, sol.CONDPURPOSEEXT&#xA;, cast(sol.CONDTYPE     &#x9;&#x9;as varchar (10))as xSollstellungsart&#xA;, sol.TERMNOAJ, sol.TERMNORH &#xA;, ISNULL(flty.ssolhab,'S') as SSOLHAB&#xA;, CONDVALUEX = bisdsysdb.dbo.BIS_Convert_FLOAT(solc.CONDVALUE) &#xA;, UNITPRICEX = bisdsysdb.dbo.BIS_Convert_FLOAT(sol.UNITPRICE)  &#xA;, me.xPrefix&#xA;into dbo.cit_SollmieteFlaeche&#xA;from        dbo.SAP_VIBDRO me with(nolock)&#xA;join&#x9;&#x9; dbo.SAP_VIBDBE obj on me.xHubid = obj.xHubid and me.BUKRs = obj.BUKRS and me.SWENR = obj.SWENR  and obj.xPrefix ='SICORE'&#xA;join&#x9;&#x9; dbo.SAP_VICDCOND     sol on me.INTRENO = sol.INTRENO and sol.xPrefix ='SICORE'&#xA;join&#x9;&#x9; dbo.SAP_VICDCONDCALC solc on sol.CONDGUID = solc.CONDGUID and solc.xprefix='SICOREsap'&#xA;left join&#x9; dbo.SAP_TIVCDCONDTYPE cond on sol.CONDTYPE = cond.CONDTYPE&#xA;left join   dbo.SAP_TIVCDFLOWTYPE flty on cond.FLOWTYPE = flty.FLOWTYPE and flty.xprefix='SICOREsap'&#xA;left join    dbo.SAP_TIVCDCONDTYPET solt on 'D' = solt.SPRAS and sol.CONDTYPE = solt.CONDTYPE and solt.xPrefix='SICOREsap'&#xA;--left join  dbo.SAP_TIVCDCHGREAST  crt on sol.CONDTYPE = crt.CONDTYPE and sol.CHGREASON = crt.CHGREASON AND crt.SPRAS = 'D' &#xA;where (sol.CONDDELETE is null or sol.CONDDELETE &lt;&gt; 'X')   &#xA;and CONDPURPOSEEXT IN ('I', 'G') -- G=Leerstandsbuchung, I=Statistische Kondition&#xA;and obj.xobjnr is not null&#xA;and me.xPrefix  like 'SICORE%'&#xA;&#xA;&#xA;&#xA;go &#xA;alter Table cit_SollmieteFlaeche add ciMonth varchar(12) null &#xA;GO &#xA;update a set ciMonth = isnull(crh.ciMonth,'XXXXXXXXXXXX') &#xA;from cit_SollmieteFlaeche a &#xA;left join   dbo.SAP_VITMRH rh on a.INTRENO = rh.INTRENO and rh.termtype = '1110' and a.termnorh = isnull(rh.termno,'')  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;and xBeginn between BISDSYSDB.dbo.BIS_Convert_DATE(&#xA;    CASE &#xA;        WHEN rh.validfrom IS NULL OR rh.validfrom = '' OR rh.validfrom = '00000000' THEN '1900-01-01'&#xA;        ELSE rh.validfrom&#xA;    END,&#xA;    NULL&#xA;)  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;and BISDSYSDB.dbo.BIS_Convert_DATE(isnull(nullif(rh.validto,''),'9999-12-31'), null) &#xA;left join &#x9;dbo.cit_rymMonth crh on rh.frequencyunit = crh.frequencyunit and rh.frequency = crh.frequency  &#xA;and case when rh.Monthfrom = '13' then right(100+month(xbeginn),2) &#xA;&#x9; when rh.MonthFrom = '40' then &#xA;&#x9;&#x9;&#x9;&#x9;case when Rhythmbegin is not null then right(100+month(BISDSYSDB.dbo.BIS_Convert_DATE(nullif(Rhythmbegin,''), null)),2) &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;else rh.Monthfrom end &#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;else rh.Monthfrom end = crh.Monthfrom &#x9;&#x9;&#xA;go &#xA;--SELECT * &#xA;--FROm&#xA;--cit_SollmieteFlaeche&#xA;&#xA;&#xA;&#xA;--SELECT rh.validfrom, rh.validto&#xA;--FROM dbo.SAP_VITMRH rh&#xA;--WHERE ISDATE(rh.validfrom) = 0 OR ISDATE(rh.validto) = 0&#xA;&#xA;--and xPrefix='SICOREsap'&#xA;&#xA;&#xA;&#xA;---- ungültige Mietkonditionen entfernen&#xA;delete&#xA;-- select *&#xA;from cit_SollmieteFlaeche &#xA;where xBeginn &gt; xEnde&#xA;and xEnde is not null&#xA;&#xA;delete &#xA;-- select * &#xA;from cit_SollmieteVertrag&#xA;where xBeginn &gt; xEnde&#xA;and xEnde is not null&#xA;&#xA;&#xA;----select *&#xA;----from cit_SollmieteFlaeche &#xA;&#xA;--select * &#xA;--from cit_SollmieteVertrag&#xA;&#xA;----select *&#xA;----from dbo.cit_SollmieteVertragADD" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -3479,13 +3478,14 @@ where xobjnr is not null</property>
               DTS:CreationName=""
               DTS:DTSID="{E79E4DEC-2C1B-4CDC-9F17-031B4FFA551F}"
               DTS:EvaluateAsExpression="True"
-              DTS:Expression="&quot;&#xA;select&#xA;  dtedit&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= GETDATE()&#xA;, lUserkz&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= 'interface'&#xA;, ldelete&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= 0&#xA;, xobFond&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= cast(SAP_VIBDBE.xfondsnr as varchar(10))&#xA;, xobGesellschaft&#x9;&#x9;&#x9;&#x9;= cast(SAP_VIBDBE.xgesellnr as varchar(20))&#xA;, xObjekt&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= cast(SAP_VIBDBE.xobjnr as varchar(50))&#xA;, xobBezeichnung&#x9;&#x9;&#x9;&#x9;= cast(SAP_VIBDBE.XWETEXT as varchar (150))&#xA;, xobMatchcode&#x9;&#x9;&#x9;&#x9;&#x9;= cast(SAP_VIBDBE.XWETEXT as varchar(150))&#xA;, xobStrasse&#x9;&#x9;&#x9;&#x9;&#x9;= cast(SAP_ADRC.STREET as varchar(1024))&#xA;, xobjHnr&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= cast(SAP_ADRC.HOUSE_NUM1 as varchar(10))&#xA;, xobPostleitzahl&#x9;&#x9;&#x9;&#x9;= cast(SAP_ADRC.POST_CODE1 as varchar(50))&#xA;, xobOrt&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= cast(SAP_ADRC.CITY1 as varchar(256))&#xA;--, xobjkey9&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= '1' -- 1=Asset based, 9=Non-Asset based  /* siehe JOB Schnittstellen Aufruf*/&#xA;, xobFreeChar1&#x9;&#x9;&#x9;&#x9;&#x9;= cast(SAP_VIBDBE.SWENR as varchar(50))&#xA;, xobWirtschaftsuebergang&#x9;&#x9;= BISDSYSDB.dbo.BIS_Convert_DATE(nullif(SAP_VIBDBE.DatumZugang,''), null)&#xA;, xobVKWirtschaftsueberg&#x9;&#x9;= BISDSYSDB.dbo.BIS_Convert_DATE(nullif(SAP_VIBDBE.DatumAbgang,'99991231'), null)&#xA;, xobVKWirtschaftsueberg_intf&#x9;= '1'&#xA;, xobLand&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= SAP_ADRC.COUNTRY&#xA;, xobvorsteueroption&#x9;&#x9;&#x9;= cast(opt.OPTRATE as decimal(5,2))&#xA;, xobWaehrung&#x9;&#x9;&#x9;&#x9;&#x9;= SAP_VIBDBE.WAERS&#xA;, xobBaujahr&#x9;&#x9;&#x9;&#x9;&#x9;= SAP_VIBDBU.YBAUJAHR&#xA;, xobLage&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= SAP_TIV4E.xprefix+'_'+SAP_TIV4E.SOBJLAGE&#xA;-- select *&#xA;from dbo.SAP_VIBDBE&#xA;left join SAP_TIV4E on SAP_VIBDBE.xHubID = SAP_TIV4E.xHubID and SAP_VIBDBE.sobjlage = SAP_TIV4E.sobjlage and SAP_TIV4E.spras = 'D'&#xA;left join dbo.SAP_VZOBJECT on SAP_VIBDBE.INTRENO = SAP_VZOBJECT.ADROBJNR and SAP_VIBDBE.xHubID = SAP_VZOBJECT.xHubID&#xA;left join (select zr=row_number() over(partition by ADDRNUMBER order by DATE_TO desc) , * from dbo.SAP_ADRC) SAP_ADRC &#xA;&#x9;on SAP_ADRC.zr=1 and SAP_vzobject.ADRNR = SAP_ADRC.ADDRNUMBER  and SAP_ADRC.xHubID = SAP_VZOBJECT.xHubID&#xA;left join &#xA;(&#xA;&#x9;select OBJNR, OPTRATE, VALIDTO,  zr=ROW_NUMBER() over(partition by OBJNR order by VALIDTO desc) &#xA;&#x9;from ( &#xA;&#x9;&#x9;&#x9;select OBJNR,  VALIDTO =  BISDSYSDB.dbo.BIS_Convert_DATE(VALIDTO, null), OPTRATE =  bisdsysdb.dbo.BIS_Convert_FLOAT(opt.OPTRATE)&#xA;&#x9;&#x9;&#x9;-- select *&#xA;&#x9;&#x9;&#x9;from SAP_VIITOPTRATE opt &#xA;&#x9;&#x9;&#x9;where ANCHPER = 'P' and isdate(BISDSYSDB.dbo.BIS_Convert_DATE(VALIDTO, null))  = 1&#xA;&#x9;&#x9;) q&#xA;) opt on SAP_VIBDBE.OBJNR = opt.OBJNR and opt.zr=1 &#xA;--Baujahr aus den Gebäuden ermitteln&#xA;left join &#xA;(&#xA;&#x9;select xHubID, BUKRS, SWENR, min(left(YBAUJAHR, 4)) as YBAUJAHR&#xA;&#x9;from SAP_VIBDBU&#xA;&#x9;group by xHubID, BUKRS, SWENR&#xA;) SAP_VIBDBU on SAP_VIBDBU.xHubID = SAP_VIBDBE.xHubID and SAP_VIBDBU.BUKRS = SAP_VIBDBE.BUKRS and SAP_VIBDBU.SWENR = SAP_VIBDBE.SWENR&#xA;where xobjnr is not null&#xA;-- wenn Variable AssetsOnlyInitial = 1, dann nur anlegen, wenn Objekt noch nicht vorhanden&#xA;and (&#xA;&#x9;&#x9;(&quot; +@[User::varAssetsOnlyInitial]+ &quot; = 1 and xobjnr not in (select distinct xobjnr from &quot; +@[User::cfgIDB]+ &quot;.dbo.xlbiobjekte where ldelete = 0)) &#xA;&#x9;&#x9;OR&#xA;&#x9;&#x9;(&quot; +@[User::varAssetsOnlyInitial]+ &quot; = 0)  &#xA;&#x9;)&#xA;/*&#xA;union&#xA;&#xA;-- general company assets&#xA;select&#xA;  dtedit&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= GETDATE()&#xA;, lUserkz&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= 'interface'&#xA;, ldelete&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= 0&#xA;, xobFond&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= cast(f.xfondsnr as varchar(10))&#xA;, xobGesellschaft&#x9;&#x9;&#x9;&#x9;= cast(t1.BUKRS as varchar(20))&#xA;, xObjekt&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= t1.BUKRS +'&quot; +@[User::cfgIdentSeparator]+ &quot;'+ '09999'&#xA;, xobBezeichnung&#x9;&#x9;&#x9;&#x9;= cast('General asset for company: ' + t1.BUKRS as varchar (150))&#xA;, xobMatchcode&#x9;&#x9;&#x9;&#x9;&#x9;= cast('General asset for company: ' + t1.BUKRS as varchar(150))&#xA;, xobStrasse&#x9;&#x9;&#x9;&#x9;&#x9;= null&#xA;, xobjHnr&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= null&#xA;, xobPostleitzahl&#x9;&#x9;&#x9;&#x9;= null&#xA;, xobOrt&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= null&#xA;, xobjkey9&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= '9' -- 1=Asset based, 9=Non-Asset based&#xA;, xobFreeChar1&#x9;&#x9;&#x9;&#x9;&#x9;= null&#xA;, xobWirtschaftsuebergang&#x9;&#x9;= null&#xA;, xobVKWirtschaftsueberg&#x9;&#x9;= null&#xA;, xobVKWirtschaftsueberg_intf&#x9;= '1'&#xA;, xobLand&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= null&#xA;, xobvorsteueroption&#x9;&#x9;&#x9;= null&#xA;, xobWaehrung&#x9;&#x9;&#x9;&#x9;&#x9;= null&#xA;, xobBaujahr&#x9;&#x9;&#x9;&#x9;&#x9;= null&#xA;, xobLage&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= null&#xA;from dbo.SAP_T001 t1&#xA;join (select xUnitCompanyCode, xFondsNr from BISIBOBDB.dbo.xIntfConfiguration where BISIBOBDB.dbo.BISGET_KEYisnum_ALPHA(xTypeOfDelivery) = '&quot; + @[User::cfgTypeOfDelivery] + &quot;' and xImportTenant = 1) map on t1.BUKRS = map.xUnitCompanyCode&#xA;join BISIBOBDB.dbo.xlbifonds f on map.xFondsNr = f.xfondsnr&#xA;where t1.BUKRS + ' 09999' not in (select xobjnr from BISIBOBDB.dbo.xlbiObjekte)&#xA;*/&#xA;&quot;"
+              DTS:Expression="&quot;&#xA;select&#xA;--MBIT 160720205: Anpassung SICORE&#xA;  dtedit&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= GETDATE()&#xA;, lUserkz&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= 'interface'&#xA;, ldelete&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= 0&#xA;, xobFond&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= cast(SAP_VIBDBE.xfondsnr as varchar(10))&#xA;, xobGesellschaft&#x9;&#x9;&#x9;&#x9;= cast(SAP_VIBDBE.xgesellnr as varchar(20))&#xA;, xObjekt&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= cast(SAP_VIBDBE.xobjnr as varchar(50))&#xA;, xobBezeichnung&#x9;&#x9;&#x9;&#x9;= cast(SAP_VIBDBE.XWETEXT as varchar (150))&#xA;, xobMatchcode&#x9;&#x9;&#x9;&#x9;&#x9;= cast(SAP_VIBDBE.XWETEXT as varchar(150))&#xA;, xobStrasse&#x9;&#x9;&#x9;&#x9;&#x9;= cast(SAP_ADRC.STREET as varchar(1024))&#xA;, xobjHnr&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= cast(SAP_ADRC.HOUSE_NUM1 as varchar(10))&#xA;, xobPostleitzahl&#x9;&#x9;&#x9;&#x9;= cast(SAP_ADRC.POST_CODE1 as varchar(50))&#xA;, xobOrt&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= cast(SAP_ADRC.CITY1 as varchar(256))&#xA;--, xobjkey9&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= '1' -- 1=Asset based, 9=Non-Asset based  /* siehe JOB Schnittstellen Aufruf*/&#xA;, xobFreeChar1&#x9;&#x9;&#x9;&#x9;&#x9;= cast(SAP_VIBDBE.SWENR as varchar(50))&#xA;, xobWirtschaftsuebergang&#x9;&#x9;= BISDSYSDB.dbo.BIS_Convert_DATE(&#xA;   &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;CASE &#xA;       &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9; WHEN SAP_VIBDBE.DatumZugang IS NULL OR SAP_VIBDBE.DatumZugang = '' OR SAP_VIBDBE.DatumZugang = '00000000' THEN ''&#xA;       &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;ELSE SAP_VIBDBE.DatumZugang&#xA;   &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;END,&#xA;   &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;NULL&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;)  &#xA;, xobVKWirtschaftsueberg&#x9;&#x9;= BISDSYSDB.dbo.BIS_Convert_DATE(&#xA;   &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;  CASE &#xA;       &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9; WHEN SAP_VIBDBE.DatumAbgang IS NULL OR SAP_VIBDBE.DatumAbgang = '' OR SAP_VIBDBE.DatumAbgang = '00000000' THEN '99991231'&#xA;       &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;ELSE SAP_VIBDBE.DatumAbgang&#xA;   &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;  END,&#xA;   &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9; NULL&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;)  &#xA;, xobVKWirtschaftsueberg_intf&#x9;= '1'&#xA;, xobLand&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= SAP_ADRC.COUNTRY&#xA;, xobvorsteueroption&#x9;&#x9;&#x9;= cast(opt.OPTRATE as decimal(5,2))&#xA;, xobWaehrung&#x9;&#x9;&#x9;&#x9;&#x9;= SAP_VIBDBE.WAERS&#xA;, xobBaujahr&#x9;&#x9;&#x9;&#x9;&#x9;= SAP_VIBDBU.YBAUJAHR&#xA;, xobLage&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= SAP_TIV4E.xprefix+'_'+SAP_TIV4E.SOBJLAGE&#xA; --select *&#xA; &#xA;from dbo.SAP_VIBDBE&#xA;left join  SAP_TIV4E on SAP_VIBDBE.xHubID = SAP_TIV4E.xHubID and SAP_VIBDBE.sobjlage = SAP_TIV4E.sobjlage and SAP_TIV4E.spras = 'D' and SAP_TIV4E.xPrefix='SICOREsap'&#xA;left join dbo.SAP_VZOBJECT on SAP_VIBDBE.INTRENO = SAP_VZOBJECT.ADROBJNR and SAP_VIBDBE.xHubID = SAP_VZOBJECT.xHubID&#xA;left join (select zr=row_number() over(partition by ADDRNUMBER order by DATE_TO desc) , * from dbo.SAP_ADRC) SAP_ADRC &#xA;&#x9;on SAP_ADRC.zr=1 and SAP_vzobject.ADRNR = SAP_ADRC.ADDRNUMBER  and SAP_ADRC.xHubID = SAP_VZOBJECT.xHubID and SAP_ADRC.xPrefix ='SICOREsap'&#xA;left join &#xA;(&#xA;&#x9;select OBJNR, OPTRATE, VALIDTO,  zr=ROW_NUMBER() over(partition by OBJNR order by VALIDTO desc) &#xA;&#x9;from ( &#xA;&#x9;&#x9;&#x9;select OBJNR,  VALIDTO =  BISDSYSDB.dbo.BIS_Convert_DATE(VALIDTO, null), OPTRATE =  bisdsysdb.dbo.BIS_Convert_FLOAT(opt.OPTRATE)&#xA;&#x9;&#x9;&#x9;-- select *&#xA;&#x9;&#x9;&#x9;from SAP_VIITOPTRATE opt &#xA;&#x9;&#x9;&#x9;where ANCHPER = 'P' and isdate(BISDSYSDB.dbo.BIS_Convert_DATE(VALIDTO, null))  = 1&#xA;&#x9;&#x9;&#x9;and  xHubID='SICORE'&#xA;&#x9;&#x9;&#x9;--order by OBJNR&#xA;&#x9;&#x9;) q&#xA;) opt on SAP_VIBDBE.OBJNR = opt.OBJNR and opt.zr=1 &#xA;--Baujahr aus den Gebäuden ermitteln&#xA;left join &#xA;(&#xA;&#x9;select xHubID, BUKRS, SWENR, min(left(YBAUJAHR, 4)) as YBAUJAHR&#xA;&#x9;from SAP_VIBDBU&#xA;&#x9;where&#xA;&#x9;xHubID='SICORE'&#xA;&#x9;group by xHubID, BUKRS, SWENR&#xA;) SAP_VIBDBU on SAP_VIBDBU.xHubID = SAP_VIBDBE.xHubID and SAP_VIBDBU.BUKRS = SAP_VIBDBE.BUKRS and SAP_VIBDBU.SWENR = SAP_VIBDBE.SWENR&#xA;where xobjnr is not null&#xA;-- wenn Variable AssetsOnlyInitial = 1, dann nur anlegen, wenn Objekt noch nicht vorhanden&#xA;and (&#xA;&#x9;&#x9;(0 = 1 and xobjnr not in (select distinct xobjnr from BISIBOBDB.dbo.xlbiobjekte where ldelete = 0)) &#xA;&#x9;&#x9;OR&#xA;&#x9;&#x9;(0 = 0)  &#xA;&#x9;)&#xA;&#x9;and&#xA;&#x9;dbo.SAP_VIBDBE.xPrefix='SICORE'&#xA;&#xA;&#x9;&#xA;/*&#xA;union&#xA;&#xA;-- general company assets&#xA;select&#xA;  dtedit&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= GETDATE()&#xA;, lUserkz&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= 'interface'&#xA;, ldelete&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= 0&#xA;, xobFond&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= cast(f.xfondsnr as varchar(10))&#xA;, xobGesellschaft&#x9;&#x9;&#x9;&#x9;= cast(t1.BUKRS as varchar(20))&#xA;, xObjekt&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= t1.BUKRS +'_'+ '09999'&#xA;, xobBezeichnung&#x9;&#x9;&#x9;&#x9;= cast('General asset for company: ' + t1.BUKRS as varchar (150))&#xA;, xobMatchcode&#x9;&#x9;&#x9;&#x9;&#x9;= cast('General asset for company: ' + t1.BUKRS as varchar(150))&#xA;, xobStrasse&#x9;&#x9;&#x9;&#x9;&#x9;= null&#xA;, xobjHnr&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= null&#xA;, xobPostleitzahl&#x9;&#x9;&#x9;&#x9;= null&#xA;, xobOrt&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= null&#xA;, xobjkey9&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= '9' -- 1=Asset based, 9=Non-Asset based&#xA;, xobFreeChar1&#x9;&#x9;&#x9;&#x9;&#x9;= null&#xA;, xobWirtschaftsuebergang&#x9;&#x9;= null&#xA;, xobVKWirtschaftsueberg&#x9;&#x9;= null&#xA;, xobVKWirtschaftsueberg_intf&#x9;= '1'&#xA;, xobLand&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= null&#xA;, xobvorsteueroption&#x9;&#x9;&#x9;= null&#xA;, xobWaehrung&#x9;&#x9;&#x9;&#x9;&#x9;= null&#xA;, xobBaujahr&#x9;&#x9;&#x9;&#x9;&#x9;= null&#xA;, xobLage&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= null&#xA;from dbo.SAP_T001 t1&#xA;join (select xUnitCompanyCode, xFondsNr from BISIBOBDB.dbo.xIntfConfiguration where BISIBOBDB.dbo.BISGET_KEYisnum_ALPHA(xTypeOfDelivery) = 'SAP' and xImportTenant = 1) map on t1.BUKRS = map.xUnitCompanyCode&#xA;join BISIBOBDB.dbo.xlbifonds f on map.xFondsNr = f.xfondsnr&#xA;where t1.BUKRS + ' 09999' not in (select xobjnr from BISIBOBDB.dbo.xlbiObjekte)&#xA;*/&#xA;&quot;"
               DTS:IncludeInDebugDump="2345"
               DTS:Namespace="User"
               DTS:ObjectName="varSQL">
               <DTS:VariableValue
                 DTS:DataType="8">
 select
+--MBIT 160720205: Anpassung SICORE
   dtedit						= GETDATE()
 , lUserkz						= 'interface'
 , ldelete						= 0
@@ -3500,20 +3500,33 @@ select
 , xobOrt						= cast(SAP_ADRC.CITY1 as varchar(256))
 --, xobjkey9						= '1' -- 1=Asset based, 9=Non-Asset based  /* siehe JOB Schnittstellen Aufruf*/
 , xobFreeChar1					= cast(SAP_VIBDBE.SWENR as varchar(50))
-, xobWirtschaftsuebergang		= BISDSYSDB.dbo.BIS_Convert_DATE(nullif(SAP_VIBDBE.DatumZugang,''), null)
-, xobVKWirtschaftsueberg		= BISDSYSDB.dbo.BIS_Convert_DATE(nullif(SAP_VIBDBE.DatumAbgang,'99991231'), null)
+, xobWirtschaftsuebergang		= BISDSYSDB.dbo.BIS_Convert_DATE(
+   																CASE 
+       																	 WHEN SAP_VIBDBE.DatumZugang IS NULL OR SAP_VIBDBE.DatumZugang = '' OR SAP_VIBDBE.DatumZugang = '00000000' THEN ''
+       																			ELSE SAP_VIBDBE.DatumZugang
+   																END,
+   																	NULL
+																	)  
+, xobVKWirtschaftsueberg		= BISDSYSDB.dbo.BIS_Convert_DATE(
+   																  CASE 
+       																	 WHEN SAP_VIBDBE.DatumAbgang IS NULL OR SAP_VIBDBE.DatumAbgang = '' OR SAP_VIBDBE.DatumAbgang = '00000000' THEN '99991231'
+       																			ELSE SAP_VIBDBE.DatumAbgang
+   																  END,
+   																	 NULL
+																)  
 , xobVKWirtschaftsueberg_intf	= '1'
 , xobLand						= SAP_ADRC.COUNTRY
 , xobvorsteueroption			= cast(opt.OPTRATE as decimal(5,2))
 , xobWaehrung					= SAP_VIBDBE.WAERS
 , xobBaujahr					= SAP_VIBDBU.YBAUJAHR
 , xobLage						= SAP_TIV4E.xprefix+'_'+SAP_TIV4E.SOBJLAGE
--- select *
+ --select *
+ 
 from dbo.SAP_VIBDBE
-left join SAP_TIV4E on SAP_VIBDBE.xHubID = SAP_TIV4E.xHubID and SAP_VIBDBE.sobjlage = SAP_TIV4E.sobjlage and SAP_TIV4E.spras = 'D'
+left join  SAP_TIV4E on SAP_VIBDBE.xHubID = SAP_TIV4E.xHubID and SAP_VIBDBE.sobjlage = SAP_TIV4E.sobjlage and SAP_TIV4E.spras = 'D' and SAP_TIV4E.xPrefix='SICOREsap'
 left join dbo.SAP_VZOBJECT on SAP_VIBDBE.INTRENO = SAP_VZOBJECT.ADROBJNR and SAP_VIBDBE.xHubID = SAP_VZOBJECT.xHubID
 left join (select zr=row_number() over(partition by ADDRNUMBER order by DATE_TO desc) , * from dbo.SAP_ADRC) SAP_ADRC 
-	on SAP_ADRC.zr=1 and SAP_vzobject.ADRNR = SAP_ADRC.ADDRNUMBER  and SAP_ADRC.xHubID = SAP_VZOBJECT.xHubID
+	on SAP_ADRC.zr=1 and SAP_vzobject.ADRNR = SAP_ADRC.ADDRNUMBER  and SAP_ADRC.xHubID = SAP_VZOBJECT.xHubID and SAP_ADRC.xPrefix ='SICOREsap'
 left join 
 (
 	select OBJNR, OPTRATE, VALIDTO,  zr=ROW_NUMBER() over(partition by OBJNR order by VALIDTO desc) 
@@ -3522,6 +3535,8 @@ left join
 			-- select *
 			from SAP_VIITOPTRATE opt 
 			where ANCHPER = 'P' and isdate(BISDSYSDB.dbo.BIS_Convert_DATE(VALIDTO, null))  = 1
+			and  xHubID='SICORE'
+			--order by OBJNR
 		) q
 ) opt on SAP_VIBDBE.OBJNR = opt.OBJNR and opt.zr=1 
 --Baujahr aus den Gebäuden ermitteln
@@ -3529,6 +3544,8 @@ left join
 (
 	select xHubID, BUKRS, SWENR, min(left(YBAUJAHR, 4)) as YBAUJAHR
 	from SAP_VIBDBU
+	where
+	xHubID='SICORE'
 	group by xHubID, BUKRS, SWENR
 ) SAP_VIBDBU on SAP_VIBDBU.xHubID = SAP_VIBDBE.xHubID and SAP_VIBDBU.BUKRS = SAP_VIBDBE.BUKRS and SAP_VIBDBU.SWENR = SAP_VIBDBE.SWENR
 where xobjnr is not null
@@ -3538,6 +3555,10 @@ and (
 		OR
 		(0 = 0)  
 	)
+	and
+	dbo.SAP_VIBDBE.xPrefix='SICORE'
+
+	
 /*
 union
 
@@ -6480,12 +6501,13 @@ where xobjnr is not null</property>
               DTS:CreationName=""
               DTS:DTSID="{FEFBADEC-49B9-4F90-A13B-E86B77604EB7}"
               DTS:EvaluateAsExpression="True"
-              DTS:Expression="&quot;select distinct&#xA;  dtedit&#x9;&#x9;&#x9;= getdate()&#xA;, luserkz&#x9;&#x9;&#x9;= 'INTERFACE'&#xA;, ldelete&#x9;&#x9;&#x9;= '0'&#xA;, xggObjekt&#x9;&#x9;&#x9;= cast(obj.xobjnr as varchar(50))&#xA;, xGrundGebaeude&#x9;= cast(obj.xobjnr +'&quot; + @[User::varIdentSeparator] + &quot;'+ right(geb.SGENR,3) as varchar(50))&#xA;, xggMatchcode&#x9;&#x9;= cast(geb.XGETXT as varchar(150))&#xA;, xggBezeichnung&#x9;= cast(isnull(rtrim(adr.POST_CODE1 + ' ' + adr.CITY1), geb.XGETXT) as varchar(150))&#xA;, xggArt&#x9;&#x9;&#x9;= '0'&#xA;, xggBaujahr&#x9;&#x9;= left(nullif(geb.YBAUJAHR, ''), 4)&#xA;, xggPostleitzahl&#x9;= adr.POST_CODE1&#xA;, xggStrasse&#x9;&#x9;= isnull(adr.STREET, case when charindex('/', geb.XGETXT) &gt; 1 then substring(geb.XGETXT, charindex('/', geb.XGETXT)+2, 100) end)&#xA;, xggOrt&#x9;&#x9;&#x9;= isnull(adr.CITY1, case when (charindex('/', geb.XGETXT)&gt;0) then rtrim(isnull(adr.CITY1, left(geb.XGETXT, charindex('/', geb.XGETXT)-1))) end)&#xA;, xggGesellsch&#x9;&#x9;= obj.xGesellNr&#xA;, xggBeginn&#x9;&#x9;&#x9;= BISDSYSDB.dbo.BIS_Convert_DATE(convert(char(8000), isnull(nullif(geb.VALIDFROM,''), nullif(obj.VALIDFROM,''))), NULL)&#xA;, xggEnde&#x9;&#x9;&#x9;= BISDSYSDB.dbo.BIS_Convert_DATE(convert(char(8000), isnull(nullif(geb.VALIDTO, '99991231'), nullif(obj.VALIDFROM, '99991231'))), NULL)&#xA;, xggEnde_intf&#x9;&#x9;= '1'&#xA;, xgghnr&#x9;&#x9;&#x9;= adr.HOUSE_NUM1&#xA;-- select obj.*&#xA;from&#x9;&#x9;dbo.SAP_vibdbu geb&#xA;join&#x9;&#x9;dbo.SAP_vibdbe obj on geb.xHubid = obj.xHubId and geb.BUKRS = obj.BUKRS and geb.SWENR = obj.SWENR&#xA;left join&#x9;dbo.SAP_VZOBJECT vz on geb.xHubId = vz.xHubId and vz.ADROBJNR = geb.INTRENO and vz.ADROBJTYP = 'VI'&#xA;left join&#x9;dbo.SAP_Adrc adr on geb.xHubId = adr.xHubId and vz.ADRNR = adr.ADDRNUMBER&#xA;where obj.xobjnr is not null&#xA;&#xA;union&#xA;&#xA;select distinct&#xA;  dtedit&#x9;&#x9;&#x9;= getdate()&#xA;, luserkz&#x9;&#x9;&#x9;= 'INTERFACE'&#xA;, ldelete&#x9;&#x9;&#x9;= '0'&#xA;, xggObjekt&#x9;&#x9;&#x9;= cast(obj.xobjnr as varchar(50))&#xA;, xGrundGebaeude&#x9;= cast(obj.xobjnr +'&quot; + @[User::varIdentSeparator] + &quot;'+ 'G'+ right(grund.SGRNR,3) as varchar(50))&#xA;, xggMatchcode&#x9;&#x9;= cast(grund.XGRTXT as varchar(150))&#xA;, xggBezeichnung&#x9;= cast(isnull(rtrim(adr.POST_CODE1 + ' ' + adr.CITY1), grund.XGRTXT) as varchar(150))&#xA;, xggArt&#x9;&#x9;&#x9;= '1'&#xA;, xggBaujahr&#x9;&#x9;= null&#xA;, xggPostleitzahl&#x9;= adr.POST_CODE1&#xA;, xggStrasse&#x9;&#x9;= isnull(adr.STREET, case when charindex('/', grund.XGRTXT) &gt; 1 then substring(grund.XGRTXT, charindex('/', grund.XGRTXT)+2, 100) end)&#xA;, xggOrt&#x9;&#x9;&#x9;= rtrim(isnull(adr.CITY1, case when charindex('/', grund.XGRTXT) &gt; 1 then left(grund.XGRTXT, charindex('/', grund.XGRTXT)-1) end))&#xA;, xggGesellsch&#x9;&#x9;= obj.xGesellNr&#xA;, xggBeginn&#x9;&#x9;&#x9;= BISDSYSDB.dbo.BIS_Convert_DATE(convert(char(8000), isnull(nullif(grund.VALIDFROM,''), nullif(obj.VALIDFROM,''))), NULL)&#xA;, xggEnde&#x9;&#x9;&#x9;= BISDSYSDB.dbo.BIS_Convert_DATE(convert(char(8000), isnull(nullif(grund.VALIDTO, '99991231'), nullif(obj.VALIDTO, '99991231'))), NULL)&#xA;, xggEnde_intf&#x9;&#x9;= '1'&#xA;, xgghnr&#x9;&#x9;&#x9;= adr.HOUSE_NUM1&#xA;-- select *&#xA;from&#x9;&#x9;dbo.SAP_VIBDPR grund&#xA;join&#x9;&#x9;dbo.SAP_vibdbe obj&#x9;on grund.xHubid = obj.xHubId and grund.BUKRS = obj.BUKRS and grund.SWENR = obj.SWENR&#xA;left join&#x9;dbo.SAP_VZOBJECT vz on grund.xHubid = vz.xHubid and vz.ADROBJNR = grund.INTRENO and vz.ADROBJTYP = 'VI'&#xA;left join&#x9;dbo.SAP_Adrc adr&#x9;on grund.xHubid = adr.xHubid and vz.ADRNR = adr.ADDRNUMBER&#xA;where obj.xobjnr is not null&#xA;&quot;"
+              DTS:Expression="&quot;select distinct&#xA;&#x9;-- MBIT: Anpassung SICORE 15072025&#xA;  dtedit&#x9;&#x9;&#x9;= getdate()&#xA;, luserkz&#x9;&#x9;&#x9;= 'INTERFACE'&#xA;, ldelete&#x9;&#x9;&#x9;= '0'&#xA;, xggObjekt&#x9;&#x9;&#x9;= cast(obj.xobjnr as varchar(50))&#xA;, xGrundGebaeude&#x9;= cast(obj.xobjnr +'_'+ right(geb.SGENR,3) as varchar(50))&#xA;, xggMatchcode&#x9;&#x9;= cast(geb.XGETXT as varchar(150))&#xA;, xggBezeichnung&#x9;= cast(isnull(rtrim(adr.POST_CODE1 + ' ' + adr.CITY1), geb.XGETXT) as varchar(150))&#xA;, xggArt&#x9;&#x9;&#x9;= '0'&#xA;, xggBaujahr&#x9;&#x9;= left(nullif(geb.YBAUJAHR, ''), 4)&#xA;, xggPostleitzahl&#x9;= adr.POST_CODE1&#xA;, xggStrasse&#x9;&#x9;= isnull(adr.STREET, case when charindex('/', geb.XGETXT) &gt; 1 then substring(geb.XGETXT, charindex('/', geb.XGETXT)+2, 100) end)&#xA;, xggOrt&#x9;&#x9;&#x9;= isnull(adr.CITY1, case when (charindex('/', geb.XGETXT)&gt;0) then rtrim(isnull(adr.CITY1, left(geb.XGETXT, charindex('/', geb.XGETXT)-1))) end)&#xA;, xggGesellsch&#x9;&#x9;= obj.xGesellNr&#xA;, xggBeginn&#x9;&#x9;&#x9;= BISDSYSDB.dbo.BIS_Convert_DATE(convert(char(8000), isnull(nullif(geb.VALIDFROM,''), nullif(obj.VALIDFROM,''))), NULL)&#xA;, xggEnde&#x9;&#x9;&#x9;= BISDSYSDB.dbo.BIS_Convert_DATE(convert(char(8000), isnull(nullif(geb.VALIDTO, '99991231'), nullif(obj.VALIDFROM, '99991231'))), NULL)&#xA;, xggEnde_intf&#x9;&#x9;= '1'&#xA;, xgghnr&#x9;&#x9;&#x9;= adr.HOUSE_NUM1&#xA;-- select obj.*&#xA;from&#x9;&#x9;dbo.SAP_vibdbu geb&#xA;join&#x9;&#x9;dbo.SAP_vibdbe obj on geb.xHubid = obj.xHubId and geb.BUKRS = obj.BUKRS and geb.SWENR = obj.SWENR and obj.xPrefix='SICORE'&#xA;left join&#x9;dbo.SAP_VZOBJECT vz on geb.xHubId = vz.xHubId and vz.ADROBJNR = geb.INTRENO and vz.ADROBJTYP = 'VI' and vz.xPrefix ='SICOREsap'&#xA;left join&#x9;dbo.SAP_Adrc adr on geb.xHubId = adr.xHubId and vz.ADRNR = adr.ADDRNUMBER and adr.xPrefix='SICOREsap'&#xA;where obj.xobjnr is not null&#xA;and&#xA;geb.xPrefix ='SICOREsap'&#xA;&#xA;union&#xA;&#xA;select distinct&#xA;  dtedit&#x9;&#x9;&#x9;= getdate()&#xA;, luserkz&#x9;&#x9;&#x9;= 'INTERFACE'&#xA;, ldelete&#x9;&#x9;&#x9;= '0'&#xA;, xggObjekt&#x9;&#x9;&#x9;= cast(obj.xobjnr as varchar(50))&#xA;, xGrundGebaeude&#x9;= cast(obj.xobjnr +'_'+ 'G'+ right(grund.SGRNR,3) as varchar(50))&#xA;, xggMatchcode&#x9;&#x9;= cast(grund.XGRTXT as varchar(150))&#xA;, xggBezeichnung&#x9;= cast(isnull(rtrim(adr.POST_CODE1 + ' ' + adr.CITY1), grund.XGRTXT) as varchar(150))&#xA;, xggArt&#x9;&#x9;&#x9;= '1'&#xA;, xggBaujahr&#x9;&#x9;= null&#xA;, xggPostleitzahl&#x9;= adr.POST_CODE1&#xA;, xggStrasse&#x9;&#x9;= isnull(adr.STREET, case when charindex('/', grund.XGRTXT) &gt; 1 then substring(grund.XGRTXT, charindex('/', grund.XGRTXT)+2, 100) end)&#xA;, xggOrt&#x9;&#x9;&#x9;= rtrim(isnull(adr.CITY1, case when charindex('/', grund.XGRTXT) &gt; 1 then left(grund.XGRTXT, charindex('/', grund.XGRTXT)-1) end))&#xA;, xggGesellsch&#x9;&#x9;= obj.xGesellNr&#xA;, xggBeginn&#x9;&#x9;&#x9;= BISDSYSDB.dbo.BIS_Convert_DATE(convert(char(8000), isnull(nullif(grund.VALIDFROM,''), nullif(obj.VALIDFROM,''))), NULL)&#xA;, xggEnde&#x9;&#x9;&#x9;= BISDSYSDB.dbo.BIS_Convert_DATE(convert(char(8000), isnull(nullif(grund.VALIDTO, '99991231'), nullif(obj.VALIDTO, '99991231'))), NULL)&#xA;, xggEnde_intf&#x9;&#x9;= '1'&#xA;, xgghnr&#x9;&#x9;&#x9;= adr.HOUSE_NUM1&#xA;-- select *&#xA;from&#x9;&#x9;dbo.SAP_VIBDPR grund&#xA;join&#x9;&#x9;dbo.SAP_vibdbe obj&#x9;on grund.xHubid = obj.xHubId and grund.BUKRS = obj.BUKRS and grund.SWENR = obj.SWENR and obj.xPrefix='SICORE'&#xA;left join&#x9;dbo.SAP_VZOBJECT vz on grund.xHubid = vz.xHubid and vz.ADROBJNR = grund.INTRENO and vz.ADROBJTYP = 'VI' and vz.xPrefix ='SICOREsap'&#xA;left join&#x9;dbo.SAP_Adrc adr&#x9;on grund.xHubid = adr.xHubid and vz.ADRNR = adr.ADDRNUMBER and adr.xPrefix='SICOREsap'&#xA;where obj.xobjnr is not null&#xA;and&#xA;grund.xPrefix ='SICOREsap'&#xA;&quot;"
               DTS:IncludeInDebugDump="2345"
               DTS:Namespace="User"
               DTS:ObjectName="varSQL">
               <DTS:VariableValue
                 DTS:DataType="8">select distinct
+	-- MBIT: Anpassung SICORE 15072025
   dtedit			= getdate()
 , luserkz			= 'INTERFACE'
 , ldelete			= '0'
@@ -6505,10 +6527,12 @@ where xobjnr is not null</property>
 , xgghnr			= adr.HOUSE_NUM1
 -- select obj.*
 from		dbo.SAP_vibdbu geb
-join		dbo.SAP_vibdbe obj on geb.xHubid = obj.xHubId and geb.BUKRS = obj.BUKRS and geb.SWENR = obj.SWENR
-left join	dbo.SAP_VZOBJECT vz on geb.xHubId = vz.xHubId and vz.ADROBJNR = geb.INTRENO and vz.ADROBJTYP = 'VI'
-left join	dbo.SAP_Adrc adr on geb.xHubId = adr.xHubId and vz.ADRNR = adr.ADDRNUMBER
+join		dbo.SAP_vibdbe obj on geb.xHubid = obj.xHubId and geb.BUKRS = obj.BUKRS and geb.SWENR = obj.SWENR and obj.xPrefix='SICORE'
+left join	dbo.SAP_VZOBJECT vz on geb.xHubId = vz.xHubId and vz.ADROBJNR = geb.INTRENO and vz.ADROBJTYP = 'VI' and vz.xPrefix ='SICOREsap'
+left join	dbo.SAP_Adrc adr on geb.xHubId = adr.xHubId and vz.ADRNR = adr.ADDRNUMBER and adr.xPrefix='SICOREsap'
 where obj.xobjnr is not null
+and
+geb.xPrefix ='SICOREsap'
 
 union
 
@@ -6532,10 +6556,12 @@ select distinct
 , xgghnr			= adr.HOUSE_NUM1
 -- select *
 from		dbo.SAP_VIBDPR grund
-join		dbo.SAP_vibdbe obj	on grund.xHubid = obj.xHubId and grund.BUKRS = obj.BUKRS and grund.SWENR = obj.SWENR
-left join	dbo.SAP_VZOBJECT vz on grund.xHubid = vz.xHubid and vz.ADROBJNR = grund.INTRENO and vz.ADROBJTYP = 'VI'
-left join	dbo.SAP_Adrc adr	on grund.xHubid = adr.xHubid and vz.ADRNR = adr.ADDRNUMBER
+join		dbo.SAP_vibdbe obj	on grund.xHubid = obj.xHubId and grund.BUKRS = obj.BUKRS and grund.SWENR = obj.SWENR and obj.xPrefix='SICORE'
+left join	dbo.SAP_VZOBJECT vz on grund.xHubid = vz.xHubid and vz.ADROBJNR = grund.INTRENO and vz.ADROBJTYP = 'VI' and vz.xPrefix ='SICOREsap'
+left join	dbo.SAP_Adrc adr	on grund.xHubid = adr.xHubid and vz.ADRNR = adr.ADDRNUMBER and adr.xPrefix='SICOREsap'
 where obj.xobjnr is not null
+and
+grund.xPrefix ='SICOREsap'
 </DTS:VariableValue>
             </DTS:Variable>
           </DTS:Variables>
@@ -8918,7 +8944,7 @@ left join SAP_ADRC adr on a.xHubid = adr.xHubid and bt2.ADDRNUMBER = adr.ADDRNUM
                     <property
                       dataType="System.String"
                       description="The mappings between the parameters in the SQL command and variables."
-                      name="ParameterMapping">"Parameter0:Input",{2208B9EA-4EE8-478C-B143-22C54D8B4308};</property>
+                      name="ParameterMapping"></property>
                   </properties>
                   <connections>
                     <connection
@@ -10750,11 +10776,13 @@ left join (select xUnitCompanyCode, xFondsNr from BISIBOBDB.dbo.xIntfConfigurati
 , xGesellFonds			= map.xFondsNr
 --, t1.*
 FROM dbo.sap_t001 t1
-LEFT JOIN dbo.SAP_T009B gj on t1.xHubID = gj.xHubID and t1.PERIV = gj.PERIV and gj.POPER = '001'
+LEFT JOIN dbo.SAP_T009B gj on t1.xHubID = gj.xHubID and t1.PERIV = gj.PERIV and gj.POPER = '001' and gj.xPrefix='SICOREsap'
 join (select distinct xUnitCompanyCode, xFondsNr from BISIBOBDB.dbo.xIntfConfiguration where 
 1 = 1 
 and BISIBOBDB.dbo.BISGET_KEYisnum_ALPHA(xTypeOfDelivery) = ? 
-and xImportTenant = 1) map on t1.BUKRS = map.xUnitCompanyCode</property>
+and xImportTenant = 1) map on t1.BUKRS = map.xUnitCompanyCode
+where
+t1.xPrefix='SICOREsap'</property>
                     <property
                       dataType="System.String"
                       description="The variable that contains the SQL command to be executed."
@@ -10983,7 +11011,7 @@ and xImportTenant = 1) map on t1.BUKRS = map.xUnitCompanyCode</property>
                           refId="Package\Data flows\Companies\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[xGesellFonds]"
                           codePage="1252"
                           dataType="str"
-                          length="10"
+                          length="20"
                           name="xGesellFonds" />
                       </externalMetadataColumns>
                     </output>
@@ -11067,7 +11095,7 @@ and xImportTenant = 1) map on t1.BUKRS = map.xUnitCompanyCode</property>
                           refId="Package\Data flows\Companies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[xGesellFonds]"
                           codePage="1252"
                           dataType="str"
-                          length="10"
+                          length="20"
                           lineageId="Package\Data flows\Companies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[xGesellFonds]"
                           name="xGesellFonds" />
                         <outputColumn
@@ -11113,7 +11141,7 @@ and xImportTenant = 1) map on t1.BUKRS = map.xUnitCompanyCode</property>
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{2105E5C9-C9EB-4DDA-8714-2A9812EBB32F}"
-              SQLTask:SqlStatementSource="declare @DftBaseyear int = ?&#xA;&#xA;if object_id('tempdb.dbo.##CONDADJ') is not null drop table dbo.##CONDADJ &#xA;&#xA;select distinct t1.xHubid, t1.INTRENO, TERMNOAJ &#xA;into dbo.##CONDADJ &#xA;from&#x9;dbo.SAP_VICDCOND t1 with(nolock)&#xA;join&#x9;dbo.SAP_VICNCN vt on t1.xHubid = vt.xHubid and t1.INTRENO = vt.INTRENO &#xA;join&#x9;dbo.SAP_VIBDOBJASS ass on t1.xHubid = ass.xHubid and '10' = OBJASSTYPE and vt.OBJNR = ass.OBJNRSRC&#xA;join&#x9;dbo.SAP_TIV26 t26 on t1.xHubid = t26.xHubid and vt.RECNTYPE = SMVART &#xA;join&#x9;dbo.SAP_VIBDRO me on t1.xHubid = me.xHubid and ass.OBJNRTRG = me.OBJNR&#xA;join dbo.SAP_VIBDBE obj on me.xHubid = obj.xHubid and me.BUKRs = obj.BUKRS and me.SWENR = obj.SWENR &#xA;Where t26.RECNSRELOB = 2 and isnull(ass.ASSIGNONLYINFO, '') &lt;&gt; 'X'&#xA;and obj.xobjnr is not null &#xA;&#xA;if object_id('citSAP_Indexvereinbarung') is not null drop table dbo.citSAP_Indexvereinbarung&#xA;select distinct&#xA;a.xHubid, &#xA;a.xPrefix, &#xA;a.INTRENO, &#xA;a.TERMTYPE, a.TERMNO, b.ADJMRULE, b.ADJMSUBRULE&#xA;,isnull(e.INDEXSERIES,f.INDEXSERIES) as INDEXSERIES  &#xA;--, case&#x9;when isnull(e.INDEXBASEACT,'X') = 'X' &#xA;--&#x9;&#x9;&#x9;then case when bj.BASJHR is not null then bj.BASJHR else f.INDEXBASEYEAR end &#xA;--&#x9;&#x9;else e.INDEXBASEYEAR &#xA;--  end &#xA;, isnull(nullif(e.INDEXBASEYEAR, 0), @DftBaseyear) as INDEXBASEYEAR  &#xA;, isnull(e.INDEXCHGPOINTS,f.INDEXCHGPOINTS) as INDEXCHGPOINTS &#xA;, isnull(e.INDEXCHGPOIEX, f.INDEXCHGPOIEX) as INDEXCHGPOIEX &#xA;, isnull(e.INDEXCHGPERCENT, f.INDEXCHGPERCENT) as INDEXCHGPERCENT&#xA;, isnull(e.INDEXCHGPEREX, f.INDEXCHGPEREX) as INDEXCHGPEREX &#xA;, isnull(e.DELAYBASE,f.DELAYBASE) as DELAYBASE&#xA;, isnull(e.DELAYBASEUNIT,f.DELAYBASEUNIT) as DELAYBASEUNIT &#xA;, d.FIRSTINDEXDATE, d.ADJMFIRSTDATE &#xA;, isnull(c.PERCENTAGEPASS, g.PERCENTAGEPASS) as PERCENTAGEPASS &#xA;, isnull(c.RHYTHM, g.RHYTHM) as RHYTHM &#xA;, isnull(c.RHYTHMUNIT, g.RHYTHMUNIT) as RHYTHMUNIT  &#xA;, IndexErstePrf = (select min(bisdsysdb.dbo.BIS_Convert_DATE(cast(FIRSTINDEXDATE as char(50)), NULL)) from BISimportDB..SAP_VIAJOBJINDX where INTRENO = a.INTRENO)&#xA;into bisimportdb.dbo.citSAP_Indexvereinbarung&#xA;from &#x9;&#x9;dbo.SAP_vitmterm a &#xA;join&#x9;&#x9;dbo.##CONDADJ xx on a.xHubid = xx.xHubid and a.intreno = xx.INTRENO and a.TERMNO = xx.TERMNOAJ &#xA;join &#x9;&#x9;dbo.SAP_viajterm b on a.xHubid = b.xHubid and a.intreno = b.intreno and a.TERMNO = b.TERMNO &#xA;left join &#x9;SAP_viajrule c on a.xHubid = c.xHubid and a.intreno = c.intreno and a.termno = b.termno and BISDSYSDB.dbo.BIS_Convert_DATE(convert(varchar(500), c.VALIDTO), NULL) &gt;= GETDATE() &#xA;left join&#x9;SAP_viajobjindx d on a.xHubid = d.xHubid and b.intreno = d.intreno and b.termno = d.Termno and b.adjmrule = d.adjmrule and b.adjmsubrule = d.adjmsubrule and BISDSYSDB.dbo.BIS_Convert_DATE(convert(varchar(500), d.VALIDTO), NULL) &gt;= GETDATE()&#xA;left join &#x9;SAP_viajspecindx e on a.xHubid = e.xHubid and b.intreno = e.intreno and b.termno = e.Termno and b.adjmrule = e.adjmrule and b.adjmsubrule = e.adjmsubrule   &#xA;left join &#x9;SAP_tivajspecindx f on a.xHubid = f.xHubid and b.ADJMSUBRULE = f.ADJMRULE &#xA;left join&#x9;SAP_TIVAJRULE g on a.xHubid = g.xHubid and b.ADJMSUBRULE = g.ADJMRULE&#xA;where a.TERMTYPE = '1300' --and b.ADJMSUBRULE = 'INDEXGEW.' &#xA;  and ISNULL(c.BLOCKREASON,'') = '' &#xA;  and(BISDSYSDB.dbo.BIS_Convert_DATE(convert(varchar(500), b.validto), NULL) &gt;= Getdate() OR b.VALIDTO IS NULL)&#xA;  and not isnull(e.INDEXSERIES,f.INDEXSERIES) is NULL and not isnull(e.INDEXSERIES,f.INDEXSERIES) = 'KEINE'&#xA;&#xA;if object_id('tempdb.dbo.##CONDADJ') is not null drop table dbo.##CONDADJ &#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              SQLTask:SqlStatementSource="--MBIT: 15072025 Anpassung SICORE&#xA;declare @DftBaseyear int = ?&#xA;&#xA;if object_id('tempdb.dbo.##CONDADJ') is not null drop table dbo.##CONDADJ &#xA;&#xA;select distinct t1.xHubid, t1.INTRENO, TERMNOAJ &#xA;into dbo.##CONDADJ &#xA;from&#x9;dbo.SAP_VICDCOND t1 with(nolock)&#xA;join&#x9;dbo.SAP_VICNCN vt on t1.xHubid = vt.xHubid and t1.INTRENO = vt.INTRENO and vt.xPrefix ='SICOREsap'&#xA;join&#x9;dbo.SAP_VIBDOBJASS ass on t1.xHubid = ass.xHubid and '10' = OBJASSTYPE and vt.OBJNR = ass.OBJNRSRC and ass.xPrefix='SICOREsap'&#xA;join&#x9;dbo.SAP_TIV26 t26 on t1.xHubid = t26.xHubid and vt.RECNTYPE = SMVART and t26.xPrefix='SICOREsap'&#xA;join&#x9;dbo.SAP_VIBDRO me on t1.xHubid = me.xHubid and ass.OBJNRTRG = me.OBJNR and me.xPrefix ='SICORE'&#xA;join dbo.SAP_VIBDBE obj on me.xHubid = obj.xHubid and me.BUKRs = obj.BUKRS and me.SWENR = obj.SWENR and obj.xPrefix ='SICORE' &#xA;Where t26.RECNSRELOB = 2 and isnull(ass.ASSIGNONLYINFO, '') &lt;&gt; 'X'&#xA;and obj.xobjnr is not null  and t1.xPrefix='SICORE' &#xA;--SELECT * FROm&#xA;--dbo.##CONDADJ&#xA;&#xA;&#xA;if object_id('citSAP_Indexvereinbarung') is not null drop table dbo.citSAP_Indexvereinbarung&#xA;select distinct&#xA;a.xHubid, &#xA;a.xPrefix, &#xA;a.INTRENO, &#xA;a.TERMTYPE, a.TERMNO, b.ADJMRULE, b.ADJMSUBRULE&#xA;,isnull(e.INDEXSERIES,f.INDEXSERIES) as INDEXSERIES  &#xA;--, case&#x9;when isnull(e.INDEXBASEACT,'X') = 'X' &#xA;--&#x9;&#x9;&#x9;then case when bj.BASJHR is not null then bj.BASJHR else f.INDEXBASEYEAR end &#xA;--&#x9;&#x9;else e.INDEXBASEYEAR &#xA;--  end &#xA;, isnull(nullif(e.INDEXBASEYEAR, 0), @DftBaseyear) as INDEXBASEYEAR  &#xA;, isnull(e.INDEXCHGPOINTS,f.INDEXCHGPOINTS) as INDEXCHGPOINTS &#xA;, isnull(e.INDEXCHGPOIEX, f.INDEXCHGPOIEX) as INDEXCHGPOIEX &#xA;, isnull(e.INDEXCHGPERCENT, f.INDEXCHGPERCENT) as INDEXCHGPERCENT&#xA;, isnull(e.INDEXCHGPEREX, f.INDEXCHGPEREX) as INDEXCHGPEREX &#xA;, isnull(e.DELAYBASE,f.DELAYBASE) as DELAYBASE&#xA;, isnull(e.DELAYBASEUNIT,f.DELAYBASEUNIT) as DELAYBASEUNIT &#xA;, d.FIRSTINDEXDATE, d.ADJMFIRSTDATE &#xA;, isnull(c.PERCENTAGEPASS, g.PERCENTAGEPASS) as PERCENTAGEPASS &#xA;, isnull(c.RHYTHM, g.RHYTHM) as RHYTHM &#xA;, isnull(c.RHYTHMUNIT, g.RHYTHMUNIT) as RHYTHMUNIT  &#xA;, IndexErstePrf = (select min(bisdsysdb.dbo.BIS_Convert_DATE(cast(FIRSTINDEXDATE as char(50)), NULL)) from BISimportDB..SAP_VIAJOBJINDX where INTRENO = a.INTRENO)&#xA;into bisimportdb.dbo.citSAP_Indexvereinbarung&#xA;from &#x9;&#x9;dbo.SAP_vitmterm a &#xA;join&#x9;&#x9;dbo.##CONDADJ xx on a.xHubid = xx.xHubid and a.intreno = xx.INTRENO and a.TERMNO = xx.TERMNOAJ &#xA;join &#x9;&#x9;dbo.SAP_viajterm b on a.xHubid = b.xHubid and a.intreno = b.intreno and a.TERMNO = b.TERMNO and b.xPrefix ='SICOREsap'&#xA;left join &#x9;SAP_viajrule c on a.xHubid = c.xHubid and a.intreno = c.intreno and a.termno = b.termno and BISDSYSDB.dbo.BIS_Convert_DATE(convert(varchar(500), c.VALIDTO), NULL) &gt;= GETDATE() and c.xPrefix ='SICOREsap'&#xA;left join&#x9;SAP_viajobjindx d on a.xHubid = d.xHubid and b.intreno = d.intreno and b.termno = d.Termno and b.adjmrule = d.adjmrule and b.adjmsubrule = d.adjmsubrule and BISDSYSDB.dbo.BIS_Convert_DATE(convert(varchar(500), d.VALIDTO), NULL) &gt;= GETDATE() and d.xPrefix ='SICOREsap'&#xA;left join &#x9;SAP_viajspecindx e on a.xHubid = e.xHubid and b.intreno = e.intreno and b.termno = e.Termno and b.adjmrule = e.adjmrule and b.adjmsubrule = e.adjmsubrule and e.xPrefix ='SICOREsap'  &#xA;left join &#x9;SAP_tivajspecindx f on a.xHubid = f.xHubid and b.ADJMSUBRULE = f.ADJMRULE and f.xPrefix ='SICOREsap'&#xA;left join&#x9;SAP_TIVAJRULE g on a.xHubid = g.xHubid and b.ADJMSUBRULE = g.ADJMRULE and g.xPrefix ='SICOREsap'&#xA;where a.TERMTYPE = '1300' --and b.ADJMSUBRULE = 'INDEXGEW.' &#xA;  and ISNULL(c.BLOCKREASON,'') = '' &#xA;  and(BISDSYSDB.dbo.BIS_Convert_DATE(convert(varchar(500), b.validto), NULL) &gt;= Getdate() OR b.VALIDTO IS NULL)&#xA;  and not isnull(e.INDEXSERIES,f.INDEXSERIES) is NULL and not isnull(e.INDEXSERIES,f.INDEXSERIES) = 'KEINE'&#xA;  and a.xPrefix ='SICOREsap'&#xA;&#xA;if object_id('tempdb.dbo.##CONDADJ') is not null drop table dbo.##CONDADJ &#xA;--SELECT * FROM &#xA;&#xA;--bisimportdb.dbo.citSAP_Indexvereinbarung" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="0"
                 SQLTask:DtsVariableName="User::cfgDftIdxBaseYear"
@@ -16009,12 +16037,14 @@ where xkvAlphacode is not null</property>
               DTS:CreationName=""
               DTS:DTSID="{94795A42-4018-4506-9BAF-850B924EFFD1}"
               DTS:EvaluateAsExpression="True"
-              DTS:Expression="&quot;select distinct &#xA;  dtedit&#x9;&#x9;&#x9;&#x9;= getdate()&#xA;, luserkz&#x9;&#x9;&#x9;&#x9;= 'INTERFACE'&#xA;, ldelete&#x9;&#x9;&#x9;&#x9;= '0'&#xA;/* RS - 20230426: wenn mehrere Verträge zu einem Hauptvertrag, dann erzeuge eine laufende Nummer */&#xA;--, xVertrag&#x9;&#x9;&#x9;&#x9;= cast(obj.xobjnr +'_'+ case when me.SGENR is null then 'G' else '' end + right(isnull(me.SGENR, me.SGRNR), 3) +'_'+ right(me.SMENR,5) +'_'+ vtg.RECNNR as varchar(50))&#xA;, xVertrag&#x9;&#x9;&#x9;&#x9;= cast(obj.xobjnr +'_'+ case when me.SGENR is null then 'G' else '' end + right(isnull(me.SGENR, me.SGRNR), 3) +'_'+ right(me.SMENR,5) +'_'+ vtg.RECNNR + case when assAnz.lid is null or NbrVt = '' then '' else '_' + right('00'+ass.NbrVt,2) end as varchar(100))&#xA;, xvtFlaeche&#x9;&#x9;&#x9;= cast(obj.xobjnr +'_'+ case when me.SGENR is null then 'G' else '' end + right(isnull(me.SGENR, me.SGRNR), 3) +'_'+ right(me.SMENR,5) as varchar(50))&#xA;, xvtObjekt&#x9;&#x9;&#x9;&#x9;= cast(obj.xobjnr as varchar(50))&#xA;, xvtAdressnummer&#x9;&#x9;= cast(bp.PARTNER as varchar(50))&#xA;, xvtSollstellungstag&#x9;= '1'&#xA;, xvtLeerstehend&#x9;&#x9;= case when isnull(ISVACANT,'') = 'X' then '1' else '0' end&#xA;--, xvtBeginn&#x9;&#x9;&#x9;&#x9;= vtg.RECNBEGX&#xA;, xvtBeginn&#x9;&#x9;&#x9;&#x9;= case when ass.VALIDFROMX &gt; vtg.RECNBEGX then ass.VALIDFROMX else vtg.RECNBEGX  end&#xA;, xvtEnde&#x9;&#x9;&#x9;&#x9;= case  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;when ass.VALIDTOX &lt; isnull(vtg.RECNENDABSX,'99991231') and ass.VALIDTOX  &lt;&gt; '99991231' then nullif(ass.VALIDTOX,'99991231')   &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;WHEN lfz.PESTATE in('X0', 'W0')  then vtg.RECNENDABSX &#xA;                                when kuendobj.NTPER is not null and kuendobj.NTPER between isnull(ass.VALIDFROMX,'17530101') and ass.VALIDTOX  then kuendobj.NTPER &#xA;                                when kuend.NTPER is not null then kuend.NTPER &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;else NULL&#xA;                          end&#xA;&#xA;, xvtEnde_intf&#x9;&#x9;&#x9;&#x9;= '1'&#xA;, xvtVertrEndeFestlaufzeit&#x9;&#x9;= CASE&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;/*Verträge mit Status = unbefristet &gt;&gt;&gt; NULL*/&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;/*Verträge mit Status = Vor Vertragsbeginn &gt;&gt;&gt; nächstes Vertragsende Stammdaten*/&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;WHEN lfz.PESTATE = 'A0' then vtg.RECNEND1STX&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;/*Verträge mit Status = beendet ODER  gekündigt ODER befristet ohne Verlängerung &gt;&gt;&gt; nächstes Vertragsende NEU*/&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;WHEN lfz.PESTATE in('X0', 'W0', 'C0') then vtg.RECNENDABSX &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;/**Verträge mit Status = unbefristete Verlängerung ODER unbefristet &gt;&gt;&gt; nächstes Kündigungsdatum Mieter*/&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;WHEN lfz.PESTATE in('RU', 'B0') then lfz.NTALLOWEDPAR&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;/*other*/&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;ELSE lfz.RNENDNEW&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;END&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;/*OLD &#xA;, xvtVertrEndeFestlaufzeit&#x9;&#x9;=&#x9;CASE&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;/*unbefristet &gt;&gt;&gt; NULL*/&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;WHEN lfz.PESTATE = 'B0' then NULL &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;/*Erstes Ende &lt; Beginn &gt;&gt;&gt; NULL*/&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;WHEN vtg.RECNEND1STX &lt; case when ass.VALIDFROMX &gt; vtg.RECNBEGX then ass.VALIDFROMX else vtg.RECNBEGX  end then NULL&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;ELSE vtg.RECNEND1STX &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;END&#xA;*/&#xA;, xvtVertrEndeFestlaufzeit_intf&#x9;= '1'&#xA;, xvertrBranche&#x9;&#x9;&#x9;&#x9;&#x9;= obj.xPrefix +'_'+ vtg.Industry&#xA;, xvtBemerkung&#x9;&#x9;&#x9;&#x9;&#x9;= cast(rtrim(vtg.RECNTXT) + case when fKndRgl.rglTxt is not null then  '   &lt;Individuelle Kündigungsregel vorhanden!&gt;   ' + fKndRgl.rglTxt end as varchar(1024))&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;+ CHAR(13) + 'Vertragstatus: ' + rtrim(XPESTATE)&#xA;, xvertrErstesVertrEnde&#x9;&#x9;&#x9;= vtg.RECNEND1STX&#xA;, xvertrErstesVertrEnde_intf&#x9;= '1'&#xA;, xvertrstammvertrag&#x9;&#x9;&#x9;= obj.xobjnr + ' '+ vtg.RECNNR&#xA;, xvertrStammvertragBeginn&#x9;&#x9;= vtg.RECNBEGX&#xA;, xvertrStammvertragende&#x9;&#x9;= CASE when Kuend.INTRENO is not null and Kuend.NTPER is not null  then convert(datetime,Kuend.NTPER) end  &#xA;&#xA;, xvertrNaechstesVertragsende            &#xA;&#x9;&#x9;&#x9;&#x9;= CASE  -- MO gekündigt&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;WHEN ass.VALIDTOX is Not Null and ass.VALIDTOX &lt;&gt; '99991231' and ass.VALIDTOX &lt; vtg.recnendabsX then ass.VALIDTOX&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;WHEN vtg.RECNENDABSX is not null and vtg.recnendabsx &lt;= getdate()  then vtg.RECNENDABSX &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;WHEN lfz.PESTATE in('X0', 'W0')  then vtg.RECNENDABSX &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;-- unbefristet&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;WHEN lfz.PESTATE = 'B0' then case when lfz.NTALLOWEDPAR is not null and lfz.NTALLOWEDPAR &lt; isnull(lfz.NTALLOWEDOWN,'99991231') then lfz.NTALLOWEDPAR else lfz.NTALLOWEDOWN end&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;-- befristet ohne Verlängerung&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;WHEN lfz.PESTATE = 'C0' then &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;case&#x9;when lfz.NTALLOWEDPAR is not null and  lfz.NTALLOWEDPAR &lt; isnull(lfz.RNEND1ST, '99991231') then lfz.NTALLOWEDPAR &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;else  lfz.RNEND1ST&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;WHEN lfz.PESTATE in('F0', 'O1', 'O2', 'R', 'RR', 'RU') then &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;case &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;when lfz.RNENDNEW is not null and lfz.RNENDNEW &lt;= isnull(lfz.NTALLOWEDPAR,'99991231') and  lfz.RNENDNEW &lt;= isnull(lfz.NTALLOWEDOWN,'99991231')  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;then lfz.RNENDNEW &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;when lfz.NTALLOWEDPAR is not null and  lfz.NTALLOWEDPAR &lt;= isnull(lfz.RNENDNEW,'99991231') and  lfz.NTALLOWEDPAR &lt;= isnull(lfz.NTALLOWEDOWN,'99991231') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;then  lfz.NTALLOWEDPAR &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;when lfz.NTALLOWEDOWN is not null and  lfz.NTALLOWEDOWN &lt;= isnull(lfz.RNENDNEW,'99991231') and  lfz.NTALLOWEDOWN &lt;= isnull(lfz.NTALLOWEDPAR,'99991231')  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;then lfz.NTALLOWEDOWN &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end                                   &#xA;&#x9;&#x9;&#x9;&#x9;  END&#xA;, xvertrNaechstesVertragsende_intf&#x9;= '1'&#xA;--, xvertrKuendZum&#x9;&#x9;&#x9;&#x9;= BISDSYSDB.dbo.BIS_Convert_DATE(convert(varchar(500), vtg.RECNNOTPER), NULL)&#xA;, xvertrKuendZum&#x9;&#x9;&#x9;&#x9;= BISDSYSDB.dbo.BIS_Convert_DATE(convert(varchar(500), kuend.NTPER), NULL)&#xA;, xvertrKuendZum_intf&#x9;&#x9;&#x9;= '1'&#xA;, xvtKzMWST&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= case when BISDSYSDB.dbo.BIS_Convert_DEC(tax.OPTRATE) = 0.00 or tax.OPTRATE is null then 0 else 1 end&#xA;, xvtKzMWST_intf&#x9;&#x9;&#x9;&#x9;= '1'&#xA;, xvertrEingangKuendigung&#x9;&#x9;= kuendobj.NTRECEIPTX&#xA;, xvertrEingangKuendigung_intf&#x9;= '1'&#xA;, xvtMibeso&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= cast(&#x9;case kndRgl.NTTYPE &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;when 1 then fKuenRgl.XNTPROC &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;when 2 then obj.xPrefix +'_'+ '0000' &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end as varchar(50)) -- 0000=individuelle Fristregelung&#xA;, xvtMibeso_intf&#x9;&#x9;&#x9;&#x9;= '1'&#xA;, xvertrSondKuendRecht&#x9;&#x9;&#x9;= case when lfz.NTALLOWEDPAR is not null and lfz.NTALLOWEDPAR &gt; GETDATE() then  nullif(lfz.NTALLOWEDPAR,'99991231') end&#xA;, xvertrSondKuendRecht_intf&#x9;&#x9;= '1'&#xA;, xvertrExtID&#x9;&#x9;&#x9;&#x9;&#x9;= vtg.INTRENO&#xA;, xvertrExtID_intf&#x9;&#x9;&#x9;&#x9;= '1'&#xA;--, lfz.*&#xA; -- select *&#xA; FROM&#xA;(&#xA;    SELECT *              &#xA;&#x9;&#x9;, RECNBEGX    = bisdsysdb.dbo.BIS_Convert_DATE(nullif(RECNBEG,''), null)&#xA;        , RECNENDABSX = bisdsysdb.dbo.BIS_Convert_DATE(nullif(recnendabs,''), null)&#xA;        , RECNEND1STX = bisdsysdb.dbo.BIS_Convert_DATE(nullif(RECNEND1ST,''), null)&#xA;        , RECNDATX    = case when isdate(replace(RECNDAT, '-', '')) = 1 then bisdsysdb.dbo.BIS_Convert_DATE(nullif(RECNDAT,''), null) end&#xA;        , RECN2DATX   = case when isdate(replace(RECN2DAT, '-', '')) = 1 then bisdsysdb.dbo.BIS_Convert_DATE(nullif(RECN2DAT,''), null) end&#xA;    FROM dbo.SAP_VICNCN with(nolock)&#xA;)  vtg&#xA;JOIN&#xA;(&#xA;    SELECT xHubID, MANDT, OBJNRSRC, OBJNRTRG, ASSIGNONLYINFO&#xA;&#x9;&#x9;, VALIDFROMX = case when isdate(replace(VALIDFROM, '-', '')) = 1 then bisdsysdb.dbo.BIS_Convert_DATE(nullif(VALIDFROM,''), null) end&#xA;&#x9;&#x9;, VALIDTOX = case when isdate(replace(VALIDTO, '-', '')) = 1 then bisdsysdb.dbo.BIS_Convert_DATE(nullif(VALIDTO,''), null) end&#xA;        , NbrVt = isnull(nullif(convert(varchar(10),ROW_NUMBER() over(partition by OBJNRSRC, OBJNRTRG order by isnull(validTo,'99991231'))),'1'),'')   &#xA;    FROM dbo.SAP_VIBDOBJASS&#xA;&#x9;WHERE OBJASSTYPE = '10'&#xA;) ass ON vtg.xHubid = ass.xHubid and vtg.OBJNR = ass.OBJNRSRC&#xA;LEFT JOIN&#xA;(&#xA;SELECT lid = 1, OBJNRSRC, OBJNRTRG, xhubid, MANDT, Anzahl = count(OBJASSTYPE)&#xA;FROM dbo.SAP_VIBDOBJASS WHERE OBJASSTYPE = '10'&#xA;GROUP BY OBJNRSRC, OBJNRTRG, xhubid, MANDT&#xA;) assAnz on assAnz.OBJNRSRC = ass.OBJNRSRC and assAnz.OBJNRTRG = ass.OBJNRTRG and assAnz.xHubID = ass.xHubID and ass.MANDT = assAnz.MANDT and assAnz.Anzahl &gt; 1&#xA; join           dbo.SAP_vibdro me on vtg.xHubid = me.xHubid and ass.OBJNRTRG = me.OBJNR&#xA; join&#x9;&#x9;    dbo.SAP_VIBDBE obj on me.xHubid = obj.xHubid and me.BUKRS = obj.BUKRS and me.SWENR = obj.SWENR&#xA;join&#x9;(&#x9;select *, R=ROW_NUMBER() over (partition by mandt, intreno, role order by validfrom desc) &#xA;&#x9;&#x9;&#x9;from dbo.SAP_vibpobjrel &#xA;&#x9;&#x9;&#x9;-- externe role ist zu P03 (Vertragspartner gemappt)&#xA;&#x9;&#x9;&#x9;join temp_SAP_mapping_BP map on xPrefix +'_'+ ROLE = map.mapFrom&#xA;&#x9;&#x9;&#x9;where mapTo = 'P03'&#xA;&#x9;&#x9;) bp on obj.xHubid = bp.xHubid and vtg.Intreno = bp.INTRENO and bp.R = 1&#xA;-- join (select *, R=ROW_NUMBER() over (partition by mandt, intreno, role order by validfrom desc) from dbo.SAP_vibpobjrel where ROLE = ?) bp on vtg.xHubid = bp.xHubid and vtg.Intreno = bp.INTRENO and bp.R = 1&#xA; left join      dbo.SAP_vibdroocc oc on vtg.xHubid = oc.xHubid and  me.INTRENO = oc.INTRENO and vtg.BUKRS = oc.BUKRS and vtg.RECNNR = oc.OCCRECNNR&#xA;LEFT JOIN &#xA;(&#xA;    select vi.INTRENO, OBJNR = ob.OBJNR , vi.NTREASON, vi.NTPARTY, NTACTIVATEDON&#xA;&#x9;, NTRECEIPTX = case when isdate(replace(NTRECEIPT, '-', '')) = 1 then bisdsysdb.dbo.BIS_Convert_DATE(nullif(NTRECEIPT,''), null) end&#xA;&#x9;, NTPER = case when isdate(replace(NTPER, '-', '')) = 1 then bisdsysdb.dbo.BIS_Convert_DATE(nullif(NTPER,''), null) end&#xA;    from dbo.SAP_VICNNT vi  &#xA;    join dbo.SAP_VICNNTOBJREL ob on vi.INTRENO = ob.INTRENO and vi.NTNO = ob.NTNO  &#xA;    where vi.NTCATE = 'O' and NTACTIVE = 'X'&#xA;) kuendobj on vtg.INTRENO = kuendobj.INTRENO and me.OBJNR = kuendobj.OBJNR &#xA; left join&#x9;&#x9;dbo.SAP_VICNNT kuend on vtg.xHubid = kuend.xHubid and kuend.INTRENO = vtg.INTRENO and NTACTIVE = 'X' and nullif(NTREVERSEDON, '00000000') is null and NTCATE = 'C' -- Contract&#xA; -- Umsatzsteuer&#xA; left join&#xA;( select *, zr=ROW_NUMBER() over(partition by xHubid, MANDT, OBJNR order by BISDSYSDB.dbo.BIS_Convert_DATE(isnull(VALIDFROM, '01.01.2019') , NULL)desc )  &#xA;&#x9;-- select * &#xA;&#x9;from&#x9;dbo.SAP_VIITOPTRATE &#xA;&#x9;where VALIDTO  &lt;&gt; '99991231' &#xA;) tax  on vtg.xHubid = tax.xHubid and vtg.MANDT = tax.MANDT and vtg.OBJNR = tax.OBJNR and tax.zr = 1 &#xA; -- Verlängerungen&#xA; left join&#xA; (&#xA;         select Verl.xHubId,  verl.INTRENO, verl.RNENDNEW&#xA;         from SAP_VICNRN Verl&#xA;         inner join (select distinct INTRENO, RNNO = MAX(RNNO) OVER (PARTITION BY INTRENO) from SAP_vicnrn where RNACTIVE = 'X' and nullif(RNACTIVATEDON,'') is not null) VerlMax&#xA;                 on Verl.INTRENO = VerlMax.INTRENO and Verl.RNNO = VerlMax.RNNO&#xA;         where Verl.RNACTIVE = 'X' and nullif(Verl.RNACTIVATEDON,'') is not null&#xA; ) Verl on Verl.INTRENO = vtg.INTRENO&#xA;-- Kündigungsregeln&#xA;left join SAP_VITMNT kndRgl on kndRgl.xHubID = vtg.xHubID and kndRgl.INTRENO = vtg.INTRENO and kndRgl.NTTYPE in (1,2) and kndRgl.TERMTYPE = '1020'&#xA;-- feste Künd. Regel&#xA;left join SAP_TIVTMNTPROCT fKuenRgl on fKuenRgl.SPRAS = 'D' and fKuenRgl.NTPROC = kndRgl.NTPROC&#xA;-- individuelle Künd. Regel&#xA;left join &#xA;(&#xA;&#x9;select distinct xHubID, INTRENO&#xA;&#x9;&#x9;, STUFF((&#x9;select  ',' + XNTRULE &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;from [dbo].[SAP_VITMNTPROCREL] b &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;where a.intreno = b.intreno &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;and b.TERMTYPE = '1020'&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;for xml path ('')), 1, 1, ''&#xA;&#x9;&#x9;&#x9;&#x9;) as rglTxt &#xA;&#x9;from [dbo].[SAP_VITMNTPROCREL] a&#xA;&#x9;where TERMTYPE = '1020' &#xA;) fKndRgl on fKndRgl.xHubID = vtg.xHubID and fKndRgl.INTRENO = vtg.INTRENO&#xA;-- In SAP ermittelte Vertragsenden&#xA;left join   &#xA;(&#xA;&#x9;select distinct xHubID, INTRENO&#xA;&#x9;&#x9;, RNEND1ST&#x9;&#x9;= bisdsysdb.dbo.BIS_Convert_DATE(nullif(RNEND1ST,''), null)&#xA;&#x9;&#x9;, RNENDNEW&#x9;&#x9;= bisdsysdb.dbo.BIS_Convert_DATE(nullif(RNENDNEW, ''), null)&#xA;&#x9;&#x9;, RNENDMAX&#x9;&#x9;= bisdsysdb.dbo.BIS_Convert_DATE(nullif(RNENDMAX,'') , null)&#xA;&#x9;&#x9;, NTALLOWEDPAR&#x9;= bisdsysdb.dbo.BIS_Convert_DATE(nullif(NTALLOWEDPAR,''), null)&#xA;&#x9;&#x9;, NTALLOWEDOWN&#x9;= bisdsysdb.dbo.BIS_Convert_DATE(nullif(NTALLOWEDOWN,''), null)&#xA;&#x9;&#x9;--, NTPERINACTIVE = convert(datetime,nullif(NTPERINACTIVE,'1900-01-01 00:00:00.000'))             &#xA;&#x9;&#x9;, case PESTATE&#xA;&#x9;&#x9;&#x9;when 'Vor Vertragsbeginn' then 'A0'&#xA;&#x9;&#x9;&#x9;when 'Unbefristet' then 'B0'&#xA;&#x9;&#x9;&#x9;when 'Befristet (ohne Verlängerung)' then 'C0'&#xA;&#x9;&#x9;&#x9;when 'In Grundlaufzeit' then 'F0'&#xA;&#x9;&#x9;&#x9;when 'In 1. Option' then 'O1'&#xA;&#x9;&#x9;&#x9;when 'In 2. Option' then 'O2'&#xA;&#x9;&#x9;&#x9;when 'In 3. Option' then 'O3'&#xA;&#x9;&#x9;&#x9;when 'In ein- oder mehrmaliger Verlängerung' then 'R'&#xA;&#x9;&#x9;&#x9;when 'In wiederkehrender Verlängerung' then  'RR'&#xA;&#x9;&#x9;&#x9;when 'In unbeschränkter Verlängerung' then  'RU'&#xA;&#x9;&#x9;&#x9;when 'Gekündigt' then 'W0'&#xA;&#x9;&#x9;&#x9;when 'Beendet' then 'X0'&#xA;&#x9;&#x9;&#x9;end as PESTATE&#xA;&#x9;&#x9;&#x9;, PESTATE as XPESTATE&#xA;&#x9;-- select *&#xA;&#x9;from dbo.SAP_XKUE&#xA;) lfz on vtg.INTRENO = lfz.INTRENO and vtg.xHubID = lfz.xHubID&#xA;where obj.xobjnr is not null &#xA;and isnull(ass.ASSIGNONLYINFO, '') != 'X'&quot;"
+              DTS:Expression="&quot; &#xA;--MBIT 17072025 Anpassungen SICORE: &#xA;select distinct &#xA;  dtedit&#x9;&#x9;&#x9;&#x9;= getdate()&#xA;, luserkz&#x9;&#x9;&#x9;&#x9;= 'INTERFACE'&#xA;, ldelete&#x9;&#x9;&#x9;&#x9;= '0'&#xA;/* RS - 20230426: wenn mehrere Verträge zu einem Hauptvertrag, dann erzeuge eine laufende Nummer */&#xA;--, xVertrag&#x9;&#x9;&#x9;&#x9;= cast(obj.xobjnr +'_'+ case when me.SGENR is null then 'G' else '' end + right(isnull(me.SGENR, me.SGRNR), 3) +'_'+ right(me.SMENR,5) +'_'+ vtg.RECNNR as varchar(50))&#xA;, xVertrag&#x9;&#x9;&#x9;&#x9;= cast(obj.xobjnr +'_'+ case when me.SGENR is null then 'G' else '' end + right(isnull(me.SGENR, me.SGRNR), 3) +'_'+ right(me.SMENR,5) +'_'+ vtg.RECNNR + case when assAnz.lid is null or NbrVt = '' then '' else '_' + right('00'+ass.NbrVt,2) end as varchar(100))&#xA;, xvtFlaeche&#x9;&#x9;&#x9;= cast(obj.xobjnr +'_'+ case when me.SGENR is null then 'G' else '' end + right(isnull(me.SGENR, me.SGRNR), 3) +'_'+ right(me.SMENR,5) as varchar(50))&#xA;, xvtObjekt&#x9;&#x9;&#x9;&#x9;= cast(obj.xobjnr as varchar(50))&#xA;, xvtAdressnummer&#x9;&#x9;= cast(bp.PARTNER as varchar(50))&#xA;, xvtSollstellungstag&#x9;= '1'&#xA;, xvtLeerstehend&#x9;&#x9;= case when isnull(ISVACANT,'') = 'X' then '1' else '0' end&#xA;--, xvtBeginn&#x9;&#x9;&#x9;&#x9;= vtg.RECNBEGX&#xA;, xvtBeginn&#x9;&#x9;&#x9;&#x9;= case when ass.VALIDFROMX &gt; vtg.RECNBEGX then ass.VALIDFROMX else vtg.RECNBEGX  end&#xA;, xvtEnde&#x9;&#x9;&#x9;&#x9;= case  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;when ass.VALIDTOX &lt; isnull(vtg.RECNENDABSX,'99991231') and ass.VALIDTOX  &lt;&gt; '99991231' then nullif(ass.VALIDTOX,'99991231')   &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;WHEN lfz.PESTATE in('X0', 'W0')  then vtg.RECNENDABSX &#xA;                                when kuendobj.NTPER is not null and kuendobj.NTPER between isnull(ass.VALIDFROMX,'17530101') and ass.VALIDTOX  then kuendobj.NTPER &#xA;                                when kuend.NTPER is not null then kuend.NTPER &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;else NULL&#xA;                          end&#xA;&#xA;, xvtEnde_intf&#x9;&#x9;&#x9;&#x9;= '1'&#xA;, xvtVertrEndeFestlaufzeit&#x9;&#x9;= CASE&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;/*Verträge mit Status = unbefristet &gt;&gt;&gt; NULL*/&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;/*Verträge mit Status = Vor Vertragsbeginn &gt;&gt;&gt; nächstes Vertragsende Stammdaten*/&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;WHEN lfz.PESTATE = 'A0' then vtg.RECNEND1STX&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;/*Verträge mit Status = beendet ODER  gekündigt ODER befristet ohne Verlängerung &gt;&gt;&gt; nächstes Vertragsende NEU*/&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;WHEN lfz.PESTATE in('X0', 'W0', 'C0') then vtg.RECNENDABSX &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;/**Verträge mit Status = unbefristete Verlängerung ODER unbefristet &gt;&gt;&gt; nächstes Kündigungsdatum Mieter*/&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;WHEN lfz.PESTATE in('RU', 'B0') then lfz.NTALLOWEDPAR&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;/*other*/&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;ELSE lfz.RNENDNEW&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;END&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;/*OLD &#xA;, xvtVertrEndeFestlaufzeit&#x9;&#x9;=&#x9;CASE&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;/*unbefristet &gt;&gt;&gt; NULL*/&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;WHEN lfz.PESTATE = 'B0' then NULL &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;/*Erstes Ende &lt; Beginn &gt;&gt;&gt; NULL*/&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;WHEN vtg.RECNEND1STX &lt; case when ass.VALIDFROMX &gt; vtg.RECNBEGX then ass.VALIDFROMX else vtg.RECNBEGX  end then NULL&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;ELSE vtg.RECNEND1STX &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;END&#xA;*/&#xA;, xvtVertrEndeFestlaufzeit_intf&#x9;= '1'&#xA;, xvertrBranche&#x9;&#x9;&#x9;&#x9;&#x9;= obj.xPrefix +'_'+ vtg.Industry&#xA;, xvtBemerkung&#x9;&#x9;&#x9;&#x9;&#x9;= cast(rtrim(vtg.RECNTXT) + case when fKndRgl.rglTxt is not null then  '   &lt;Individuelle Kündigungsregel vorhanden!&gt;   ' + fKndRgl.rglTxt end as varchar(1024))&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;+ CHAR(13) + 'Vertragstatus: ' + rtrim(XPESTATE)&#xA;, xvertrErstesVertrEnde&#x9;&#x9;&#x9;= vtg.RECNEND1STX&#xA;, xvertrErstesVertrEnde_intf&#x9;= '1'&#xA;, xvertrstammvertrag&#x9;&#x9;&#x9;= obj.xobjnr + ' '+ vtg.RECNNR&#xA;, xvertrStammvertragBeginn&#x9;&#x9;= vtg.RECNBEGX&#xA;, xvertrStammvertragende&#x9;&#x9;= CASE when Kuend.INTRENO is not null and Kuend.NTPER is not null  then convert(datetime,Kuend.NTPER) end  &#xA;&#xA;, xvertrNaechstesVertragsende            &#xA;&#x9;&#x9;&#x9;&#x9;= CASE  -- MO gekündigt&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;WHEN ass.VALIDTOX is Not Null and ass.VALIDTOX &lt;&gt; '99991231' and ass.VALIDTOX &lt; vtg.recnendabsX then ass.VALIDTOX&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;WHEN vtg.RECNENDABSX is not null and vtg.recnendabsx &lt;= getdate()  then vtg.RECNENDABSX &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;WHEN lfz.PESTATE in('X0', 'W0')  then vtg.RECNENDABSX &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;-- unbefristet&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;WHEN lfz.PESTATE = 'B0' then case when lfz.NTALLOWEDPAR is not null and lfz.NTALLOWEDPAR &lt; isnull(lfz.NTALLOWEDOWN,'99991231') then lfz.NTALLOWEDPAR else lfz.NTALLOWEDOWN end&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;-- befristet ohne Verlängerung&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;WHEN lfz.PESTATE = 'C0' then &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;case&#x9;when lfz.NTALLOWEDPAR is not null and  lfz.NTALLOWEDPAR &lt; isnull(lfz.RNEND1ST, '99991231') then lfz.NTALLOWEDPAR &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;else  lfz.RNEND1ST&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;WHEN lfz.PESTATE in('F0', 'O1', 'O2', 'R', 'RR', 'RU') then &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;case &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;when lfz.RNENDNEW is not null and lfz.RNENDNEW &lt;= isnull(lfz.NTALLOWEDPAR,'99991231') and  lfz.RNENDNEW &lt;= isnull(lfz.NTALLOWEDOWN,'99991231')  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;then lfz.RNENDNEW &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;when lfz.NTALLOWEDPAR is not null and  lfz.NTALLOWEDPAR &lt;= isnull(lfz.RNENDNEW,'99991231') and  lfz.NTALLOWEDPAR &lt;= isnull(lfz.NTALLOWEDOWN,'99991231') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;then  lfz.NTALLOWEDPAR &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;when lfz.NTALLOWEDOWN is not null and  lfz.NTALLOWEDOWN &lt;= isnull(lfz.RNENDNEW,'99991231') and  lfz.NTALLOWEDOWN &lt;= isnull(lfz.NTALLOWEDPAR,'99991231')  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;then lfz.NTALLOWEDOWN &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end                                   &#xA;&#x9;&#x9;&#x9;&#x9;  END&#xA;, xvertrNaechstesVertragsende_intf&#x9;= '1'&#xA;--, xvertrKuendZum&#x9;&#x9;&#x9;&#x9;= BISDSYSDB.dbo.BIS_Convert_DATE(convert(varchar(500), vtg.RECNNOTPER), NULL)&#xA;, xvertrKuendZum&#x9;&#x9;&#x9;&#x9;= BISDSYSDB.dbo.BIS_Convert_DATE(convert(varchar(500), kuend.NTPER), NULL)&#xA;, xvertrKuendZum_intf&#x9;&#x9;&#x9;= '1'&#xA;, xvtKzMWST&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= case when BISDSYSDB.dbo.BIS_Convert_DEC(tax.OPTRATE) = 0.00 or tax.OPTRATE is null then 0 else 1 end&#xA;, xvtKzMWST_intf&#x9;&#x9;&#x9;&#x9;= '1'&#xA;, xvertrEingangKuendigung&#x9;&#x9;= kuendobj.NTRECEIPTX&#xA;, xvertrEingangKuendigung_intf&#x9;= '1'&#xA;, xvtMibeso&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;= cast(&#x9;case kndRgl.NTTYPE &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;when 1 then fKuenRgl.XNTPROC &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;when 2 then obj.xPrefix +'_'+ '0000' &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end as varchar(50)) -- 0000=individuelle Fristregelung&#xA;, xvtMibeso_intf&#x9;&#x9;&#x9;&#x9;= '1'&#xA;, xvertrSondKuendRecht&#x9;&#x9;&#x9;= case when lfz.NTALLOWEDPAR is not null and lfz.NTALLOWEDPAR &gt; GETDATE() then  nullif(lfz.NTALLOWEDPAR,'99991231') end&#xA;, xvertrSondKuendRecht_intf&#x9;&#x9;= '1'&#xA;, xvertrExtID&#x9;&#x9;&#x9;&#x9;&#x9;= vtg.INTRENO&#xA;, xvertrExtID_intf&#x9;&#x9;&#x9;&#x9;= '1'&#xA;--, lfz.*&#xA; -- select *&#xA; FROM&#xA;(&#xA;    SELECT *              &#xA;&#x9;&#x9;, RECNBEGX    = bisdsysdb.dbo.BIS_Convert_DATE(&#xA;&#x9;&#x9;CASE &#xA;        WHEN RECNBEG IS NULL OR RECNBEG = '' OR RECNBEG = '00000000' THEN ''&#xA;        ELSE RECNBEG&#xA;    END,&#xA;    NULL&#xA;&#xA;&#xA;&#x9;&#x9;--nullif(RECNBEG,''), null&#xA;&#x9;&#x9;)&#xA;   --     &#xA;   , RECNENDABSX = bisdsysdb.dbo.BIS_Convert_DATE(&#xA;&#x9;&#x9;CASE &#xA;        WHEN recnendabs IS NULL OR recnendabs = '' OR recnendabs = '00000000' THEN ''&#xA;        ELSE recnendabs&#xA;   &#x9;&#x9;&#x9;END,&#xA;   &#x9;&#x9;&#x9;&#x9; NULL&#xA;&#x9;&#x9;&#x9;&#x9;)&#xA; --bisdsysdb.dbo.BIS_Convert_DATE(nullif(recnendabs,''), null)&#xA;        , RECNEND1STX = &#xA;&#x9;&#x9;bisdsysdb.dbo.BIS_Convert_DATE(&#xA;&#x9;&#x9;CASE &#xA;        WHEN RECNEND1ST IS NULL OR RECNEND1ST = '' OR RECNEND1ST = '00000000' THEN ''&#xA;        ELSE RECNEND1ST&#xA;   &#x9;&#x9;&#x9;END,&#xA;   &#x9;&#x9;&#x9;&#x9; NULL&#xA;&#x9;&#x9;&#x9;&#x9;)&#xA;&#x9;   --  bisdsysdb.dbo.BIS_Convert_DATE(nullif(RECNEND1ST,''), null)&#xA;        , RECNDATX    = case when isdate(replace(RECNDAT, '-', '')) = 1 then bisdsysdb.dbo.BIS_Convert_DATE(nullif(RECNDAT,''), null) end&#xA;        , RECN2DATX   = case when isdate(replace(RECN2DAT, '-', '')) = 1 then bisdsysdb.dbo.BIS_Convert_DATE(nullif(RECN2DAT,''), null) end&#xA;    FROM dbo.SAP_VICNCN with(nolock)&#xA;&#x9;where&#xA;&#x9;xPrefix ='SICOREsap'&#xA;)  vtg&#xA;JOIN&#xA;(&#xA;    SELECT xHubID, MANDT, OBJNRSRC, OBJNRTRG, ASSIGNONLYINFO&#xA;&#x9;&#x9;, VALIDFROMX = case when isdate(replace(VALIDFROM, '-', '')) = 1 then bisdsysdb.dbo.BIS_Convert_DATE(nullif(VALIDFROM,''), null) end&#xA;&#x9;&#x9;, VALIDTOX = case when isdate(replace(VALIDTO, '-', '')) = 1 then bisdsysdb.dbo.BIS_Convert_DATE(nullif(VALIDTO,''), null) end&#xA;        , NbrVt = isnull(nullif(convert(varchar(10),ROW_NUMBER() over(partition by OBJNRSRC, OBJNRTRG order by isnull(validTo,'99991231'))),'1'),'')   &#xA;    FROM dbo.SAP_VIBDOBJASS&#xA;&#x9;WHERE OBJASSTYPE = '10'&#xA;&#x9;and&#xA;&#x9;xPrefix ='SICOREsap'&#xA;) ass ON vtg.xHubid = ass.xHubid and vtg.OBJNR = ass.OBJNRSRC&#xA;LEFT JOIN&#xA;(&#xA;SELECT lid = 1, OBJNRSRC, OBJNRTRG, xhubid, MANDT, Anzahl = count(OBJASSTYPE)&#xA;FROM dbo.SAP_VIBDOBJASS WHERE OBJASSTYPE = '10' and xPrefix ='SICOREsap'&#xA;GROUP BY OBJNRSRC, OBJNRTRG, xhubid, MANDT&#xA;) assAnz on assAnz.OBJNRSRC = ass.OBJNRSRC and assAnz.OBJNRTRG = ass.OBJNRTRG and assAnz.xHubID = ass.xHubID and ass.MANDT = assAnz.MANDT and assAnz.Anzahl &gt; 1&#xA; join           dbo.SAP_vibdro me on vtg.xHubid = me.xHubid and ass.OBJNRTRG = me.OBJNR&#xA; join&#x9;&#x9;    dbo.SAP_VIBDBE obj on me.xHubid = obj.xHubid and me.BUKRS = obj.BUKRS and me.SWENR = obj.SWENR&#xA;join&#x9;(&#x9;select *, R=ROW_NUMBER() over (partition by mandt, intreno, role order by validfrom desc) &#xA;&#x9;&#x9;&#x9;from dbo.SAP_vibpobjrel &#xA;&#x9;&#x9;&#x9;-- externe role ist zu P03 (Vertragspartner gemappt)&#xA;&#x9;&#x9;&#x9;join temp_SAP_mapping_BP map on xPrefix +'_'+ ROLE = map.mapFrom&#xA;&#x9;&#x9;&#x9;where mapTo = 'P03'&#xA;&#x9;&#x9;) bp on obj.xHubid = bp.xHubid and vtg.Intreno = bp.INTRENO and bp.R = 1&#xA;-- join (select *, R=ROW_NUMBER() over (partition by mandt, intreno, role order by validfrom desc) from dbo.SAP_vibpobjrel where ROLE = ?) bp on vtg.xHubid = bp.xHubid and vtg.Intreno = bp.INTRENO and bp.R = 1&#xA; left join      dbo.SAP_vibdroocc oc on vtg.xHubid = oc.xHubid and  me.INTRENO = oc.INTRENO and vtg.BUKRS = oc.BUKRS and vtg.RECNNR = oc.OCCRECNNR&#xA;LEFT JOIN &#xA;(&#xA;    select vi.INTRENO, OBJNR = ob.OBJNR , vi.NTREASON, vi.NTPARTY, NTACTIVATEDON&#xA;&#x9;, NTRECEIPTX = case when isdate(replace(NTRECEIPT, '-', '')) = 1 then bisdsysdb.dbo.BIS_Convert_DATE(nullif(NTRECEIPT,''), null) end&#xA;&#x9;, NTPER = case when isdate(replace(NTPER, '-', '')) = 1 then bisdsysdb.dbo.BIS_Convert_DATE(nullif(NTPER,''), null) end&#xA;    from dbo.SAP_VICNNT vi  &#xA;    join dbo.SAP_VICNNTOBJREL ob on vi.INTRENO = ob.INTRENO and vi.NTNO = ob.NTNO  &#xA;    where vi.NTCATE = 'O' and NTACTIVE = 'X'&#xA;) kuendobj on vtg.INTRENO = kuendobj.INTRENO and me.OBJNR = kuendobj.OBJNR &#xA; left join&#x9;&#x9;dbo.SAP_VICNNT kuend on vtg.xHubid = kuend.xHubid and kuend.INTRENO = vtg.INTRENO and NTACTIVE = 'X' and nullif(NTREVERSEDON, '00000000') is null and NTCATE = 'C' -- Contract&#xA; -- Umsatzsteuer&#xA; left join&#xA;( select *, zr=ROW_NUMBER() over(partition by xHubid, MANDT, OBJNR order by bisdsysdb.dbo.BIS_Convert_DATE(&#xA;&#x9;&#x9;CASE &#xA;        WHEN VALIDFROM IS NULL OR VALIDFROM = '' OR VALIDFROM = '00000000' THEN '01.01.2019'&#xA;        ELSE VALIDFROM&#xA;    END,&#xA;    NULL&#xA;&#xA;&#xA;&#x9;&#x9;--nullif(RECNBEG,''), null&#xA;&#x9;&#x9;) desc )  &#xA;&#x9;-- select * &#xA;&#x9;from&#x9;dbo.SAP_VIITOPTRATE &#xA;&#x9;where VALIDTO  &lt;&gt; '99991231' &#xA;&#x9;and xPrefix ='SICOREsap'&#xA;) tax  on vtg.xHubid = tax.xHubid and vtg.MANDT = tax.MANDT and vtg.OBJNR = tax.OBJNR and tax.zr = 1 &#xA; -- Verlängerungen&#xA; left join&#xA; (&#xA;         select Verl.xHubId,  verl.INTRENO, verl.RNENDNEW&#xA;         from SAP_VICNRN Verl&#xA;         inner join (select distinct INTRENO, RNNO = MAX(RNNO) OVER (PARTITION BY INTRENO) from SAP_vicnrn where RNACTIVE = 'X' and nullif(RNACTIVATEDON,'') is not null) VerlMax&#xA;                 on Verl.INTRENO = VerlMax.INTRENO and Verl.RNNO = VerlMax.RNNO&#xA;         where Verl.RNACTIVE = 'X' and nullif(Verl.RNACTIVATEDON,'') is not null&#xA; ) Verl on Verl.INTRENO = vtg.INTRENO&#xA;-- Kündigungsregeln&#xA;left join SAP_VITMNT kndRgl on kndRgl.xHubID = vtg.xHubID and kndRgl.INTRENO = vtg.INTRENO and kndRgl.NTTYPE in (1,2) and kndRgl.TERMTYPE = '1020'&#xA;-- feste Künd. Regel&#xA;left join SAP_TIVTMNTPROCT fKuenRgl on fKuenRgl.SPRAS = 'D' and fKuenRgl.NTPROC = kndRgl.NTPROC&#xA;-- individuelle Künd. Regel&#xA;left join &#xA;(&#xA;&#x9;select distinct xHubID, INTRENO&#xA;&#x9;&#x9;, STUFF((&#x9;select  ',' + XNTRULE &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;from [dbo].[SAP_VITMNTPROCREL] b &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;where a.intreno = b.intreno &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;and b.TERMTYPE = '1020'&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;for xml path ('')), 1, 1, ''&#xA;&#x9;&#x9;&#x9;&#x9;) as rglTxt &#xA;&#x9;from [dbo].[SAP_VITMNTPROCREL] a&#xA;&#x9;where TERMTYPE = '1020'&#xA;&#x9;and&#xA;&#x9;xPrefix ='SICOREsap'&#xA;&#xA;) fKndRgl on fKndRgl.xHubID = vtg.xHubID and fKndRgl.INTRENO = vtg.INTRENO&#xA;-- In SAP ermittelte Vertragsenden&#xA;left join   &#xA;(&#xA;&#x9;select distinct xHubID, INTRENO&#xA;&#x9;&#x9;, RNEND1ST&#x9;&#x9;= bisdsysdb.dbo.BIS_Convert_DATE(nullif(RNEND1ST,''), null)&#xA;&#x9;&#x9;, RNENDNEW&#x9;&#x9;= bisdsysdb.dbo.BIS_Convert_DATE(nullif(RNENDNEW, ''), null)&#xA;&#x9;&#x9;, RNENDMAX&#x9;&#x9;= bisdsysdb.dbo.BIS_Convert_DATE(nullif(RNENDMAX,'') , null)&#xA;&#x9;&#x9;, NTALLOWEDPAR&#x9;= bisdsysdb.dbo.BIS_Convert_DATE(nullif(NTALLOWEDPAR,''), null)&#xA;&#x9;&#x9;, NTALLOWEDOWN&#x9;= bisdsysdb.dbo.BIS_Convert_DATE(nullif(NTALLOWEDOWN,''), null)&#xA;&#x9;&#x9;--, NTPERINACTIVE = convert(datetime,nullif(NTPERINACTIVE,'1900-01-01 00:00:00.000'))             &#xA;&#x9;&#x9;--, case PESTATE&#xA;&#x9;&#x9;--&#x9;when 'Vor Vertragsbeginn' then 'A0'&#xA;&#x9;&#x9;--&#x9;when 'Unbefristet' then 'B0'&#xA;&#x9;&#x9;--&#x9;when 'Befristet (ohne Verlängerung)' then 'C0'&#xA;&#x9;&#x9;--&#x9;when 'In Grundlaufzeit' then 'F0'&#xA;&#x9;&#x9;--&#x9;when 'In 1. Option' then 'O1'&#xA;&#x9;&#x9;--&#x9;when 'In 2. Option' then 'O2'&#xA;&#x9;&#x9;--&#x9;when 'In 3. Option' then 'O3'&#xA;&#x9;&#x9;--&#x9;when 'In ein- oder mehrmaliger Verlängerung' then 'R'&#xA;&#x9;&#x9;--&#x9;when 'In wiederkehrender Verlängerung' then  'RR'&#xA;&#x9;&#x9;--&#x9;when 'In unbeschränkter Verlängerung' then  'RU'&#xA;&#x9;&#x9;--&#x9;when 'Gekündigt' then 'W0'&#xA;&#x9;&#x9;--&#x9;when 'Beendet' then 'X0'&#xA;&#x9;&#x9;--&#x9;end as PESTATE&#xA;&#x9;&#x9;,PESTATE&#xA;&#x9;&#x9;&#x9;, &#xA;&#x9;&#x9;&#x9;PESTATE as XPESTATE&#xA;&#x9;-- select *&#xA;&#x9;from dbo.SAP_XKUE&#xA;&#x9;where&#xA;&#x9;xPrefix='SICOREsap'&#xA;) lfz on vtg.INTRENO = lfz.INTRENO and vtg.xHubID = lfz.xHubID&#xA;where obj.xobjnr is not null &#xA;and isnull(ass.ASSIGNONLYINFO, '') != 'X'&#xA; &quot;"
               DTS:IncludeInDebugDump="2345"
               DTS:Namespace="User"
               DTS:ObjectName="varSQL">
               <DTS:VariableValue
-                DTS:DataType="8">select distinct 
+                DTS:DataType="8"> 
+--MBIT 17072025 Anpassungen SICORE: 
+select distinct 
   dtedit				= getdate()
 , luserkz				= 'INTERFACE'
 , ldelete				= '0'
@@ -16113,12 +16143,39 @@ where xkvAlphacode is not null</property>
  FROM
 (
     SELECT *              
-		, RECNBEGX    = bisdsysdb.dbo.BIS_Convert_DATE(nullif(RECNBEG,''), null)
-        , RECNENDABSX = bisdsysdb.dbo.BIS_Convert_DATE(nullif(recnendabs,''), null)
-        , RECNEND1STX = bisdsysdb.dbo.BIS_Convert_DATE(nullif(RECNEND1ST,''), null)
+		, RECNBEGX    = bisdsysdb.dbo.BIS_Convert_DATE(
+		CASE 
+        WHEN RECNBEG IS NULL OR RECNBEG = '' OR RECNBEG = '00000000' THEN ''
+        ELSE RECNBEG
+    END,
+    NULL
+
+
+		--nullif(RECNBEG,''), null
+		)
+   --     
+   , RECNENDABSX = bisdsysdb.dbo.BIS_Convert_DATE(
+		CASE 
+        WHEN recnendabs IS NULL OR recnendabs = '' OR recnendabs = '00000000' THEN ''
+        ELSE recnendabs
+   			END,
+   				 NULL
+				)
+ --bisdsysdb.dbo.BIS_Convert_DATE(nullif(recnendabs,''), null)
+        , RECNEND1STX = 
+		bisdsysdb.dbo.BIS_Convert_DATE(
+		CASE 
+        WHEN RECNEND1ST IS NULL OR RECNEND1ST = '' OR RECNEND1ST = '00000000' THEN ''
+        ELSE RECNEND1ST
+   			END,
+   				 NULL
+				)
+	   --  bisdsysdb.dbo.BIS_Convert_DATE(nullif(RECNEND1ST,''), null)
         , RECNDATX    = case when isdate(replace(RECNDAT, '-', '')) = 1 then bisdsysdb.dbo.BIS_Convert_DATE(nullif(RECNDAT,''), null) end
         , RECN2DATX   = case when isdate(replace(RECN2DAT, '-', '')) = 1 then bisdsysdb.dbo.BIS_Convert_DATE(nullif(RECN2DAT,''), null) end
     FROM dbo.SAP_VICNCN with(nolock)
+	where
+	xPrefix ='SICOREsap'
 )  vtg
 JOIN
 (
@@ -16128,11 +16185,13 @@ JOIN
         , NbrVt = isnull(nullif(convert(varchar(10),ROW_NUMBER() over(partition by OBJNRSRC, OBJNRTRG order by isnull(validTo,'99991231'))),'1'),'')   
     FROM dbo.SAP_VIBDOBJASS
 	WHERE OBJASSTYPE = '10'
+	and
+	xPrefix ='SICOREsap'
 ) ass ON vtg.xHubid = ass.xHubid and vtg.OBJNR = ass.OBJNRSRC
 LEFT JOIN
 (
 SELECT lid = 1, OBJNRSRC, OBJNRTRG, xhubid, MANDT, Anzahl = count(OBJASSTYPE)
-FROM dbo.SAP_VIBDOBJASS WHERE OBJASSTYPE = '10'
+FROM dbo.SAP_VIBDOBJASS WHERE OBJASSTYPE = '10' and xPrefix ='SICOREsap'
 GROUP BY OBJNRSRC, OBJNRTRG, xhubid, MANDT
 ) assAnz on assAnz.OBJNRSRC = ass.OBJNRSRC and assAnz.OBJNRTRG = ass.OBJNRTRG and assAnz.xHubID = ass.xHubID and ass.MANDT = assAnz.MANDT and assAnz.Anzahl &gt; 1
  join           dbo.SAP_vibdro me on vtg.xHubid = me.xHubid and ass.OBJNRTRG = me.OBJNR
@@ -16157,10 +16216,20 @@ LEFT JOIN
  left join		dbo.SAP_VICNNT kuend on vtg.xHubid = kuend.xHubid and kuend.INTRENO = vtg.INTRENO and NTACTIVE = 'X' and nullif(NTREVERSEDON, '00000000') is null and NTCATE = 'C' -- Contract
  -- Umsatzsteuer
  left join
-( select *, zr=ROW_NUMBER() over(partition by xHubid, MANDT, OBJNR order by BISDSYSDB.dbo.BIS_Convert_DATE(isnull(VALIDFROM, '01.01.2019') , NULL)desc )  
+( select *, zr=ROW_NUMBER() over(partition by xHubid, MANDT, OBJNR order by bisdsysdb.dbo.BIS_Convert_DATE(
+		CASE 
+        WHEN VALIDFROM IS NULL OR VALIDFROM = '' OR VALIDFROM = '00000000' THEN '01.01.2019'
+        ELSE VALIDFROM
+    END,
+    NULL
+
+
+		--nullif(RECNBEG,''), null
+		) desc )  
 	-- select * 
 	from	dbo.SAP_VIITOPTRATE 
 	where VALIDTO  &lt;&gt; '99991231' 
+	and xPrefix ='SICOREsap'
 ) tax  on vtg.xHubid = tax.xHubid and vtg.MANDT = tax.MANDT and vtg.OBJNR = tax.OBJNR and tax.zr = 1 
  -- Verlängerungen
  left join
@@ -16186,7 +16255,10 @@ left join
 					for xml path ('')), 1, 1, ''
 				) as rglTxt 
 	from [dbo].[SAP_VITMNTPROCREL] a
-	where TERMTYPE = '1020' 
+	where TERMTYPE = '1020'
+	and
+	xPrefix ='SICOREsap'
+
 ) fKndRgl on fKndRgl.xHubID = vtg.xHubID and fKndRgl.INTRENO = vtg.INTRENO
 -- In SAP ermittelte Vertragsenden
 left join   
@@ -16198,26 +16270,31 @@ left join
 		, NTALLOWEDPAR	= bisdsysdb.dbo.BIS_Convert_DATE(nullif(NTALLOWEDPAR,''), null)
 		, NTALLOWEDOWN	= bisdsysdb.dbo.BIS_Convert_DATE(nullif(NTALLOWEDOWN,''), null)
 		--, NTPERINACTIVE = convert(datetime,nullif(NTPERINACTIVE,'1900-01-01 00:00:00.000'))             
-		, case PESTATE
-			when 'Vor Vertragsbeginn' then 'A0'
-			when 'Unbefristet' then 'B0'
-			when 'Befristet (ohne Verlängerung)' then 'C0'
-			when 'In Grundlaufzeit' then 'F0'
-			when 'In 1. Option' then 'O1'
-			when 'In 2. Option' then 'O2'
-			when 'In 3. Option' then 'O3'
-			when 'In ein- oder mehrmaliger Verlängerung' then 'R'
-			when 'In wiederkehrender Verlängerung' then  'RR'
-			when 'In unbeschränkter Verlängerung' then  'RU'
-			when 'Gekündigt' then 'W0'
-			when 'Beendet' then 'X0'
-			end as PESTATE
-			, PESTATE as XPESTATE
+		--, case PESTATE
+		--	when 'Vor Vertragsbeginn' then 'A0'
+		--	when 'Unbefristet' then 'B0'
+		--	when 'Befristet (ohne Verlängerung)' then 'C0'
+		--	when 'In Grundlaufzeit' then 'F0'
+		--	when 'In 1. Option' then 'O1'
+		--	when 'In 2. Option' then 'O2'
+		--	when 'In 3. Option' then 'O3'
+		--	when 'In ein- oder mehrmaliger Verlängerung' then 'R'
+		--	when 'In wiederkehrender Verlängerung' then  'RR'
+		--	when 'In unbeschränkter Verlängerung' then  'RU'
+		--	when 'Gekündigt' then 'W0'
+		--	when 'Beendet' then 'X0'
+		--	end as PESTATE
+		,PESTATE
+			, 
+			PESTATE as XPESTATE
 	-- select *
 	from dbo.SAP_XKUE
+	where
+	xPrefix='SICOREsap'
 ) lfz on vtg.INTRENO = lfz.INTRENO and vtg.xHubID = lfz.xHubID
 where obj.xobjnr is not null 
-and isnull(ass.ASSIGNONLYINFO, '') != 'X'</DTS:VariableValue>
+and isnull(ass.ASSIGNONLYINFO, '') != 'X'
+ </DTS:VariableValue>
             </DTS:Variable>
           </DTS:Variables>
           <DTS:LoggingOptions
@@ -17930,7 +18007,7 @@ and isnull(ass.ASSIGNONLYINFO, '') != 'X'</property>
                           refId="Package\Data flows\Lease contracts\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[xVertrag]"
                           codePage="1252"
                           dataType="str"
-                          length="50"
+                          length="100"
                           name="xVertrag" />
                         <externalMetadataColumn
                           refId="Package\Data flows\Lease contracts\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[xvtFlaeche]"
@@ -18126,7 +18203,7 @@ and isnull(ass.ASSIGNONLYINFO, '') != 'X'</property>
                           refId="Package\Data flows\Lease contracts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[xVertrag]"
                           codePage="1252"
                           dataType="str"
-                          length="50"
+                          length="100"
                           lineageId="Package\Data flows\Lease contracts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[xVertrag]"
                           name="xVertrag" />
                         <outputColumn
@@ -20593,12 +20670,14 @@ and  not RECNEND1ST is null -- nächstes Vertragsende
               DTS:CreationName=""
               DTS:DTSID="{FAE91FCB-731E-452D-9F36-55F7F126E8F6}"
               DTS:EvaluateAsExpression="True"
-              DTS:Expression="&quot;select distinct &#xA;  dtedit&#x9;&#x9;&#x9;&#x9;= getdate()&#xA;, luserkz&#x9;&#x9;&#x9;&#x9;= 'INTERFACE'&#xA;, ldelete&#x9;&#x9;&#x9;&#x9;= '0'&#xA;, xFlaeche&#x9;&#x9;&#x9;&#x9;= cast(obj.xobjnr +'&quot; + @[User::varIdentSeparator] + &quot;'+ case when me.SGENR is null then 'G' else '' end + right(isnull(me.SGENR, me.SGRNR), 3) +'&quot; + @[User::varIdentSeparator] + &quot;'+ right(me.SMENR,5) as varchar(50))&#xA;, xUmlageschluessel&#x9;&#x9;= cast(me.xPrefix +'_'+ uml.MEAS as varchar(50))&#xA;, xBeginn&#x9;&#x9;&#x9;&#x9;= BISDSYSDB.dbo.BIS_Convert_DATE(COALESCE(nullif(uml.VALIDFROM,''), nullif(me.validfrom, ''), '19000101'), null)&#xA;, xumWert&#x9;&#x9;&#x9;&#x9;= MEASVALUE&#xA;, xumEinheit&#x9;&#x9;&#x9;= me.xPrefix +'_'+ uml.MEASUNIT&#xA;-- select uml.*&#xA;from dbo.SAP_vibdro me&#xA;join dbo.SAP_VIBDBE obj on me.xHubid = obj.xHubid and me.BUKRs = obj.BUKRS and me.SWENR = obj.SWENR &#xA;join dbo.SAP_vibdmeas uml on me.xHubid = uml.xHubid and me.INTRENO = uml.INTRENO&#xA;where obj.xobjnr is not null&#xA;&quot;"
+              DTS:Expression="&quot;&#xA;--MBIT 16072025:Anpassungen SICORE &#xA;select distinct &#xA;  dtedit&#x9;&#x9;&#x9;&#x9;= getdate()&#xA;, luserkz&#x9;&#x9;&#x9;&#x9;= 'INTERFACE'&#xA;, ldelete&#x9;&#x9;&#x9;&#x9;= '0'&#xA;, xFlaeche&#x9;&#x9;&#x9;&#x9;= cast(obj.xobjnr +'_'+ case when me.SGENR is null then 'G' else '' end + right(isnull(me.SGENR, me.SGRNR), 3) +'_'+ right(me.SMENR,5) as varchar(50))&#xA;, xUmlageschluessel&#x9;&#x9;= cast(me.xPrefix +'_'+ uml.MEAS as varchar(50))&#xA;, xBeginn&#x9;&#x9;&#x9;&#x9;= BISDSYSDB.dbo.BIS_Convert_DATE(COALESCE(nullif(uml.VALIDFROM,''), nullif(me.validfrom, ''), '19000101'), null)&#xA;, xumWert&#x9;&#x9;&#x9;&#x9;= MEASVALUE&#xA;, xumEinheit&#x9;&#x9;&#x9;= me.xPrefix +'_'+ uml.MEASUNIT&#xA;-- select uml.*&#xA;from dbo.SAP_vibdro me&#xA;join dbo.SAP_VIBDBE obj on me.xHubid = obj.xHubid and me.BUKRs = obj.BUKRS and me.SWENR = obj.SWENR and obj.xPrefix='SICORE'&#xA;join dbo.SAP_vibdmeas uml on me.xHubid = uml.xHubid and me.INTRENO = uml.INTRENO and uml.xPrefix='SICOREsap'&#xA;where obj.xobjnr is not null&#xA;and&#xA;me.xPrefix='SICORE'&quot;"
               DTS:IncludeInDebugDump="2345"
               DTS:Namespace="User"
               DTS:ObjectName="varSQL">
               <DTS:VariableValue
-                DTS:DataType="8">select distinct 
+                DTS:DataType="8">
+--MBIT 16072025:Anpassungen SICORE 
+select distinct 
   dtedit				= getdate()
 , luserkz				= 'INTERFACE'
 , ldelete				= '0'
@@ -20609,10 +20688,11 @@ and  not RECNEND1ST is null -- nächstes Vertragsende
 , xumEinheit			= me.xPrefix +'_'+ uml.MEASUNIT
 -- select uml.*
 from dbo.SAP_vibdro me
-join dbo.SAP_VIBDBE obj on me.xHubid = obj.xHubid and me.BUKRs = obj.BUKRS and me.SWENR = obj.SWENR 
-join dbo.SAP_vibdmeas uml on me.xHubid = uml.xHubid and me.INTRENO = uml.INTRENO
+join dbo.SAP_VIBDBE obj on me.xHubid = obj.xHubid and me.BUKRs = obj.BUKRS and me.SWENR = obj.SWENR and obj.xPrefix='SICORE'
+join dbo.SAP_vibdmeas uml on me.xHubid = uml.xHubid and me.INTRENO = uml.INTRENO and uml.xPrefix='SICOREsap'
 where obj.xobjnr is not null
-</DTS:VariableValue>
+and
+me.xPrefix='SICORE'</DTS:VariableValue>
             </DTS:Variable>
           </DTS:Variables>
           <DTS:LoggingOptions
@@ -21307,12 +21387,12 @@ where obj.xobjnr is not null</property>
               DTS:CreationName=""
               DTS:DTSID="{5485F14F-60C1-41D1-8A9D-F3AAFE5F7E49}"
               DTS:EvaluateAsExpression="True"
-              DTS:Expression="&quot;&#xA;-- ME's auf dem Gebäude&#xA;select distinct&#xA;  dtedit&#x9;&#x9;&#x9;&#x9;= getdate()&#xA;, luserkz&#x9;&#x9;&#x9;&#x9;= 'INTERFACE'&#xA;, ldelete&#x9;&#x9;&#x9;&#x9;= '0'&#xA;, xflGrundGebaeude&#x9;&#x9;= cast(obj.xobjnr +'&quot; + @[User::varIdentSeparator] + &quot;'+ right(me.SGENR, 3) as varchar(50))&#xA;, xFlaeche&#x9;&#x9;&#x9;&#x9;= cast(obj.xobjnr +'&quot; + @[User::varIdentSeparator] + &quot;'+ right(me.SGENR, 3) +'&quot; + @[User::varIdentSeparator] + &quot;'+ right(me.SMENR,5) as varchar(50))&#xA;, xflMatchcode&#x9;&#x9;&#x9;= cast(me.XMETXT as varchar(100))&#xA;-- Adresse&#xA;--, xflMatchcode&#x9;&#x9;&#x9;= cast(rtrim(isnull(adr.STREET, substring(geb.XGETXT, &#xA;--&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;case when charindex('/ ', geb.XGETXT) &gt; 1 then charindex('/ ', geb.XGETXT)+2&#xA;--&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9; when charindex(', ', geb.XGETXT) &gt; 1 then charindex(', ', geb.XGETXT)+2 &#xA;--&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9; else 1 &#xA;--&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;--&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;, 100))) + isnull(' '+ rtrim(adr.HOUSE_NUM1), '') as varchar(100))&#xA;-- Lage + Etage&#xA;, xflBezeichnung&#x9;&#x9;= cast(case &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;when nullif(me.RLGESCH, '') is not null then me.RLGESCH + isnull(' '+me.SSTOCKW, '')&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;else na.XMBEZ&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;  end as varchar(150))&#xA;, xflFlaechenart&#x9;&#x9;= obj.xPrefix  +'_'+ me.SNUNR&#xA;, xflZugangsdatum&#x9;&#x9;= BISDSYSDB.dbo.BIS_Convert_DATE(convert(char(8000), COALESCE(nullif(me.VALIDFROM,''), nullif(geb.VALIDFROM,''), nullif(obj.VALIDFROM,''), '19000101')), NULL)&#xA;, xflAbgangsdatum&#x9;&#x9;= BISDSYSDB.dbo.BIS_Convert_DATE(COALESCE(nullif(me.VALIDTO, '99991231'), nullif(geb.VALIDTO, '99991231'), nullif(obj.VALIDTO, '99991231')), NULL)&#xA;, xflAbgangsdatum_intf&#x9;= '1'&#xA;, xflLage&#x9;&#x9;&#x9;&#x9;= convert(varchar(50), t3h.XMLGESCH)&#xA;, xflEtage&#x9;&#x9;&#x9;&#x9;= convert(varchar(20), t3g.XSTOCKM)&#xA;-- select RLGESCH, SSTOCKW, me.*&#xA;from&#x9;&#x9;dbo.SAP_VIBDRO me&#xA;join&#x9;&#x9;dbo.SAP_VIBDBE obj on me.xHubid = obj.xHubid and me.BUKRS = obj.BUKRS and me.SWENR = obj.SWENR&#xA;join&#x9;&#x9;dbo.SAP_VIBDBU geb on me.xHubid = geb.xHubid and me.BUKRS = geb.BUKRS and me.SWENR = geb.SWENR and me.SGENR = geb.SGENR&#xA;join&#x9;&#x9;dbo.SAP_TIV0A na on me.xHubid = na.xHubid and me.SNUNR = na.SNUNR and na.SPRAS = 'D'&#xA;left join&#x9;dbo.SAP_VZOBJECT vz on me.xHubid = vz.xHubid and vz.ADROBJNR = geb.INTRENO and vz.ADROBJTYP = 'VI'&#xA;left join&#x9;dbo.SAP_Adrc adr on me.xHubid = adr.xHubid and vz.ADRNR = adr.ADDRNUMBER&#xA;left join dbo.SAP_TIV3H t3h on me.xHubID = t3h.xHubID and me.RLGESCH = t3h.RLGESCH and t3h.SPRAS = 'D'&#xA;left join dbo.SAP_TIV3G t3g on me.xHubID = t3g.xHubID and me.SSTOCKW = t3g.SSTOCKW and t3g.SPRAS = 'D'&#xA;&#xA;where me.SGENR is not null &#xA;and obj.xobjnr is not null &#xA;&#xA;union&#xA;&#xA;-- ME's auf dem Grundstück&#xA;select distinct &#xA;  dtedit&#x9;&#x9;&#x9;&#x9;= getdate()&#xA;, luserkz&#x9;&#x9;&#x9;&#x9;= 'INTERFACE'&#xA;, ldelete&#x9;&#x9;&#x9;&#x9;= '0'&#xA;, xflGrundGebaeude&#x9;&#x9;= cast(obj.xobjnr +'&quot; + @[User::varIdentSeparator] + &quot;'+ 'G'+ right(me.SGRNR, 3) as varchar(50))&#xA;, xFlaeche&#x9;&#x9;&#x9;&#x9;= cast(obj.xobjnr +'&quot; + @[User::varIdentSeparator] + &quot;'+ 'G'+ right(me.SGRNR, 3) +'&quot; + @[User::varIdentSeparator] + &quot;'+ right(me.SMENR,5) as varchar(50))&#xA;, xflMatchcode&#x9;&#x9;&#x9;= cast(me.XMETXT as varchar(100))&#xA;-- Adresse&#xA;-- Bei Grundstücksflächen wird die Adresse in XGRTXT im Format (Ort, Str Hnr) gespeichert, der Ort wird abgeschnitten&#xA;--, xflMatchcode&#x9;&#x9;&#x9;= cast(rtrim(isnull(adr.STREET, substring(grund.XGRTXT, &#xA;--&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;case when charindex('/ ', grund.XGRTXT) &gt; 1 then charindex('/ ', grund.XGRTXT)+2&#xA;--&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9; when charindex(', ', grund.XGRTXT) &gt; 1 then charindex(', ', grund.XGRTXT)+2 &#xA;--&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9; else 1 &#xA;--&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;--&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;, 100))) + isnull(' '+ rtrim(adr.HOUSE_NUM1), '') as varchar(100))&#xA;&#xA;-- Lage + Etage&#xA;, xflBezeichnung&#x9;&#x9;= cast(case &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;when nullif(me.RLGESCH, '') is not null then me.RLGESCH + isnull(' '+me.SSTOCKW, '')&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;else na.XMBEZ&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;  end as varchar(150))&#xA;, xflFlaechenart&#x9;&#x9;= obj.xPrefix +'_'+ me.SNUNR&#xA;, xflZugangsdatum&#x9;&#x9;= BISDSYSDB.dbo.BIS_Convert_DATE(convert(char(8000), COALESCE(nullif(me.VALIDFROM,''), nullif(grund.VALIDFROM,''), nullif(obj.VALIDFROM,''), '19000101')), NULL)&#xA;, xflAbgangsdatum&#x9;&#x9;= BISDSYSDB.dbo.BIS_Convert_DATE(COALESCE(nullif(me.VALIDTO, '99991231'), nullif(grund.VALIDTO, '99991231'), nullif(obj.VALIDTO, '99991231')), null)&#xA;, xflAbgangsdatum_intf&#x9;= '1'&#xA;, xflLage&#x9;&#x9;&#x9;&#x9;= convert(varchar(50), t3h.XMLGESCH)&#xA;, xflEtage&#x9;&#x9;&#x9;&#x9;= convert(varchar(20), t3g.XSTOCKM)&#xA;-- select me.*&#xA;from&#x9;&#x9;dbo.SAP_VIBDRO me&#xA;join&#x9;&#x9;dbo.SAP_VIBDBE obj on me.xHubid = obj.xHubid and me.BUKRS = obj.BUKRS and me.SWENR = obj.SWENR&#xA;join&#x9;&#x9;dbo.SAP_VIBDPR grund on me.xHubid = grund.xHubid and me.BUKRS = grund.BUKRS and me.SWENR = grund.SWENR and me.SGRNR = grund.SGRNR&#xA;join&#x9;&#x9;dbo.SAP_TIV0A na on me.xHubid = na.xHubid and me.SNUNR = na.SNUNR and na.SPRAS = 'D'&#xA;left join&#x9;dbo.SAP_VZOBJECT vz on me.xHubid = vz.xHubid and vz.ADROBJNR = grund.INTRENO and vz.ADROBJTYP = 'VI'&#xA;left join&#x9;dbo.SAP_Adrc adr on me.xHubid = adr.xHubid and vz.ADRNR = adr.ADDRNUMBER&#xA;left join dbo.SAP_TIV3H t3h on me.xHubID = t3h.xHubID and me.RLGESCH = t3h.RLGESCH and t3h.SPRAS = 'D'&#xA;left join dbo.SAP_TIV3G t3g on me.xHubID = t3g.xHubID and me.SSTOCKW = t3g.SSTOCKW and t3g.SPRAS = 'D'&#xA;where me.SGRNR is not null&#xA;and obj.xobjnr is not null&#xA;&quot;"
+              DTS:Expression="&quot;--MBIT 16072025: Anpassungen SICORE &#xA;-- ME's auf dem Gebäude&#xA;select distinct&#xA;  dtedit&#x9;&#x9;&#x9;&#x9;= getdate()&#xA;, luserkz&#x9;&#x9;&#x9;&#x9;= 'INTERFACE'&#xA;, ldelete&#x9;&#x9;&#x9;&#x9;= '0'&#xA;, xflGrundGebaeude&#x9;&#x9;= cast(obj.xobjnr +'_'+ right(me.SGENR, 3) as varchar(50))&#xA;, xFlaeche&#x9;&#x9;&#x9;&#x9;= cast(obj.xobjnr +'_'+ right(me.SGENR, 3) +'_'+ right(me.SMENR,5) as varchar(50))&#xA;, xflMatchcode&#x9;&#x9;&#x9;= cast(me.XMETXT as varchar(100))&#xA;-- Adresse&#xA;--, xflMatchcode&#x9;&#x9;&#x9;= cast(rtrim(isnull(adr.STREET, substring(geb.XGETXT, &#xA;--&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;case when charindex('/ ', geb.XGETXT) &gt; 1 then charindex('/ ', geb.XGETXT)+2&#xA;--&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9; when charindex(', ', geb.XGETXT) &gt; 1 then charindex(', ', geb.XGETXT)+2 &#xA;--&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9; else 1 &#xA;--&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;--&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;, 100))) + isnull(' '+ rtrim(adr.HOUSE_NUM1), '') as varchar(100))&#xA;-- Lage + Etage&#xA;, xflBezeichnung&#x9;&#x9;= cast(case &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;when nullif(me.RLGESCH, '') is not null then me.RLGESCH + isnull(' '+me.SSTOCKW, '')&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;else na.XMBEZ&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;  end as varchar(150))&#xA;, xflFlaechenart&#x9;&#x9;= obj.xPrefix  +'_'+ me.SNUNR&#xA;, xflZugangsdatum&#x9;&#x9;= BISDSYSDB.dbo.BIS_Convert_DATE(convert(char(8000), COALESCE(nullif(me.VALIDFROM,''), nullif(geb.VALIDFROM,''), nullif(obj.VALIDFROM,''), '19000101')), NULL)&#xA;, xflAbgangsdatum&#x9;&#x9;= BISDSYSDB.dbo.BIS_Convert_DATE(COALESCE(nullif(me.VALIDTO, '99991231'), nullif(geb.VALIDTO, '99991231'), nullif(obj.VALIDTO, '99991231')), NULL)&#xA;, xflAbgangsdatum_intf&#x9;= '1'&#xA;, xflLage&#x9;&#x9;&#x9;&#x9;= convert(varchar(50), t3h.XMLGESCH)&#xA;, xflEtage&#x9;&#x9;&#x9;&#x9;= convert(varchar(20), t3g.XSTOCKM)&#xA;-- select RLGESCH, SSTOCKW, me.*&#xA;from&#x9;&#x9;dbo.SAP_VIBDRO me&#xA;join&#x9;&#x9;dbo.SAP_VIBDBE obj on me.xHubid = obj.xHubid and me.BUKRS = obj.BUKRS and me.SWENR = obj.SWENR and obj.xPrefix='SICORE'&#xA;join&#x9;&#x9;dbo.SAP_VIBDBU geb on me.xHubid = geb.xHubid and me.BUKRS = geb.BUKRS and me.SWENR = geb.SWENR and me.SGENR = geb.SGENR and geb.xPrefix='SICOREsap'&#xA;join&#x9;&#x9;dbo.SAP_TIV0A na on me.xHubid = na.xHubid and me.SNUNR = na.SNUNR and na.SPRAS = 'D' and na.xPrefix='SICORE'&#xA;left join&#x9;dbo.SAP_VZOBJECT vz on me.xHubid = vz.xHubid and vz.ADROBJNR = geb.INTRENO and vz.ADROBJTYP = 'VI' and vz.xPrefix='SICOREsap'&#xA;left join&#x9;dbo.SAP_Adrc adr on me.xHubid = adr.xHubid and vz.ADRNR = adr.ADDRNUMBER and adr.xPrefix='SICOREsap'&#xA;left join dbo.SAP_TIV3H t3h on me.xHubID = t3h.xHubID and me.RLGESCH = t3h.RLGESCH and t3h.SPRAS = 'D' and t3h.xPrefix='SICOREsap'&#xA;left join dbo.SAP_TIV3G t3g on me.xHubID = t3g.xHubID and me.SSTOCKW = t3g.SSTOCKW and t3g.SPRAS = 'D' and t3g.xPrefix='SICOREsap'&#xA;&#xA;where me.SGENR is not null &#xA;and obj.xobjnr is not null &#xA;and&#xA;me.xPrefix='SICORE'&#xA;&#xA;union&#xA;&#xA;-- ME's auf dem Grundstück&#xA;select distinct &#xA;  dtedit&#x9;&#x9;&#x9;&#x9;= getdate()&#xA;, luserkz&#x9;&#x9;&#x9;&#x9;= 'INTERFACE'&#xA;, ldelete&#x9;&#x9;&#x9;&#x9;= '0'&#xA;, xflGrundGebaeude&#x9;&#x9;= cast(obj.xobjnr +'_'+ 'G'+ right(me.SGRNR, 3) as varchar(50))&#xA;, xFlaeche&#x9;&#x9;&#x9;&#x9;= cast(obj.xobjnr +'_'+ 'G'+ right(me.SGRNR, 3) +'_'+ right(me.SMENR,5) as varchar(50))&#xA;, xflMatchcode&#x9;&#x9;&#x9;= cast(me.XMETXT as varchar(100))&#xA;-- Adresse&#xA;-- Bei Grundstücksflächen wird die Adresse in XGRTXT im Format (Ort, Str Hnr) gespeichert, der Ort wird abgeschnitten&#xA;--, xflMatchcode&#x9;&#x9;&#x9;= cast(rtrim(isnull(adr.STREET, substring(grund.XGRTXT, &#xA;--&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;case when charindex('/ ', grund.XGRTXT) &gt; 1 then charindex('/ ', grund.XGRTXT)+2&#xA;--&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9; when charindex(', ', grund.XGRTXT) &gt; 1 then charindex(', ', grund.XGRTXT)+2 &#xA;--&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9; else 1 &#xA;--&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;--&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;, 100))) + isnull(' '+ rtrim(adr.HOUSE_NUM1), '') as varchar(100))&#xA;&#xA;-- Lage + Etage&#xA;, xflBezeichnung&#x9;&#x9;= cast(case &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;when nullif(me.RLGESCH, '') is not null then me.RLGESCH + isnull(' '+me.SSTOCKW, '')&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;else na.XMBEZ&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;  end as varchar(150))&#xA;, xflFlaechenart&#x9;&#x9;= obj.xPrefix +'_'+ me.SNUNR&#xA;, xflZugangsdatum&#x9;&#x9;= BISDSYSDB.dbo.BIS_Convert_DATE(convert(char(8000), COALESCE(nullif(me.VALIDFROM,''), nullif(grund.VALIDFROM,''), nullif(obj.VALIDFROM,''), '19000101')), NULL)&#xA;, xflAbgangsdatum&#x9;&#x9;= BISDSYSDB.dbo.BIS_Convert_DATE(COALESCE(nullif(me.VALIDTO, '99991231'), nullif(grund.VALIDTO, '99991231'), nullif(obj.VALIDTO, '99991231')), null)&#xA;, xflAbgangsdatum_intf&#x9;= '1'&#xA;, xflLage&#x9;&#x9;&#x9;&#x9;= convert(varchar(50), t3h.XMLGESCH)&#xA;, xflEtage&#x9;&#x9;&#x9;&#x9;= convert(varchar(20), t3g.XSTOCKM)&#xA;-- select me.*&#xA;from&#x9;&#x9;dbo.SAP_VIBDRO me&#xA;join&#x9;&#x9;dbo.SAP_VIBDBE obj on me.xHubid = obj.xHubid and me.BUKRS = obj.BUKRS and me.SWENR = obj.SWENR and obj.xPrefix='SICORE'&#xA;join&#x9;&#x9;dbo.SAP_VIBDPR grund on me.xHubid = grund.xHubid and me.BUKRS = grund.BUKRS and me.SWENR = grund.SWENR and me.SGRNR = grund.SGRNR  and grund.xPrefix='SICOREsap'&#xA;join&#x9;&#x9;dbo.SAP_TIV0A na on me.xHubid = na.xHubid and me.SNUNR = na.SNUNR and na.SPRAS = 'D' and na.xPrefix='SICORE'&#xA;left join&#x9;dbo.SAP_VZOBJECT vz on me.xHubid = vz.xHubid and vz.ADROBJNR = grund.INTRENO and vz.ADROBJTYP = 'VI' and vz.xPrefix='SICOREsap'&#xA;left join&#x9;dbo.SAP_Adrc adr on me.xHubid = adr.xHubid and vz.ADRNR = adr.ADDRNUMBER and adr.xPrefix='SICOREsap'&#xA;left join dbo.SAP_TIV3H t3h on me.xHubID = t3h.xHubID and me.RLGESCH = t3h.RLGESCH and t3h.SPRAS = 'D' and t3h.xPrefix='SICOREsap'&#xA;left join dbo.SAP_TIV3G t3g on me.xHubID = t3g.xHubID and me.SSTOCKW = t3g.SSTOCKW and t3g.SPRAS = 'D' and t3g.xPrefix='SICOREsap'&#xA;&#xA;where me.SGRNR is not null&#xA;and obj.xobjnr is not null&#xA;and&#xA;me.xPrefix='SICORE'&quot;"
               DTS:IncludeInDebugDump="2345"
               DTS:Namespace="User"
               DTS:ObjectName="varSQL">
               <DTS:VariableValue
-                DTS:DataType="8">
+                DTS:DataType="8">--MBIT 16072025: Anpassungen SICORE 
 -- ME's auf dem Gebäude
 select distinct
   dtedit				= getdate()
@@ -21341,16 +21421,18 @@ select distinct
 , xflEtage				= convert(varchar(20), t3g.XSTOCKM)
 -- select RLGESCH, SSTOCKW, me.*
 from		dbo.SAP_VIBDRO me
-join		dbo.SAP_VIBDBE obj on me.xHubid = obj.xHubid and me.BUKRS = obj.BUKRS and me.SWENR = obj.SWENR
-join		dbo.SAP_VIBDBU geb on me.xHubid = geb.xHubid and me.BUKRS = geb.BUKRS and me.SWENR = geb.SWENR and me.SGENR = geb.SGENR
-join		dbo.SAP_TIV0A na on me.xHubid = na.xHubid and me.SNUNR = na.SNUNR and na.SPRAS = 'D'
-left join	dbo.SAP_VZOBJECT vz on me.xHubid = vz.xHubid and vz.ADROBJNR = geb.INTRENO and vz.ADROBJTYP = 'VI'
-left join	dbo.SAP_Adrc adr on me.xHubid = adr.xHubid and vz.ADRNR = adr.ADDRNUMBER
-left join dbo.SAP_TIV3H t3h on me.xHubID = t3h.xHubID and me.RLGESCH = t3h.RLGESCH and t3h.SPRAS = 'D'
-left join dbo.SAP_TIV3G t3g on me.xHubID = t3g.xHubID and me.SSTOCKW = t3g.SSTOCKW and t3g.SPRAS = 'D'
+join		dbo.SAP_VIBDBE obj on me.xHubid = obj.xHubid and me.BUKRS = obj.BUKRS and me.SWENR = obj.SWENR and obj.xPrefix='SICORE'
+join		dbo.SAP_VIBDBU geb on me.xHubid = geb.xHubid and me.BUKRS = geb.BUKRS and me.SWENR = geb.SWENR and me.SGENR = geb.SGENR and geb.xPrefix='SICOREsap'
+join		dbo.SAP_TIV0A na on me.xHubid = na.xHubid and me.SNUNR = na.SNUNR and na.SPRAS = 'D' and na.xPrefix='SICORE'
+left join	dbo.SAP_VZOBJECT vz on me.xHubid = vz.xHubid and vz.ADROBJNR = geb.INTRENO and vz.ADROBJTYP = 'VI' and vz.xPrefix='SICOREsap'
+left join	dbo.SAP_Adrc adr on me.xHubid = adr.xHubid and vz.ADRNR = adr.ADDRNUMBER and adr.xPrefix='SICOREsap'
+left join dbo.SAP_TIV3H t3h on me.xHubID = t3h.xHubID and me.RLGESCH = t3h.RLGESCH and t3h.SPRAS = 'D' and t3h.xPrefix='SICOREsap'
+left join dbo.SAP_TIV3G t3g on me.xHubID = t3g.xHubID and me.SSTOCKW = t3g.SSTOCKW and t3g.SPRAS = 'D' and t3g.xPrefix='SICOREsap'
 
 where me.SGENR is not null 
 and obj.xobjnr is not null 
+and
+me.xPrefix='SICORE'
 
 union
 
@@ -21384,16 +21466,18 @@ select distinct
 , xflEtage				= convert(varchar(20), t3g.XSTOCKM)
 -- select me.*
 from		dbo.SAP_VIBDRO me
-join		dbo.SAP_VIBDBE obj on me.xHubid = obj.xHubid and me.BUKRS = obj.BUKRS and me.SWENR = obj.SWENR
-join		dbo.SAP_VIBDPR grund on me.xHubid = grund.xHubid and me.BUKRS = grund.BUKRS and me.SWENR = grund.SWENR and me.SGRNR = grund.SGRNR
-join		dbo.SAP_TIV0A na on me.xHubid = na.xHubid and me.SNUNR = na.SNUNR and na.SPRAS = 'D'
-left join	dbo.SAP_VZOBJECT vz on me.xHubid = vz.xHubid and vz.ADROBJNR = grund.INTRENO and vz.ADROBJTYP = 'VI'
-left join	dbo.SAP_Adrc adr on me.xHubid = adr.xHubid and vz.ADRNR = adr.ADDRNUMBER
-left join dbo.SAP_TIV3H t3h on me.xHubID = t3h.xHubID and me.RLGESCH = t3h.RLGESCH and t3h.SPRAS = 'D'
-left join dbo.SAP_TIV3G t3g on me.xHubID = t3g.xHubID and me.SSTOCKW = t3g.SSTOCKW and t3g.SPRAS = 'D'
+join		dbo.SAP_VIBDBE obj on me.xHubid = obj.xHubid and me.BUKRS = obj.BUKRS and me.SWENR = obj.SWENR and obj.xPrefix='SICORE'
+join		dbo.SAP_VIBDPR grund on me.xHubid = grund.xHubid and me.BUKRS = grund.BUKRS and me.SWENR = grund.SWENR and me.SGRNR = grund.SGRNR  and grund.xPrefix='SICOREsap'
+join		dbo.SAP_TIV0A na on me.xHubid = na.xHubid and me.SNUNR = na.SNUNR and na.SPRAS = 'D' and na.xPrefix='SICORE'
+left join	dbo.SAP_VZOBJECT vz on me.xHubid = vz.xHubid and vz.ADROBJNR = grund.INTRENO and vz.ADROBJTYP = 'VI' and vz.xPrefix='SICOREsap'
+left join	dbo.SAP_Adrc adr on me.xHubid = adr.xHubid and vz.ADRNR = adr.ADDRNUMBER and adr.xPrefix='SICOREsap'
+left join dbo.SAP_TIV3H t3h on me.xHubID = t3h.xHubID and me.RLGESCH = t3h.RLGESCH and t3h.SPRAS = 'D' and t3h.xPrefix='SICOREsap'
+left join dbo.SAP_TIV3G t3g on me.xHubID = t3g.xHubID and me.SSTOCKW = t3g.SSTOCKW and t3g.SPRAS = 'D' and t3g.xPrefix='SICOREsap'
+
 where me.SGRNR is not null
 and obj.xobjnr is not null
-</DTS:VariableValue>
+and
+me.xPrefix='SICORE'</DTS:VariableValue>
             </DTS:Variable>
           </DTS:Variables>
           <DTS:LoggingOptions
@@ -22922,7 +23006,6 @@ and obj.xobjnr is not null</property>
       DTS:refId="Package\Execute key - mapping"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="externe Keys mappen"
-      DTS:Disabled="True"
       DTS:DTSID="{22E6B695-8FBB-4B17-84ED-64DF35A637DA}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
@@ -23824,7 +23907,6 @@ and convert(varchar(50),xEnd,112) &lt;&gt; '99991231'
       DTS:refId="Package\insert 0 debits for each debit position on lease begin"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:Disabled="True"
       DTS:DTSID="{C7F7BA0D-02BB-4D62-8B4C-E76CA131A318}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
@@ -25185,7 +25267,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
       DTS:refId="Package\POST - executions (before key mapping)"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="Sequence Container"
-      DTS:Disabled="True"
       DTS:DTSID="{5FCF5E0A-FB2B-42DA-BBDF-CF7CD29592DE}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
@@ -25781,7 +25862,6 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
       DTS:refId="Package\Reset lock"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Mietminderungen negativ machen"
-      DTS:Disabled="True"
       DTS:DTSID="{286B64CB-6D83-4198-B0B2-536FE94C3772}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
@@ -25801,7 +25881,6 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
       DTS:refId="Package\set end for deleted units in SAP"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:Disabled="True"
       DTS:DTSID="{9920FE84-2407-4627-9850-A0355E54CA1F}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
@@ -25818,7 +25897,6 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
       DTS:refId="Package\StagingDB --&gt; BISimmo"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="IM_Stammdaten"
-      DTS:Disabled="True"
       DTS:DTSID="{8BFF4FED-02FA-4516-94B9-90BFD3D34FA6}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
@@ -25888,7 +25966,6 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
       DTS:refId="Package\Update assets"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Task &quot;SQL ausführen&quot;"
-      DTS:Disabled="True"
       DTS:DTSID="{C40C8E15-1DB5-49C8-A290-511ADFCF8871}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
@@ -25905,7 +25982,6 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
       DTS:refId="Package\update debits (set negative)"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="externe Keys mappen"
-      DTS:Disabled="True"
       DTS:DTSID="{72ccfec9-9abf-4563-ba36-e20faca7965c}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
@@ -25925,7 +26001,6 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
       DTS:refId="Package\Update Flächenarten (qm und stk)"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:Disabled="True"
       DTS:DTSID="{BA2A68B9-214E-4B5C-9FC4-B8A50BA7B284}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
@@ -25942,7 +26017,6 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
       DTS:refId="Package\Update Vertragsindex"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Task &quot;SQL ausführen&quot;"
-      DTS:Disabled="True"
       DTS:DTSID="{5c29d058-3f6a-4cee-aa65-2c4f195591fb}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
@@ -26126,7 +26200,7 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
         <NodeLayout
           Size="215,42"
           Id="Package\clear last debit for each unit if value is 0"
-          TopLeft="1920,472.666666666667" />
+          TopLeft="1921,474.666666666667" />
         <NodeLayout
           Size="186,42"
           Id="Package\Clear SSIS log"
@@ -26136,7 +26210,7 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
           Id="Package\Create temp tables"
           TopLeft="611.277777777777,1213.33333333333" />
         <NodeLayout
-          Size="193,42"
+          Size="197,42"
           Id="Package\Create temporary tables"
           TopLeft="612.333333333333,911" />
         <NodeLayout
@@ -26503,7 +26577,7 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
         <NodeLayout
           Size="136,42"
           Id="Package\Debits HIRA"
-          TopLeft="636.527777777777,985.300354022228" />
+          TopLeft="637.527777777777,985.300354022228" />
         <NodeLayout
           Size="135,42"
           Id="Package\Debits -VAT"
@@ -26511,7 +26585,7 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
         <NodeLayout
           Size="186,42"
           Id="Package\Execute key - mapping"
-          TopLeft="1931.2857202624,397.316334747874" />
+          TopLeft="1932.2857202624,399.316334747874" />
         <NodeLayout
           Size="147,42"
           Id="Package\Insert 0 debits"
@@ -26519,7 +26593,7 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
         <NodeLayout
           Size="267,42"
           Id="Package\insert 0 debits for each debit position on lease begin"
-          TopLeft="1893,329" />
+          TopLeft="1894,332" />
         <NodeLayout
           Size="182,42"
           Id="Package\Lock and wait\Check lock state and wait"
@@ -26724,7 +26798,7 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
           PanelSize="260,898"
           Size="260,941"
           Id="Package\POST - executions (before key mapping)"
-          TopLeft="1576.28573067334,323.741178323818" />
+          TopLeft="1577.28573067334,326.741178323818" />
         <NodeLayout
           Size="166,42"
           Id="Package\PRE - executions\Add mapping columns"
@@ -26825,33 +26899,45 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
         <NodeLayout
           Size="126,42"
           Id="Package\Reset lock"
-          TopLeft="2225.28573126939,629.167311567273" />
+          TopLeft="2225.28573126939,631.167311567273" />
         <NodeLayout
           Size="227,42"
           Id="Package\set end for deleted units in SAP"
-          TopLeft="1433,217" />
+          TopLeft="1434,218" />
         <NodeLayout
           Size="162,42"
           Id="Package\StagingDB --&gt; BISimmo\Set configurations"
           TopLeft="14.5714743915887,37.4013065584533" />
         <NodeLayout
-          Size="161,42"
+          Size="194,42"
           Id="Package\StagingDB --&gt; BISimmo\Task &quot;Paket ausführen&quot;"
-          TopLeft="21,131" />
+          TopLeft="21,132" />
         <EdgeLayout
           Id="Package\StagingDB --&gt; BISimmo.PrecedenceConstraints[Einschränkung]"
-          TopLeft="98.5357371957944,79.4013065584533">
+          TopLeft="95.5714743915887,79.4013065584533">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,51.5986934415467"
+              EndConnector="22.4285256084113,52.5986934415467"
               Start="0,0"
-              End="0,44.0986934415467">
+              End="22.4285256084113,45.0986934415467">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,44.0986934415467" />
+                    End="0,22.2993467207734" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.2993467207734"
+                    Point2="0,26.2993467207734"
+                    Point3="4,26.2993467207734" />
+                  <mssgle:LineSegment
+                    End="18.4285256084113,26.2993467207734" />
+                  <mssgle:CubicBezierSegment
+                    Point1="18.4285256084113,26.2993467207734"
+                    Point2="22.4285256084113,26.2993467207734"
+                    Point3="22.4285256084113,30.2993467207734" />
+                  <mssgle:LineSegment
+                    End="22.4285256084113,45.0986934415467" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -26863,26 +26949,26 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="205,205"
-          Size="205,248"
+          PanelSize="220,229"
+          Size="220,272"
           Id="Package\StagingDB --&gt; BISimmo"
-          TopLeft="2187.44444597902,320.316334747874" />
+          TopLeft="2187.44444597902,322.316334747874" />
         <NodeLayout
           Size="186,42"
           Id="Package\Update assets"
-          TopLeft="2428.55555612606,325" />
+          TopLeft="2428.55555612606,326" />
         <NodeLayout
           Size="212,42"
           Id="Package\update debits (set negative)"
-          TopLeft="1922.17460915129,541.296733879374" />
+          TopLeft="1923.17460915129,543.296733879374" />
         <NodeLayout
           Size="186,42"
           Id="Package\Update Flächenarten (qm und stk)"
-          TopLeft="2019.5,628.5" />
+          TopLeft="2020.5,630.5" />
         <NodeLayout
           Size="186,42"
           Id="Package\Update Vertragsindex"
-          TopLeft="2429.55555612606,468.852289434929" />
+          TopLeft="2429.55555612606,469.852289434929" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="503,533">
@@ -26953,31 +27039,43 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 9]"
-          TopLeft="2289.1150886242,568.316334747874">
+          TopLeft="2322.77777931235,594.316334747874">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,60.8509768193991"
+              EndConnector="-34.4920480429637,36.8509768193991"
               Start="0,0"
-              End="0,53.3509768193991">
+              End="-34.4920480429637,29.3509768193991">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,53.3509768193991" />
+                    End="0,10.9116246955555" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,10.9116246955555"
+                    Point2="0,14.9116246955555"
+                    Point3="-4,14.9116246955555" />
+                  <mssgle:LineSegment
+                    End="-30.4920480429637,14.9116246955555" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-30.4920480429637,14.9116246955555"
+                    Point2="-34.4920480429637,14.9116246955555"
+                    Point3="-34.4920480429637,18.9116246955555" />
+                  <mssgle:LineSegment
+                    End="-34.4920480429637,29.3509768193991" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-25.304453125,20.8708009096995,50.60890625,11.609375"
+              BoundingBox="-42.5504771464818,19.9116246955555,50.60890625,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Einschränkung]"
-          TopLeft="2027.83730457565,514.666666666667">
+          TopLeft="2028.83730457565,516.666666666667">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -26999,30 +27097,30 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Einschränkung 1]"
-          TopLeft="2142.16666666667,628.5">
+          TopLeft="2143.16666666667,630.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="114.94444597902,-60.183665252126"
+              EndConnector="118.94444597902,-36.183665252126"
               Start="0,0"
-              End="114.94444597902,-52.683665252126">
+              End="118.94444597902,-28.683665252126">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,-26.121219181362" />
+                    End="0,-14.1213122728227" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,-26.121219181362"
-                    Point2="0,-30.121219181362"
-                    Point3="4,-30.121219181362" />
+                    Point1="0,-14.1213122728227"
+                    Point2="0,-18.1213122728227"
+                    Point3="4,-18.1213122728227" />
                   <mssgle:LineSegment
-                    End="110.94444597902,-30.121219181362" />
+                    End="114.94444597902,-18.1213122728227" />
                   <mssgle:CubicBezierSegment
-                    Point1="110.94444597902,-30.121219181362"
-                    Point2="114.94444597902,-30.121219181362"
-                    Point3="114.94444597902,-34.121219181362" />
+                    Point1="114.94444597902,-18.1213122728227"
+                    Point2="118.94444597902,-18.1213122728227"
+                    Point3="118.94444597902,-22.1213122728227" />
                   <mssgle:LineSegment
-                    End="114.94444597902,-52.683665252126" />
+                    End="118.94444597902,-28.683665252126" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -27033,7 +27131,7 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Einschränkung 10]"
-          TopLeft="2522.05555612606,367">
+          TopLeft="2522.05555612606,368">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -27055,7 +27153,7 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Einschränkung 11]"
-          TopLeft="2025.8928601312,439.316334747874">
+          TopLeft="2026.8928601312,441.316334747874">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -27077,18 +27175,18 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Einschränkung 12]"
-          TopLeft="2025.3928601312,371">
+          TopLeft="2026.3928601312,374">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,26.316334747874"
+              EndConnector="0,25.316334747874"
               Start="0,0"
-              End="0,18.816334747874">
+              End="0,17.816334747874">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,18.816334747874" />
+                    End="0,17.816334747874" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -27099,7 +27197,7 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Einschränkung 13]"
-          TopLeft="1836.28573067334,794.241178323818">
+          TopLeft="1837.28573067334,797.241178323818">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -27155,7 +27253,7 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Einschränkung 2]"
-          TopLeft="705.916672533466,879.904576742791">
+          TopLeft="706.916672533466,879.904576742791">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -27181,26 +27279,26 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="292.896813055011,-56.231040604487"
+              EndConnector="293.896813055011,-55.231040604487"
               Start="0,0"
-              End="292.896813055011,-48.731040604487">
+              End="293.896813055011,-47.731040604487">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,-29.50248350976" />
+                    End="0,-28.9066829848256" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,-29.50248350976"
-                    Point2="0,-33.50248350976"
-                    Point3="4,-33.50248350976" />
+                    Point1="0,-28.9066829848256"
+                    Point2="0,-32.9066829848256"
+                    Point3="4,-32.9066829848256" />
                   <mssgle:LineSegment
-                    End="288.896813055011,-33.50248350976" />
+                    End="289.896813055011,-32.9066829848256" />
                   <mssgle:CubicBezierSegment
-                    Point1="288.896813055011,-33.50248350976"
-                    Point2="292.896813055011,-33.50248350976"
-                    Point3="292.896813055011,-37.50248350976" />
+                    Point1="289.896813055011,-32.9066829848256"
+                    Point2="293.896813055011,-32.9066829848256"
+                    Point3="293.896813055011,-36.9066829848256" />
                   <mssgle:LineSegment
-                    End="292.896813055011,-48.731040604487" />
+                    End="293.896813055011,-47.731040604487" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -27211,7 +27309,7 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Einschränkung 4]"
-          TopLeft="706.680555555555,953">
+          TopLeft="708.180555555555,953">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -27267,30 +27365,24 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Einschränkung 6]"
-          TopLeft="2392.44444597902,444.316334747874">
+          TopLeft="2407.44444597902,458.316334747874">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="36.1111101470397,-98.316334747874"
+              EndConnector="84.4444434803731,-90.316334747874"
               Start="0,0"
-              End="28.6111101470397,-98.316334747874">
+              End="84.4444434803731,-82.816334747874">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="14.0555550735198,0" />
+                    End="80.4444434803731,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="14.0555550735198,0"
-                    Point2="18.0555550735198,0"
-                    Point3="18.0555550735198,-4" />
+                    Point1="80.4444434803731,0"
+                    Point2="84.4444434803731,0"
+                    Point3="84.4444434803731,-4" />
                   <mssgle:LineSegment
-                    End="18.0555550735198,-94.316334747874" />
-                  <mssgle:CubicBezierSegment
-                    Point1="18.0555550735198,-94.316334747874"
-                    Point2="18.0555550735198,-98.316334747874"
-                    Point3="22.0555550735198,-98.316334747874" />
-                  <mssgle:LineSegment
-                    End="28.6111101470397,-98.316334747874" />
+                    End="84.4444434803731,-82.816334747874" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -27301,18 +27393,18 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Einschränkung 7]"
-          TopLeft="705.402777777778,1027.30035402223">
+          TopLeft="705.902777777778,1027.30035402223">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,33.4774237555491"
+              EndConnector="0,33.4774237555521"
               Start="0,0"
-              End="0,25.9774237555491">
+              End="0,25.9774237555521">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,25.9774237555491" />
+                    End="0,25.9774237555521" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -27345,7 +27437,7 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Einschränkung 8]"
-          TopLeft="2028.17460915129,583.296733879374">
+          TopLeft="2029.17460915129,585.296733879374">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -27379,30 +27471,30 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Einschränkung 9]"
-          TopLeft="1583,259">
+          TopLeft="1584,260">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="123.28573067334,64.7411783238181"
+              EndConnector="123.28573067334,66.7411783238181"
               Start="0,0"
-              End="123.28573067334,57.2411783238181">
+              End="123.28573067334,59.2411783238181">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22.1683502936168" />
+                    End="0,22.976749243748" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,22.1683502936168"
-                    Point2="0,26.1683502936168"
-                    Point3="4,26.1683502936168" />
+                    Point1="0,22.976749243748"
+                    Point2="0,26.976749243748"
+                    Point3="4,26.976749243748" />
                   <mssgle:LineSegment
-                    End="119.28573067334,26.1683502936168" />
+                    End="119.28573067334,26.976749243748" />
                   <mssgle:CubicBezierSegment
-                    Point1="119.28573067334,26.1683502936168"
-                    Point2="123.28573067334,26.1683502936168"
-                    Point3="123.28573067334,30.1683502936168" />
+                    Point1="119.28573067334,26.976749243748"
+                    Point2="123.28573067334,26.976749243748"
+                    Point3="123.28573067334,30.976749243748" />
                   <mssgle:LineSegment
-                    End="123.28573067334,57.2411783238181" />
+                    End="123.28573067334,59.2411783238181" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -27738,7 +27830,7 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
     design-time-name="Package\Data flows\Buildings and plots">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="170,42"
           Id="Package\Data flows\Buildings and plots\OLE DB Source"
@@ -27766,9 +27858,7 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -27799,7 +27889,7 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
     design-time-name="Package\Data flows\Business partners">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="170,42"
           Id="Package\Data flows\Business partners\OLE DB Destination"
@@ -27827,9 +27917,7 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -27860,7 +27948,7 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
     design-time-name="Package\Data flows\Companies">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="178,42"
           Id="Package\Data flows\Companies\OLE DB Source"
@@ -27888,9 +27976,7 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -28043,7 +28129,7 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
     design-time-name="Package\Data flows\Deposits aus SAP - Cust Tabelle">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="170,42"
           Id="Package\Data flows\Deposits aus SAP - Cust Tabelle\OLE DB Source"
@@ -28071,9 +28157,7 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -28224,7 +28308,7 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
     design-time-name="Package\Data flows\Lease contracts">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="150,42"
           Id="Package\Data flows\Lease contracts\OLE DB Source"
@@ -28252,9 +28336,7 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -28407,7 +28489,7 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
     design-time-name="Package\Data flows\Measures">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="170,42"
           Id="Package\Data flows\Measures\OLE DB Source"
@@ -28435,9 +28517,7 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -28468,7 +28548,7 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
     design-time-name="Package\Data flows\units">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="170,42"
           Id="Package\Data flows\units\OLE DB Source"
@@ -28496,9 +28576,7 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -28529,37 +28607,35 @@ cross apply (select xkeyalphanr from " +@[User::cfgIDB]+ ".dbo.xlbikeyval where 
     design-time-name="Package\Insert 0 debits">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="148,42"
           Id="Package\Insert 0 debits\OLE DB-Quelle"
           TopLeft="252,70" />
         <NodeLayout
-          Size="135,42"
+          Size="141,42"
           Id="Package\Insert 0 debits\OLE DB-Ziel"
-          TopLeft="255,180" />
+          TopLeft="255,181" />
         <EdgeLayout
           Id="Package\Insert 0 debits.Paths[Ausgabe der OLE DB-Quelle]"
-          TopLeft="324.25,112">
+          TopLeft="325.75,112">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,68"
+              EndConnector="0,69"
               Start="0,0"
-              End="0,60.5">
+              End="0,61.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,60.5" />
+                    End="0,61.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
