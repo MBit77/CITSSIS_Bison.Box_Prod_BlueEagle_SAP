@@ -12,8 +12,8 @@
   DTS:LocaleID="1031"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="40"
-  DTS:VersionGUID="{3F23F60B-C1F4-496A-9DE4-31C34E1BA7D1}">
+  DTS:VersionBuild="46"
+  DTS:VersionGUID="{546B0714-9D80-4E6F-BFC2-6EA6136BF326}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -111,8 +111,8 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{B0C3630F-6C3A-4EF5-B65F-E55891C1073B}"
-          SQLTask:SqlStatementSource="declare @sql varchar(max) = ''&#xA;&#xA;select @sql  = @sql + 'truncate table BISimportDB.dbo.' + inp.name +';'&#xA;from sys.objects o&#xA;join BISimportDB.sys.objects inp on o.name = inp.name&#xA;where o.name like 'SAP%'&#xA;&#xA;--print @sql&#xA;exec (@sql)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:Connection="{2105E5C9-C9EB-4DDA-8714-2A9812EBB32F}"
+          SQLTask:SqlStatementSource="DECLARE @sql NVARCHAR(MAX) = N'';&#xA;&#xA;SELECT @sql = STRING_AGG(&#xA;    CAST('DELETE FROM BISimportDB.dbo.' + QUOTENAME(name) + ' WHERE xHubID LIKE ''SICORE%'';' AS NVARCHAR(MAX)),&#xA;    CHAR(13)&#xA;)&#xA;FROM BISimportDB.sys.tables&#xA;WHERE name LIKE 'SAP%';&#xA;&#xA;--PRINT @sql;  -- Zum Prüfen&#xA; EXEC sp_executesql @sql;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -148,6 +148,22 @@
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
+      DTS:refId="Package\Transfer data (from Extractor to XKUE in BISImport DB"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Task &quot;SQL ausführen&quot;"
+      DTS:DTSID="{3bdbb2c9-7b9d-4760-b0cc-c90c801e4ab5}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Transfer data (from Extractor to XKUE in BISImport DB"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2105E5C9-C9EB-4DDA-8714-2A9812EBB32F}"
+          SQLTask:SqlStatementSource="INSERT INTO [dbo].[SAP_XKUE] (&#xA;    [INTRENO],&#xA;    [RECNNR],&#xA;    [BUKRS],&#xA;    [PESTATE],&#xA;    [RNENDNEW],&#xA;    [RNENDMAX],&#xA;    [NTALLOWEDPAR],&#xA;    [NTALLOWEDOWN],&#xA;    [NTPER],&#xA;    [RNEND1ST],&#xA;    [xHubID],&#xA;    [xPrefix],&#xA;    [xTypeOfDataDelivery]&#xA;)&#xA;SELECT&#xA;    HR3.[INTRENO],&#xA;    HR3.[RECNNR],&#xA;    HR3.[BUKRS],&#xA;    HR3.[PESTATE],&#xA;    HR3.[RNENDNEW],&#xA;    HR3.[RNENDMAX],&#xA;    HR3.[NTALLOWEDPAR],&#xA;    HR3.[NTALLOWEDOWN],&#xA;    HR3.[NTPER],&#xA;    HR3.[RNEND1ST],&#xA;    'SICORE' AS [xHubID],&#xA;    'SICOREsap' AS [xPrefix],&#xA;    'SAP' AS [xTypeOfDataDelivery]&#xA;FROM [ImmoControlling_RDB_Import_HR3].[dbo].[T_Import_Dim_Z_VDM_CONTRACT_DTL] AS HR3;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
       DTS:refId="Package\Transfer data (from views) to BISimportDB"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Task &quot;SQL ausführen&quot;"
@@ -165,6 +181,14 @@
     </DTS:Executable>
   </DTS:Executables>
   <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{B5BC8AA9-91B2-431E-8E09-9E6602CCA66F}"
+      DTS:From="Package\Transfer data (from views) to BISimportDB"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Transfer data (from Extractor to XKUE in BISImport DB" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Einschränkung]"
       DTS:CreationName=""
@@ -203,9 +227,9 @@
           Id="Package\Clear SSIS log"
           TopLeft="60,60" />
         <NodeLayout
-          Size="216,42"
+          Size="286,42"
           Id="Package\Transfer data (from views) to BISimportDB"
-          TopLeft="582,62" />
+          TopLeft="584,65" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Einschränkung]"
           TopLeft="271,81">
@@ -230,18 +254,44 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Einschränkung 1]"
-          TopLeft="534,82">
+          TopLeft="534,83.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="48,0"
+              EndConnector="50,0"
               Start="0,0"
-              End="40.5,0">
+              End="42.5,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="40.5,0" />
+                    End="42.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="346,42"
+          Id="Package\Transfer data (from Extractor to XKUE in BISImport DB"
+          TopLeft="957,66" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="870,86.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="87,0"
+              Start="0,0"
+              End="79.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="79.5,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
